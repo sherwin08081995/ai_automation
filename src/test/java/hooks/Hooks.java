@@ -36,8 +36,13 @@ public class Hooks {
 
         WebDriverManager.chromedriver().setup();
 
+        boolean isHeadless = Boolean.parseBoolean(System.getenv().getOrDefault("CHROME_HEADLESS", ConfigReader.get("headless")));
+
         ChromeOptions options = new ChromeOptions();
-        options.addArguments("--headless=new");
+        if (isHeadless) {
+            options.addArguments("--headless=new"); // fallback to "--headless" if needed
+        }
+
         options.addArguments("--no-sandbox");
         options.addArguments("--disable-dev-shm-usage");
         options.addArguments("--window-size=1920,1080");
