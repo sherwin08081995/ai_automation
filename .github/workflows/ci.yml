@@ -20,8 +20,16 @@ jobs:
           distribution: 'temurin'
           java-version: '21'
 
-      - name: Build and Run Tests
+      - name: Set up Chrome
+        uses: browser-actions/setup-chrome@v1
+
+      - name: Print Chrome version
+        run: google-chrome --version
+
+      - name: Run Maven Tests
         run: mvn clean test
+        env:
+          CHROME_HEADLESS: true
 
       - name: Upload Test Reports
         if: failure()
@@ -29,3 +37,10 @@ jobs:
         with:
           name: surefire-reports
           path: target/surefire-reports
+
+      - name: Upload Screenshots (if any)
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: screenshots
+          path: screenshots/
