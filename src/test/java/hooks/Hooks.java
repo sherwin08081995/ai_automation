@@ -35,10 +35,9 @@ public class Hooks {
         }
 
         WebDriverManager.chromedriver().setup();
-
         boolean isHeadless = Boolean.parseBoolean(System.getenv().getOrDefault("CHROME_HEADLESS", ConfigReader.get("headless")));
-
         ChromeOptions options = new ChromeOptions();
+
         if (isHeadless) {
             options.addArguments("--headless=new"); // fallback to "--headless" if needed
         }
@@ -46,9 +45,7 @@ public class Hooks {
         options.addArguments("--no-sandbox");
         options.addArguments("--disable-dev-shm-usage");
         options.addArguments("--window-size=1920,1080");
-
         driver = new ChromeDriver(options);
-
 
         // Set timeouts from config
         int pageLoad = Integer.parseInt(ConfigReader.get("pageLoadTimeout"));
@@ -62,7 +59,6 @@ public class Hooks {
 
         // Set test in ThreadLocal for reuse in step definitions
         ExtentTestManager.setTest(extentTest);
-
         extentTest.log(Status.INFO, "Browser launched and maximized");
     }
 
@@ -76,8 +72,4 @@ public class Hooks {
         // Optional cleanup
         ExtentTestManager.removeTest();
     }
-//    @AfterAll
-//    public static void afterAll() {
-//        ExtentReportManager.getInstance().flush();
-//    }
 }
