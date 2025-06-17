@@ -8,6 +8,10 @@ import utils.WaitUtils;
 import org.apache.logging.log4j.Logger;
 
 /**
+ * BasePage is an abstract foundation for all page objects.
+ * It initializes commonly used utilities like WebDriver, wait handling, helper methods, and logging.
+ * All other page classes should extend this class to inherit shared behavior.
+ *
  * @author Sherwin
  * @since 09-06-2025
  */

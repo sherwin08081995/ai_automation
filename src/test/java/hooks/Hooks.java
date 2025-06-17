@@ -2,14 +2,17 @@ package hooks;
 
 import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.ExtentTest;
+import com.aventstack.extentreports.MediaEntityBuilder;
 import com.aventstack.extentreports.Status;
-import io.cucumber.java.After;
-import io.cucumber.java.Before;
-import io.cucumber.java.Scenario;
+import io.cucumber.java.*;
 import io.github.bonigarcia.wdm.WebDriverManager;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import pages.HomePage;
+import pages.LoginPage;
 import utils.ConfigReader;
 import utils.ExtentReportManager;
 import utils.ExtentTestManager;
@@ -18,66 +21,120 @@ import utils.ScreenshotUtils;
 import java.time.Duration;
 
 /**
+ * Hooks class manages setup and teardown activities for each Cucumber scenario.
+ * It includes WebDriver initialization, login, report logging, and cleanup tasks.
+ *
  * @author Sherwin
  * @since 09-06-2025
  */
 
+
 public class Hooks {
     public static WebDriver driver;
+    private static final Logger logger = LogManager.getLogger(Hooks.class);
+
+    /**
+     * Sets up the WebDriver and test environment before each scenario.
+     * - Clears screenshots once per test run
+     * - Launches browser with configured options
+     * - Initializes reporting
+     * - Performs login unless scenario name includes 'login'
+     *
+     * @param scenario The Cucumber scenario about to be executed
+     */
 
     @Before
     public void setup(Scenario scenario) {
-
         // Clear screenshot folder once per test run
         if (System.getProperty("screenshots.cleared") == null) {
             ScreenshotUtils.clearScreenshotFolder();
             System.setProperty("screenshots.cleared", "true");
+            logger.info("✅ Screenshot folder cleaned.");
         }
 
         WebDriverManager.chromedriver().setup();
+        ChromeOptions options = new ChromeOptions();
 
         boolean isHeadless = Boolean.parseBoolean(System.getenv().getOrDefault("CHROME_HEADLESS", ConfigReader.get("headless")));
-
-        ChromeOptions options = new ChromeOptions();
         if (isHeadless) {
-            options.addArguments("--headless=new"); // fallback to "--headless" if needed
+            options.addArguments("--headless=new");
+            logger.info("🔧 Headless mode enabled.");
         }
 
-        options.addArguments("--no-sandbox");
-        options.addArguments("--disable-dev-shm-usage");
-        options.addArguments("--window-size=1920,1080");
-
+        options.addArguments("--no-sandbox", "--disable-dev-shm-usage", "--window-size=1920,1080");
         driver = new ChromeDriver(options);
 
+        driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(Long.parseLong(ConfigReader.get("pageLoadTimeout"))));
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(Long.parseLong(ConfigReader.get("implicitWait"))));
 
-        // Set timeouts from config
-        int pageLoad = Integer.parseInt(ConfigReader.get("pageLoadTimeout"));
-        int implicit = Integer.parseInt(ConfigReader.get("implicitWait"));
-        driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(pageLoad));
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(implicit));
-
-        // Create ExtentReports test using scenario name
         ExtentReports extent = ExtentReportManager.getInstance();
-        ExtentTest extentTest = extent.createTest(scenario.getName());
+        ExtentTest test = extent.createTest(scenario.getName());
+        ExtentTestManager.setTest(test);
 
-        // Set test in ThreadLocal for reuse in step definitions
-        ExtentTestManager.setTest(extentTest);
+        test.log(Status.INFO, "🚀 Browser launched for scenario: " + scenario.getName());
+        logger.info("🚀 WebDriver setup complete for scenario: {}", scenario.getName());
 
-        extentTest.log(Status.INFO, "Browser launched and maximized");
+        if (!scenario.getName().toLowerCase().contains("login")) {
+            performLogin();
+        } else {
+            test.log(Status.INFO, "🔍 Skipping login for Login Page validation scenario");
+            logger.info("🔍 Skipping login for login-related scenario.");
+        }
     }
+
+    /**
+     * Tears down the WebDriver and ends reporting after each scenario.
+     * - Closes the browser
+     * - Logs closure into the report
+     * - Removes test from ExtentTestManager
+     *
+     * @param scenario The Cucumber scenario just executed
+     */
 
     @After
-    public void tearDown() {
-        if (driver != null) {
-            driver.quit();
-            ExtentTestManager.getTest().log(Status.INFO, "Browser closed");
+    public void tearDown(Scenario scenario) {
+
+        if (scenario.isFailed()) {
+            String screenshotPath = ScreenshotUtils.takeScreenshot(driver, "Failure_" + scenario.getName().replace(" ", "_"));
+            ExtentTestManager.getTest().fail("❌ Scenario failed: " + scenario.getName(),
+                    MediaEntityBuilder.createScreenCaptureFromPath(screenshotPath).build());
         }
 
-        // Optional cleanup
+        if (driver != null) {
+            driver.quit();
+            ExtentTestManager.getTest().log(Status.INFO, "🧹 Browser closed for scenario: " + scenario.getName());
+            logger.info("🧹 Browser closed after scenario: {}", scenario.getName());
+        }
         ExtentTestManager.removeTest();
     }
-//    @AfterAll
-//    public static void afterAll() {
-//        ExtentReportManager.getInstance().flush();
-//    }
+
+    /**
+     * Performs application login before each non-login scenario.
+     * Navigates to base URL and logs in using credentials from the config file.
+     * Fails the test if login verification fails.
+     */
+
+    private void performLogin() {
+        driver.get(ConfigReader.get("baseUrl"));
+        logger.info("🌐 Navigated to: {}", ConfigReader.get("baseUrl"));
+
+        LoginPage loginPage = new LoginPage(driver);
+        loginPage.enterEmail(ConfigReader.get("email"));
+        loginPage.clickOtpButton();
+        loginPage.enterOtp(ConfigReader.get("otp"));
+
+        HomePage homePage = new HomePage(driver);
+        boolean success = homePage.isLoginSuccessful("Vakilsearch");
+
+        if (!success) {
+            logger.error("❌ Login failed during setup.");
+            throw new IllegalStateException("Login failed during setup");
+        }
+
+        ExtentTestManager.getTest().log(Status.INFO, "🔐 User logged in successfully before test begins");
+        logger.info("🔐 Login successfully performed via @Before hook.");
+    }
 }
+
+
+
