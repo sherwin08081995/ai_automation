@@ -163,6 +163,8 @@ public class HomePageValidationSteps {
             //Get displayed tab count
             int displayedTabCount;
             try {
+                driver.navigate().refresh();
+                Thread.sleep(3000);
                 displayedTabCount = homePage.getDisplayedTabCount(tabName);
                 String beforeClickScreenshot = ScreenshotUtils.takeScreenshot(driver, "Before_Click_" + tabName.replace(" ", "_"));
                 test.log(Status.INFO, "📥 <b>Displayed Count:</b><br>🔹 Tab: <b>" + tabName + "</b><br>🔢 Count: <b>" + displayedTabCount + "</b>", MediaEntityBuilder.createScreenCaptureFromPath(beforeClickScreenshot).build());
@@ -177,6 +179,7 @@ public class HomePageValidationSteps {
             int actualTabCount;
             try {
                 actualTabCount = homePage.clickComplianceStatusTabAndGetCount(tabName);
+                driver.navigate().refresh();
                 Thread.sleep(3000);
                 String clickedTabScreenshot = ScreenshotUtils.takeScreenshot(driver, "Clicked_Tab_" + tabName.replace(" ", "_"));
                 test.log(Status.PASS, "✅ <b>Clicked tab:</b> <b>" + tabName + "</b><br>🔢 Fetched Count: <b>" + actualTabCount + "</b>", MediaEntityBuilder.createScreenCaptureFromPath(clickedTabScreenshot).build());
