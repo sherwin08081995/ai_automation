@@ -12,7 +12,6 @@ import java.util.Date;
 
 /**
  * @author Sherwin Anto
- *
  */
 
 public class ScreenshotUtils {
@@ -31,7 +30,8 @@ public class ScreenshotUtils {
             e.printStackTrace();
         }
 
-        return destFile.getAbsolutePath();
+        return "screenshots/" + fileName;
+
     }
 
 
