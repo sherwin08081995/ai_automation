@@ -1647,3 +1647,34 @@ java.lang.NullPointerException: Cannot invoke "com.aventstack.extentreports.Exte
 2025-06-22 14:34:53 [main] INFO  hooks.Hooks - 🧹 Browser closed after scenario: Login with valid user credentials and OTP
 2025-06-22 14:34:53 [main] INFO  listeners.TestListener - Skipping onTestSuccess for Cucumber scenario: runScenario
 2025-06-22 14:34:53 [main] INFO  listeners.TestListener - >>> Test Suite Finished: C:/Users/Vakilsearch/IdeaProjects/ZolvitFramework
+2025-06-22 15:06:09 [main] INFO  listeners.TestListener - >>> Test Suite Started: C:/Users/Vakilsearch/IdeaProjects/ZolvitFramework
+2025-06-22 15:06:10 [main] WARN  listeners.TestListener - Skipping ExtentTest creation for method: runScenario (handled via Hooks)
+2025-06-22 15:06:10 [main] INFO  hooks.Hooks - ✅ Screenshot folder cleaned.
+2025-06-22 15:06:11 [main] INFO  hooks.Hooks - 🚀 WebDriver setup complete for scenario: Validate left side menu
+2025-06-22 15:06:14 [main] INFO  hooks.Hooks - 🌐 Navigated to: https://qe-grc.vakilsearch.com/grc/login
+2025-06-22 15:09:21 [main] INFO  listeners.TestListener - >>> Test Suite Started: C:/Users/Vakilsearch/IdeaProjects/ZolvitFramework
+2025-06-22 15:09:22 [main] WARN  listeners.TestListener - Skipping ExtentTest creation for method: runScenario (handled via Hooks)
+2025-06-22 15:09:22 [main] INFO  hooks.Hooks - ✅ Screenshot folder cleaned.
+2025-06-22 15:09:23 [main] INFO  hooks.Hooks - 🚀 WebDriver setup complete for scenario: Validate left side menu
+2025-06-22 15:09:26 [main] INFO  hooks.Hooks - 🌐 Navigated to: https://qe-grc.vakilsearch.com/grc/login
+2025-06-22 15:09:33 [main] INFO  hooks.Hooks - 🔐 Login successfully performed via @Before hook.
+2025-06-22 15:09:47 [main] INFO  hooks.Hooks - 🧹 Browser closed after scenario: Validate left side menu
+2025-06-22 15:09:47 [main] INFO  listeners.TestListener - Skipping onTestSuccess for Cucumber scenario: runScenario
+2025-06-22 15:09:47 [main] WARN  listeners.TestListener - Skipping ExtentTest creation for method: runScenario (handled via Hooks)
+2025-06-22 15:09:48 [main] INFO  hooks.Hooks - 🚀 WebDriver setup complete for scenario: Verify the Overall Compliances count
+2025-06-22 15:09:48 [main] INFO  hooks.Hooks - 🌐 Navigated to: https://qe-grc.vakilsearch.com/grc/login
+2025-06-22 15:09:54 [main] INFO  hooks.Hooks - 🔐 Login successfully performed via @Before hook.
+2025-06-22 15:10:00 [main] INFO  hooks.Hooks - 🧹 Browser closed after scenario: Verify the Overall Compliances count
+2025-06-22 15:10:00 [main] INFO  listeners.TestListener - Skipping onTestSuccess for Cucumber scenario: runScenario
+2025-06-22 15:10:00 [main] WARN  listeners.TestListener - Skipping ExtentTest creation for method: runScenario (handled via Hooks)
+2025-06-22 15:10:01 [main] INFO  hooks.Hooks - 🚀 WebDriver setup complete for scenario: Verify each Compliance tab navigates and displays correct record count
+2025-06-22 15:10:01 [main] INFO  hooks.Hooks - 🌐 Navigated to: https://qe-grc.vakilsearch.com/grc/login
+2025-06-22 15:10:07 [main] INFO  hooks.Hooks - 🔐 Login successfully performed via @Before hook.
+2025-06-22 15:10:17 [main] INFO  hooks.Hooks - 🧹 Browser closed after scenario: Verify each Compliance tab navigates and displays correct record count
+2025-06-22 15:10:17 [main] INFO  listeners.TestListener - Skipping onTestFailure for Cucumber scenario: runScenario
+2025-06-22 15:10:17 [main] WARN  listeners.TestListener - Skipping ExtentTest creation for method: runScenario (handled via Hooks)
+2025-06-22 15:10:17 [main] INFO  hooks.Hooks - 🚀 WebDriver setup complete for scenario: Login with valid user credentials and OTP
+2025-06-22 15:10:17 [main] INFO  hooks.Hooks - 🔍 Skipping login for login-related scenario.
+2025-06-22 15:10:25 [main] INFO  hooks.Hooks - 🧹 Browser closed after scenario: Login with valid user credentials and OTP
+2025-06-22 15:10:25 [main] INFO  listeners.TestListener - Skipping onTestSuccess for Cucumber scenario: runScenario
+2025-06-22 15:10:25 [main] INFO  listeners.TestListener - >>> Test Suite Finished: C:/Users/Vakilsearch/IdeaProjects/ZolvitFramework
