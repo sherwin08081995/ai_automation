@@ -22,19 +22,34 @@ public class ScreenshotUtils {
         String timestamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
         String fileName = screenshotName + "_" + timestamp + ".png";
 
+        // Add delay to avoid capturing partially rendered pages
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
         File srcFile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
         File destFile = new File(SCREENSHOT_PATH + fileName);
 
         try {
-            new File(SCREENSHOT_PATH).mkdirs(); // Ensure the folder exists
+            new File(SCREENSHOT_PATH).mkdirs(); // Ensure folder exists
             FileUtils.copyFile(srcFile, destFile);
+
+            // ✅ Add this check right after copying the screenshot
+            if (destFile.length() < 10_000) { // ~10 KB is too small for a valid image
+                System.err.println("⚠️ Warning: Screenshot " + destFile.getName() + " might be blank or incomplete.");
+            }
+
             System.out.println("📸 Screenshot saved at: " + destFile.getAbsolutePath());
+
         } catch (IOException e) {
             e.printStackTrace();
         }
 
-        return "screenshots/" + fileName;  // ✅ Relative path to match extent-report.html
+        return "screenshots/" + fileName;
     }
+
 
 
     /**

@@ -24,16 +24,49 @@ public class ExtentReportManager {
      * @return Configured ExtentReports instance.
      */
 
+//    private static ExtentReports createInstance(String fileName) {
+//        ExtentSparkReporter sparkReporter = new ExtentSparkReporter(fileName);
+//        sparkReporter.config().setTheme(Theme.STANDARD);
+//        sparkReporter.config().setDocumentTitle("Automation Report");
+//        sparkReporter.config().setReportName("Execution Report");
+//
+//        ExtentReports extentReports = new ExtentReports();
+//        extentReports.attachReporter(sparkReporter);
+//        return extentReports;
+//    }
     private static ExtentReports createInstance(String fileName) {
         ExtentSparkReporter sparkReporter = new ExtentSparkReporter(fileName);
+
+        // ✅ Inject custom CSS for image size and font styling
+        String customCSS = """
+                    img {
+                        max-width: 600px;
+                        height: auto;
+                        border: 1px solid #ccc;
+                        border-radius: 6px;
+                        padding: 4px;
+                        margin-top: 6px;
+                    }
+                    body, td {
+                        font-size: 16px !important;
+                    }
+                    .status-info, .status-pass, .status-fail {
+                        font-size: 15px !important;
+                    }
+                """;
+
         sparkReporter.config().setTheme(Theme.STANDARD);
         sparkReporter.config().setDocumentTitle("Automation Report");
         sparkReporter.config().setReportName("Execution Report");
+
+        // 💡 Add custom CSS for styling
+        sparkReporter.config().setCss(customCSS);
 
         ExtentReports extentReports = new ExtentReports();
         extentReports.attachReporter(sparkReporter);
         return extentReports;
     }
+
 
     /**
      * Returns a singleton instance of {@link ExtentReports}.
