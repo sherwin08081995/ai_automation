@@ -20,39 +20,39 @@ public class ScreenshotUtils {
     private static final String SCREENSHOT_PATH = System.getProperty("user.dir") + "/target/extent-report/screenshots/";
 
     public static String takeScreenshot(WebDriver driver, String screenshotName) {
-
         String timestamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
         String fileName = screenshotName + "_" + timestamp + ".png";
-
-        // Add delay to avoid capturing partially rendered pages
-        try {
-            // ✅ Scroll to top or a visible Y offset
-            ((JavascriptExecutor) driver).executeScript("window.scrollTo(0, 100);"); // slight down-scroll to trigger rendering
-            Thread.sleep(1000); // Let content settle
-        } catch (Exception e) {
-            System.err.println("⚠️ Scroll failed before screenshot: " + e.getMessage());
-        }
-
-        File srcFile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
         File destFile = new File(SCREENSHOT_PATH + fileName);
 
         try {
-            new File(SCREENSHOT_PATH).mkdirs(); // Ensure folder exists
+            // Ensure folder exists
+            new File(SCREENSHOT_PATH).mkdirs();
+
+            // 🔁 Trigger layout & visual refresh
+            JavascriptExecutor js = (JavascriptExecutor) driver;
+            js.executeScript("window.scrollTo(0, document.body.scrollHeight);"); // Scroll to bottom
+            Thread.sleep(500);
+            js.executeScript("window.scrollTo(0, 0);"); // Scroll to top
+            Thread.sleep(800); // Allow animation/render
+
+            // 📸 Capture screenshot
+            File srcFile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
             FileUtils.copyFile(srcFile, destFile);
 
-            // ✅ Add this check right after copying the screenshot
-            if (destFile.length() < 10_000) { // ~10 KB is too small for a valid image
-                System.err.println("⚠️ Warning: Screenshot " + destFile.getName() + " might be blank or incomplete.");
+            // ⚠️ Warn if likely blank
+            if (destFile.length() < 10_000) {
+                System.err.println("⚠️ Screenshot might be blank: " + destFile.getAbsolutePath());
             }
 
             System.out.println("📸 Screenshot saved at: " + destFile.getAbsolutePath());
 
-        } catch (IOException e) {
-            e.printStackTrace();
+        } catch (Exception e) {
+            System.err.println("❌ Screenshot failed: " + e.getMessage());
         }
 
         return "screenshots/" + fileName;
     }
+
 
 
     /**
