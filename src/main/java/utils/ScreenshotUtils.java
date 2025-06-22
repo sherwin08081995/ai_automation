@@ -19,12 +19,13 @@ public class ScreenshotUtils {
     private static final String SCREENSHOT_PATH = System.getProperty("user.dir") + "/target/extent-report/screenshots/";
 
     public static String takeScreenshot(WebDriver driver, String screenshotName) {
+
         String timestamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
         String fileName = screenshotName + "_" + timestamp + ".png";
 
         // Add delay to avoid capturing partially rendered pages
         try {
-            Thread.sleep(1000);
+            Thread.sleep(1200);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
