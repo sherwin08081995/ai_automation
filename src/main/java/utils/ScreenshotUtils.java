@@ -15,7 +15,8 @@ import java.util.Date;
  */
 
 public class ScreenshotUtils {
-    private static final String SCREENSHOT_PATH = System.getProperty("user.dir") + "/target/screenshots/";
+    // Save screenshots inside the same folder as your ExtentReport
+    private static final String SCREENSHOT_PATH = System.getProperty("user.dir") + "/target/extent-report/screenshots/";
 
     public static String takeScreenshot(WebDriver driver, String screenshotName) {
         String timestamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
@@ -25,13 +26,14 @@ public class ScreenshotUtils {
         File destFile = new File(SCREENSHOT_PATH + fileName);
 
         try {
+            new File(SCREENSHOT_PATH).mkdirs(); // Ensure the folder exists
             FileUtils.copyFile(srcFile, destFile);
+            System.out.println("📸 Screenshot saved at: " + destFile.getAbsolutePath());
         } catch (IOException e) {
             e.printStackTrace();
         }
 
-        return "screenshots/" + fileName;
-
+        return "screenshots/" + fileName;  // ✅ Relative path to match extent-report.html
     }
 
 
@@ -48,7 +50,12 @@ public class ScreenshotUtils {
             } else {
                 FileUtils.forceMkdir(screenshotDir);
             }
-            System.out.println("✅ Screenshot folder cleaned: " + screenshotDir.getAbsolutePath());
+
+            // 🔐 Create a dummy file to ensure folder visibility in Jenkins
+            File dummy = new File(screenshotDir, ".keep");
+            dummy.createNewFile();
+
+            System.out.println("✅ Screenshot folder cleaned and .keep created: " + screenshotDir.getAbsolutePath());
         } catch (IOException e) {
             System.err.println("❌ Failed to clean screenshot folder: " + e.getMessage());
         }
