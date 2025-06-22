@@ -1,6 +1,7 @@
 package utils;
 
 import org.apache.commons.io.FileUtils;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
@@ -25,9 +26,11 @@ public class ScreenshotUtils {
 
         // Add delay to avoid capturing partially rendered pages
         try {
-            Thread.sleep(1200);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
+            // ✅ Scroll to top or a visible Y offset
+            ((JavascriptExecutor) driver).executeScript("window.scrollTo(0, 100);"); // slight down-scroll to trigger rendering
+            Thread.sleep(1000); // Let content settle
+        } catch (Exception e) {
+            System.err.println("⚠️ Scroll failed before screenshot: " + e.getMessage());
         }
 
         File srcFile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
@@ -50,7 +53,6 @@ public class ScreenshotUtils {
 
         return "screenshots/" + fileName;
     }
-
 
 
     /**
