@@ -35,6 +35,12 @@ public class ScreenshotUtils {
         return destFile.getAbsolutePath(); // ✅ Use absolute path to avoid image loading issues
     }
 
+    public static String getBase64Screenshot(WebDriver driver) {
+        TakesScreenshot ts = (TakesScreenshot) driver;
+        return ts.getScreenshotAs(OutputType.BASE64);
+    }
+
+
     public static void clearScreenshotFolder() {
         File screenshotDir = new File(SCREENSHOT_PATH);
 
