@@ -35,6 +35,11 @@ public class ScreenshotUtils {
         return ts.getScreenshotAs(OutputType.BASE64);
     }
 
+    public static String getInlineBase64Img(String base64, int height) {
+        return "<br><img src='data:image/png;base64," + base64 + "' height='" + height + "' />";
+    }
+
+
     public static void clearScreenshotFolder() {
         File screenshotDir = new File(SCREENSHOT_FOLDER);
         try {
