@@ -26,7 +26,9 @@ public class ExtentReportManager {
 
     private static ExtentReports createInstance(String fileName) {
         ExtentSparkReporter sparkReporter = new ExtentSparkReporter(fileName);
+
         sparkReporter.config().setTheme(Theme.STANDARD);
+        sparkReporter.config().setEncoding("utf-8"); // ✅ Prevent Base64 image issues
         sparkReporter.config().setDocumentTitle("Automation Report");
         sparkReporter.config().setReportName("Execution Report");
 
@@ -58,10 +60,7 @@ public class ExtentReportManager {
             extent.setSystemInfo("Browser", ConfigReader.get("browser"));
             extent.setSystemInfo("Tester", "Anto Sherwin");
 
-            // global flush after everything is done
-            Runtime.getRuntime().addShutdownHook(new Thread(() -> {
-                extent.flush(); // Called once JVM is shutting down
-            }));
+            Runtime.getRuntime().addShutdownHook(new Thread(() -> extent.flush()));
         }
         return extent;
     }

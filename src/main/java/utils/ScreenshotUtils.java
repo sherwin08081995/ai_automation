@@ -10,29 +10,24 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-/**
- * @author Sherwin Anto
- */
 public class ScreenshotUtils {
 
-    // 🛠 Matches the path where extent-report.html is located
-    private static final String SCREENSHOT_PATH = System.getProperty("user.dir") + "/target/extent-report/screenshots/";
+    private static final String SCREENSHOT_FOLDER = System.getProperty("user.dir") + "/target/extent-report/screenshots/";
 
     public static String takeScreenshot(WebDriver driver, String screenshotName) {
         String timestamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
         String fileName = screenshotName + "_" + timestamp + ".png";
-
-        File destFile = new File(SCREENSHOT_PATH + fileName);
+        File destFile = new File(SCREENSHOT_FOLDER + fileName);
 
         try {
             File srcFile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
             FileUtils.copyFile(srcFile, destFile);
-            System.out.println("📸 Screenshot saved: " + destFile.getAbsolutePath());
+            System.out.println("📸 Screenshot saved at: " + destFile.getAbsolutePath());
         } catch (IOException e) {
-            System.err.println("❌ Screenshot capture failed: " + e.getMessage());
+            System.err.println("❌ Failed to save screenshot: " + e.getMessage());
         }
 
-        return destFile.getAbsolutePath(); // ✅ Use absolute path to avoid image loading issues
+        return destFile.getAbsolutePath(); // For attaching to Extent using file path
     }
 
     public static String getBase64Screenshot(WebDriver driver) {
@@ -40,19 +35,17 @@ public class ScreenshotUtils {
         return ts.getScreenshotAs(OutputType.BASE64);
     }
 
-
     public static void clearScreenshotFolder() {
-        File screenshotDir = new File(SCREENSHOT_PATH);
-
+        File screenshotDir = new File(SCREENSHOT_FOLDER);
         try {
             if (screenshotDir.exists()) {
                 FileUtils.cleanDirectory(screenshotDir);
             } else {
                 FileUtils.forceMkdir(screenshotDir);
             }
-            System.out.println("✅ Screenshot folder cleaned: " + screenshotDir.getAbsolutePath());
+            System.out.println("✅ Screenshot folder ready: " + screenshotDir.getAbsolutePath());
         } catch (IOException e) {
-            System.err.println("❌ Failed to clean screenshot folder: " + e.getMessage());
+            System.err.println("❌ Error preparing screenshot folder: " + e.getMessage());
         }
     }
 }
