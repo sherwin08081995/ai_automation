@@ -95,9 +95,13 @@ public class Hooks {
     public void tearDown(Scenario scenario) {
 
         if (scenario.isFailed()) {
-            String screenshotPath = ScreenshotUtils.takeScreenshot(driver, "Failure_" + scenario.getName().replace(" ", "_"));
+            // Optional: still save to file for local inspection
+            ScreenshotUtils.takeScreenshot(driver, "Failure_" + scenario.getName().replace(" ", "_"));
+
+            // ✅ Embed screenshot as base64 to work inside Jenkins report
+            String base64 = ScreenshotUtils.getBase64Screenshot(driver);
             ExtentTestManager.getTest().fail("❌ Scenario failed: " + scenario.getName(),
-                    MediaEntityBuilder.createScreenCaptureFromPath(screenshotPath).build());
+                    MediaEntityBuilder.createScreenCaptureFromBase64String(base64, "image/png").build());
         }
 
         if (driver != null) {
@@ -105,8 +109,10 @@ public class Hooks {
             ExtentTestManager.getTest().log(Status.INFO, "🧹 Browser closed for scenario: " + scenario.getName());
             logger.info("🧹 Browser closed after scenario: {}", scenario.getName());
         }
+
         ExtentTestManager.removeTest();
     }
+
 
     /**
      * Performs application login before each non-login scenario.
