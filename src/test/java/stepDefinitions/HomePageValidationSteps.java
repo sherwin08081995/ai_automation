@@ -38,11 +38,9 @@ public class HomePageValidationSteps {
     @When("the user views the left side menu")
     public void the_user_views_the_left_side_menu() throws InterruptedException {
         boolean isVisible = homePage.isLeftMenuVisible();
-        String screenshotPath = ScreenshotUtils.takeScreenshot(driver, isVisible ? "Left_Menu_Visible" : "Left_Menu_Not_Visible");
-
         Thread.sleep(2000);
-        test.log(isVisible ? Status.PASS : Status.FAIL, isVisible ? "Left menu is visible." : "Left menu is not visible.", MediaEntityBuilder.createScreenCaptureFromPath(screenshotPath).build());
-
+        test.log(isVisible ? Status.PASS : Status.FAIL, isVisible ? "Left menu is visible." : "Left menu is not visible.", MediaEntityBuilder.createScreenCaptureFromBase64String(ScreenshotUtils.getBase64Screenshot(driver), "image/png").build());
+        test.log(Status.INFO, "<img src='data:image/png;base64," + ScreenshotUtils.getBase64Screenshot(driver) + "' height='400' width='600'/>");
         Assert.assertTrue(isVisible, "Left menu is not visible");
     }
 
@@ -53,8 +51,8 @@ public class HomePageValidationSteps {
 
         for (String menu : expectedMenus) {
             boolean found = actualMenus.contains(menu);
-            String screenshotPath = ScreenshotUtils.takeScreenshot(driver, found ? "MenuItem_Visible_" + menu : "MenuItem_Missing_" + menu);
-            test.log(found ? Status.PASS : Status.FAIL, found ? "Menu item visible: " + menu : "Missing menu item: " + menu, MediaEntityBuilder.createScreenCaptureFromPath(screenshotPath).build());
+            test.log(found ? Status.PASS : Status.FAIL, found ? "Menu item visible: " + menu : "Missing menu item: " + menu, MediaEntityBuilder.createScreenCaptureFromBase64String(ScreenshotUtils.getBase64Screenshot(driver), "image/png").build());
+            test.log(Status.INFO, "<img src='data:image/png;base64," + ScreenshotUtils.getBase64Screenshot(driver) + "' height='400' width='600'/>");
             Assert.assertTrue(found, "Menu not found: " + menu);
         }
     }
@@ -64,22 +62,21 @@ public class HomePageValidationSteps {
         List<String> menuItems = dataTable.asList();
 
         for (String menuItem : menuItems) {
-            boolean success = false;
-            String screenshotPath = "";
+            boolean success;
 
             try {
                 homePage.clickLeftMenu(menuItem.trim());
                 success = homePage.waitForMenuPageToLoad(menuItem.trim());
 
-                screenshotPath = ScreenshotUtils.takeScreenshot(driver, success ? "Menu_Access_Success_" + menuItem : "Menu_Access_Failure_" + menuItem);
-
-                test.log(success ? Status.PASS : Status.FAIL, success ? "Accessed and loaded menu item: " + menuItem : "Menu item clicked but page did not load: " + menuItem, MediaEntityBuilder.createScreenCaptureFromPath(screenshotPath).build());
+                test.log(success ? Status.PASS : Status.FAIL, success ? "Accessed and loaded menu item: " + menuItem : "Page did not load: " + menuItem, MediaEntityBuilder.createScreenCaptureFromBase64String(ScreenshotUtils.getBase64Screenshot(driver), "image/png").build());
+                test.log(Status.INFO, "<img src='data:image/png;base64," + ScreenshotUtils.getBase64Screenshot(driver) + "' height='400' width='600'/>");
 
                 if (success) driver.navigate().refresh();
-
             } catch (Exception e) {
-                screenshotPath = ScreenshotUtils.takeScreenshot(driver, "Menu_Access_Exception_" + menuItem);
-                test.log(Status.FAIL, "Exception accessing menu item: " + menuItem + "<br>" + e.getMessage(), MediaEntityBuilder.createScreenCaptureFromPath(screenshotPath).build());
+                test.log(Status.FAIL, "Exception accessing menu item: " + menuItem + "\n" + e.getMessage(), MediaEntityBuilder.createScreenCaptureFromBase64String(ScreenshotUtils.getBase64Screenshot(driver), "image/png").build());
+                test.log(Status.INFO, "<img src='data:image/png;base64," + ScreenshotUtils.getBase64Screenshot(driver) + "' height='400' width='600'/>");
+                Assert.fail("Unable to access or verify menu item: " + menuItem);
+                return;
             }
 
             Assert.assertTrue(success, "Unable to access or verify menu item: " + menuItem);
@@ -93,22 +90,26 @@ public class HomePageValidationSteps {
             boolean isVisible = driver.findElement(By.xpath("//p[contains(normalize-space(),'Overall Compliances')]/span")).isDisplayed();
             Assert.assertTrue(isVisible, "Overall Compliance section not visible");
         } catch (Exception e) {
-            String screenshotPath = ScreenshotUtils.takeScreenshot(driver, "OverallCompliance_Missing");
-            test.log(Status.FAIL, "❌ Overall Compliance section is not visible.", MediaEntityBuilder.createScreenCaptureFromPath(screenshotPath).build());
-            Assert.fail("Overall Compliance section is not visible. Screenshot: " + screenshotPath);
+            test.log(Status.FAIL, "❌ Overall Compliance section is not visible.", MediaEntityBuilder.createScreenCaptureFromBase64String(ScreenshotUtils.getBase64Screenshot(driver), "image/png").build());
+            test.log(Status.INFO, "<img src='data:image/png;base64," + ScreenshotUtils.getBase64Screenshot(driver) + "' height='400' width='600'/>");
+            Assert.fail("Overall Compliance section is not visible.");
         }
     }
+
+    // The rest of the method already updated in canvas remains unchanged.
+
 
     @Then("the Overall Compliances count should be displayed properly")
     public void the_Overall_Compliances_count_should_be_displayed_properly() {
         int actualCount = homePage.getOverallCompliancesCount();
-        String screenshot = ScreenshotUtils.takeScreenshot(driver, "Overall_Compliances_Count_Check");
 
         if (actualCount < 0) {
-            test.log(Status.FAIL, "❌ Invalid overall compliance count: " + actualCount, MediaEntityBuilder.createScreenCaptureFromPath(screenshot).build());
-            Assert.fail("Overall Compliance count is invalid. Screenshot: " + screenshot);
+            test.log(Status.FAIL, "❌ Invalid overall compliance count: " + actualCount, MediaEntityBuilder.createScreenCaptureFromBase64String(ScreenshotUtils.getBase64Screenshot(driver), "image/png").build());
+            test.log(Status.INFO, "<img src='data:image/png;base64," + ScreenshotUtils.getBase64Screenshot(driver) + "' height='400' width='600'/>");
+            Assert.fail("Overall Compliance count is invalid.");
         } else {
-            test.log(Status.PASS, "✅ Overall Compliances count displayed: " + actualCount, MediaEntityBuilder.createScreenCaptureFromPath(screenshot).build());
+            test.log(Status.PASS, "✅ Overall Compliances count displayed: " + actualCount, MediaEntityBuilder.createScreenCaptureFromBase64String(ScreenshotUtils.getBase64Screenshot(driver), "image/png").build());
+            test.log(Status.INFO, "<img src='data:image/png;base64," + ScreenshotUtils.getBase64Screenshot(driver) + "' height='400' width='600'/>");
         }
     }
 
@@ -138,16 +139,17 @@ public class HomePageValidationSteps {
         logMessage.append("<br>📊 <b>Expected Total from Tabs</b> : ").append(expectedTotal).append("<br>");
         logMessage.append("📋 <b>Actual Overall Compliance</b> : ").append(actualOverall).append("<br>");
 
-        String summaryScreenshot = ScreenshotUtils.takeScreenshot(driver, "Compliance_Tab_Summary");
-        test.log(Status.INFO, logMessage.toString()).addScreenCaptureFromPath(summaryScreenshot);
+        test.log(Status.INFO, logMessage.toString());
+        test.log(Status.INFO, "<img src='data:image/png;base64," + ScreenshotUtils.getBase64Screenshot(driver) + "' height='400' width='600'/>");
 
         if (expectedTotal != actualOverall) {
-            String mismatchScreenshot = ScreenshotUtils.takeScreenshot(driver, "Compliance_Count_Mismatch");
-            test.log(Status.FAIL, "❌ Mismatch in compliance counts!<br>Expected: " + expectedTotal + "<br>Actual: " + actualOverall, MediaEntityBuilder.createScreenCaptureFromPath(mismatchScreenshot).build());
-            throw new AssertionError("❌ Compliance count mismatch. Screenshot: " + mismatchScreenshot);
+            test.log(Status.FAIL, "❌ Mismatch in compliance counts!<br>Expected: " + expectedTotal + "<br>Actual: " + actualOverall, MediaEntityBuilder.createScreenCaptureFromBase64String(ScreenshotUtils.getBase64Screenshot(driver), "image/png").build());
+            test.log(Status.INFO, "<img src='data:image/png;base64," + ScreenshotUtils.getBase64Screenshot(driver) + "' height='400' width='600'/>");
+            throw new AssertionError("❌ Compliance count mismatch.");
         }
 
-        test.log(Status.PASS, "✅ Compliance counts match as expected.");
+        test.log(Status.PASS, "✅ Compliance counts match as expected.", MediaEntityBuilder.createScreenCaptureFromBase64String(ScreenshotUtils.getBase64Screenshot(driver), "image/png").build());
+        test.log(Status.INFO, "<img src='data:image/png;base64," + ScreenshotUtils.getBase64Screenshot(driver) + "' height='400' width='600'/>");
     }
 
 
@@ -159,65 +161,52 @@ public class HomePageValidationSteps {
             String tabName = pair.get("Tab");
             String sectionName = pair.get("Section");
 
-            //Get displayed tab count
             int displayedTabCount;
             try {
                 displayedTabCount = homePage.getDisplayedTabCount(tabName);
-                String beforeClickScreenshot = ScreenshotUtils.takeScreenshot(driver, "Before_Click_" + tabName.replace(" ", "_"));
-                test.log(Status.INFO, "📥 <b>Displayed Count:</b><br>🔹 Tab: <b>" + tabName + "</b><br>🔢 Count: <b>" + displayedTabCount + "</b>", MediaEntityBuilder.createScreenCaptureFromPath(beforeClickScreenshot).build());
+                test.log(Status.INFO, "📥 <b>Displayed Count:</b><br>🔹 Tab: <b>" + tabName + "</b><br>🔢 Count: <b>" + displayedTabCount + "</b>", MediaEntityBuilder.createScreenCaptureFromBase64String(ScreenshotUtils.getBase64Screenshot(driver), "image/png").build());
+                test.log(Status.INFO, "Inline Screenshot:<br><img src='data:image/png;base64," + ScreenshotUtils.getBase64Screenshot(driver) + "' height='400' width='600'/>");
             } catch (Exception e) {
-                String errorScreenshot = ScreenshotUtils.takeScreenshot(driver, "Tab_Count_Fail_" + tabName.replace(" ", "_"));
-                test.log(Status.FAIL, "❌ <b>Failed to get displayed tab count</b><br>🔹 Tab: <b>" + tabName + "</b><br><pre>" + e.getMessage() + "</pre>", MediaEntityBuilder.createScreenCaptureFromPath(errorScreenshot).build());
+                test.log(Status.FAIL, "❌ Failed to get displayed tab count<br>🔹 Tab: <b>" + tabName + "</b><br><pre>" + e.getMessage() + "</pre>", MediaEntityBuilder.createScreenCaptureFromBase64String(ScreenshotUtils.getBase64Screenshot(driver), "image/png").build());
                 Assert.fail("Displayed tab count fetch failed for: " + tabName);
                 return;
             }
 
-            //Click tab and fetch count internally
             int actualTabCount;
             try {
                 actualTabCount = homePage.clickComplianceStatusTabAndGetCount(tabName);
                 Thread.sleep(3000);
-                String clickedTabScreenshot = ScreenshotUtils.takeScreenshot(driver, "Clicked_Tab_" + tabName.replace(" ", "_"));
-                test.log(Status.PASS, "✅ <b>Clicked tab:</b> <b>" + tabName + "</b><br>🔢 Fetched Count: <b>" + actualTabCount + "</b>", MediaEntityBuilder.createScreenCaptureFromPath(clickedTabScreenshot).build());
+                test.log(Status.PASS, "✅ <b>Clicked tab:</b> <b>" + tabName + "</b><br>🔢 Fetched Count: <b>" + actualTabCount + "</b>", MediaEntityBuilder.createScreenCaptureFromBase64String(ScreenshotUtils.getBase64Screenshot(driver), "image/png").build());
+                test.log(Status.INFO, "Inline Screenshot:<br><img src='data:image/png;base64," + ScreenshotUtils.getBase64Screenshot(driver) + "' height='400' width='600'/>");
             } catch (Exception e) {
-                String failScreenshot = ScreenshotUtils.takeScreenshot(driver, "Click_Tab_Fail_" + tabName.replace(" ", "_"));
-                test.log(Status.FAIL, "❌ <b>Failed to click tab or fetch count</b><br>🔹 Tab: <b>" + tabName + "</b><br><pre>" + e.getMessage() + "</pre>", MediaEntityBuilder.createScreenCaptureFromPath(failScreenshot).build());
+                test.log(Status.FAIL, "❌ Failed to click tab or fetch count<br>🔹 Tab: <b>" + tabName + "</b><br><pre>" + e.getMessage() + "</pre>", MediaEntityBuilder.createScreenCaptureFromBase64String(ScreenshotUtils.getBase64Screenshot(driver), "image/png").build());
                 Assert.fail("Click or count fetch failed for tab: " + tabName);
                 return;
             }
 
-            //Compare displayed vs actual count
             if (displayedTabCount != actualTabCount) {
-                test.log(Status.WARNING, "⚠️ <b>Displayed vs. Fetched count mismatch</b><br>🔹 Tab: <b>" + tabName + "</b><br>" + "📥 Displayed: <b>" + displayedTabCount + "</b><br>📤 Fetched: <b>" + actualTabCount + "</b>");
+                test.log(Status.WARNING, "⚠️ Displayed vs. Fetched count mismatch<br>🔹 Tab: <b>" + tabName + "</b><br>📥 Displayed: <b>" + displayedTabCount + "</b><br>📤 Fetched: <b>" + actualTabCount + "</b>");
             }
             Assert.assertEquals(actualTabCount, displayedTabCount, "Mismatch in displayed vs actual tab count for: " + tabName);
 
-            //Ensure Compliance screen is visible
             boolean isOnComplianceScreen = homePage.isComplianceScreenVisible();
-            String complianceScreenScreenshot = ScreenshotUtils.takeScreenshot(driver, "Compliance_Screen_" + tabName.replace(" ", "_"));
-
-            test.log(isOnComplianceScreen ? Status.PASS : Status.FAIL, isOnComplianceScreen ? "📄 <b>Compliance screen loaded for:</b> <b>" + tabName + "</b>" : "❌ <b>Compliance screen NOT visible</b> for tab: <b>" + tabName + "</b>", MediaEntityBuilder.createScreenCaptureFromPath(complianceScreenScreenshot).build());
+            test.log(isOnComplianceScreen ? Status.PASS : Status.FAIL, isOnComplianceScreen ? "📄 Compliance screen loaded for: <b>" + tabName + "</b>" : "❌ Compliance screen NOT visible for tab: <b>" + tabName + "</b>", MediaEntityBuilder.createScreenCaptureFromBase64String(ScreenshotUtils.getBase64Screenshot(driver), "image/png").build());
+            test.log(Status.INFO, "Inline Screenshot:<br><img src='data:image/png;base64," + ScreenshotUtils.getBase64Screenshot(driver) + "' height='400' width='600'/>");
 
             Assert.assertTrue(isOnComplianceScreen, "Compliance screen not visible for tab: " + tabName);
 
-            //Fetch record count from section and validate
             int recordCount = homePage.getRecordCountForSection(sectionName);
-            String recordCountScreenshot = ScreenshotUtils.takeScreenshot(driver, "Record_Count_" + sectionName.replace(" ", "_"));
-
             if (recordCount != actualTabCount) {
-                test.log(Status.FAIL, "❌ <b>Record count mismatch</b><br>🔹 Section: <b>" + sectionName + "</b><br>" + "📤 Tab Count: <b>" + actualTabCount + "</b><br>📄 Section Count: <b>" + recordCount + "</b>", MediaEntityBuilder.createScreenCaptureFromPath(recordCountScreenshot).build());
+                test.log(Status.FAIL, "❌ Record count mismatch<br>🔹 Section: <b>" + sectionName + "</b><br>📤 Tab Count: <b>" + actualTabCount + "</b><br>📄 Section Count: <b>" + recordCount + "</b>", MediaEntityBuilder.createScreenCaptureFromBase64String(ScreenshotUtils.getBase64Screenshot(driver), "image/png").build());
             } else {
-                test.log(Status.PASS, "✅ <b style='color:green;'>Counts Matched!</b><br>" + "🔹 Tab: <b>" + tabName + "</b><br>" + "🔹 Section: <b>" + sectionName + "</b><br>" + "📌 Count: <b style='font-size:1.2em;color:green;'>" + actualTabCount + "</b>", MediaEntityBuilder.createScreenCaptureFromPath(recordCountScreenshot).build());
+                test.log(Status.PASS, "✅ Counts Matched!<br>🔹 Tab: <b>" + tabName + "</b><br>🔹 Section: <b>" + sectionName + "</b><br>📌 Count: <b style='color:green;'>" + actualTabCount + "</b>", MediaEntityBuilder.createScreenCaptureFromBase64String(ScreenshotUtils.getBase64Screenshot(driver), "image/png").build());
             }
-
+            test.log(Status.INFO, "Inline Screenshot:<br><img src='data:image/png;base64," + ScreenshotUtils.getBase64Screenshot(driver) + "' height='400' width='600'/>");
             Assert.assertEquals(recordCount, actualTabCount, "Count mismatch for section: " + sectionName);
 
-            //Navigate back to Home
             boolean navigatedBack = homePage.goBackToHomePage();
-            String backScreenshot = ScreenshotUtils.takeScreenshot(driver, "Returned_Home_" + tabName.replace(" ", "_"));
-
-            test.log(navigatedBack ? Status.PASS : Status.FAIL, navigatedBack ? "↩️ <b>Returned to Home after validating tab:</b> <b>" + tabName + "</b>" : "❌ <b>Failed to return to Home</b> after tab: <b>" + tabName + "</b>", MediaEntityBuilder.createScreenCaptureFromPath(backScreenshot).build());
-
+            test.log(navigatedBack ? Status.PASS : Status.FAIL, navigatedBack ? "↩️ Returned to Home after validating tab: <b>" + tabName + "</b>" : "❌ Failed to return to Home after tab: <b>" + tabName + "</b>", MediaEntityBuilder.createScreenCaptureFromBase64String(ScreenshotUtils.getBase64Screenshot(driver), "image/png").build());
+            test.log(Status.INFO, "Inline Screenshot:<br><img src='data:image/png;base64," + ScreenshotUtils.getBase64Screenshot(driver) + "' height='400' width='600'/>");
             Assert.assertTrue(navigatedBack, "Failed to return to Home from tab: " + tabName);
         }
     }

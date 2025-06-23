@@ -106,8 +106,10 @@ public class LoginPage extends BasePage {
      * @return true if login success logo is found, false otherwise.
      */
 
+
     public boolean isLoginSuccessful(String expectedAltText) {
         try {
+            wait.waitForVisibility(loginSuccessfulConfirmation);
             String altText = loginSuccessfulConfirmation.getAttribute("alt");
             return altText != null && altText.equalsIgnoreCase(expectedAltText);
         } catch (Exception e) {
@@ -115,6 +117,7 @@ public class LoginPage extends BasePage {
             return false;
         }
     }
+
 
 
     /**
