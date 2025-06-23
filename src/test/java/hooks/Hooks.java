@@ -46,7 +46,6 @@ public class Hooks {
 
     @Before
     public void setup(Scenario scenario) {
-        // Clear screenshot folder once per test run
         if (System.getProperty("screenshots.cleared") == null) {
             ScreenshotUtils.clearScreenshotFolder();
             System.setProperty("screenshots.cleared", "true");
@@ -59,25 +58,26 @@ public class Hooks {
         boolean isHeadless = Boolean.parseBoolean(System.getenv().getOrDefault("CHROME_HEADLESS", ConfigReader.get("headless")));
         if (isHeadless) {
             options.addArguments("--headless=new");
-            options.addArguments("--disable-gpu");
+            // ✅ GPU now works in headless=new, comment out below
+            // options.addArguments("--disable-gpu");
             logger.info("🔧 Headless mode enabled.");
         }
 
-        // Required for Jenkins/GitHub Actions Docker/Linux environments
+        // Critical for CI environments
         options.addArguments("--no-sandbox");
         options.addArguments("--disable-dev-shm-usage");
         options.addArguments("--window-size=1920,1080");
 
         driver = new ChromeDriver(options);
 
-        // Extra safety: set size again (some systems ignore window-size)
+        // Enforce consistent resolution even in headless
         driver.manage().window().setSize(new Dimension(1920, 1080));
 
-        // Timeouts
+        // Timeout settings
         driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(Long.parseLong(ConfigReader.get("pageLoadTimeout"))));
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(Long.parseLong(ConfigReader.get("implicitWait"))));
 
-        // Reporting setup
+        // Reporting
         ExtentReports extent = ExtentReportManager.getInstance();
         ExtentTest test = extent.createTest(scenario.getName());
         ExtentTestManager.setTest(test);
@@ -85,7 +85,7 @@ public class Hooks {
         test.log(Status.INFO, "🚀 Browser launched for scenario: " + scenario.getName());
         logger.info("🚀 WebDriver setup complete for scenario: {}", scenario.getName());
 
-        // Auto-login if needed
+        // Conditional login
         if (!scenario.getName().toLowerCase().contains("login")) {
             performLogin();
         } else {
@@ -93,6 +93,7 @@ public class Hooks {
             logger.info("🔍 Skipping login for login-related scenario.");
         }
     }
+
 
 
     /**

@@ -26,48 +26,47 @@ public class ScreenshotUtils {
         File destFile = new File(SCREENSHOT_PATH + fileName);
 
         try {
-            // Create screenshot folder if not exists
             new File(SCREENSHOT_PATH).mkdirs();
 
-            // Maximize or set fixed size for headless environments
+            // Force consistent resolution
             driver.manage().window().setSize(new Dimension(1920, 1080));
 
-            // Wait for page to visually load
-            new WebDriverWait(driver, Duration.ofSeconds(10))
+            // Wait until the visible part of the DOM is ready
+            new WebDriverWait(driver, Duration.ofSeconds(15))
                     .until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("body")));
-
 
             JavascriptExecutor js = (JavascriptExecutor) driver;
 
-            // Scroll to force full render
+            // Trigger scroll rendering
             js.executeScript("window.scrollTo(0, document.body.scrollHeight);");
             Thread.sleep(800);
             js.executeScript("window.scrollTo(0, 0);");
             Thread.sleep(1000);
 
-            // Force a redraw
+            // Optional: Force a redraw
             js.executeScript("document.body.style.outline='1px solid transparent';");
 
-            // Take screenshot
+            // Take initial screenshot
             File srcFile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
             FileHandler.copy(srcFile, destFile);
 
-            // Check if screenshot is too small (likely blank) – Retry once
-            if (destFile.length() < 10_000) {
-                System.err.println("⚠️ Screenshot might be blank, retrying once: " + destFile.getAbsolutePath());
+            // Retry if file is suspiciously small
+            long fileSize = destFile.length();
+            if (fileSize < 10_000) {
+                System.err.println("⚠️ Screenshot might be blank (" + fileSize + " bytes), retrying: " + destFile.getAbsolutePath());
                 Thread.sleep(1000);
                 srcFile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
                 FileHandler.copy(srcFile, destFile);
             }
 
             System.out.println("📸 Screenshot saved at: " + destFile.getAbsolutePath());
-
         } catch (Exception e) {
             System.err.println("❌ Screenshot failed: " + e.getMessage());
         }
 
         return "screenshots/" + fileName;
     }
+
 
 
 
