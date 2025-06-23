@@ -87,8 +87,6 @@ public class HomePageValidationSteps {
 
     @When("the user views the Overall Compliances section")
     public void the_user_views_the_Overall_Compliances_section() {
-        driver.navigate().refresh();
-
         try {
             Thread.sleep(2000);
             boolean isVisible = driver.findElement(By.xpath("//p[contains(normalize-space(),'Overall Compliances')]/span")).isDisplayed();

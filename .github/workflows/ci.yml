@@ -2,9 +2,9 @@ name: Run Test Automation
 
 on:
   push:
-    branches: [ main ]
+    branches: [ qe-release ]
   pull_request:
-    branches: [ main ]
+    branches: [ qe-release ]
 
 jobs:
   build:
@@ -31,16 +31,16 @@ jobs:
         env:
           CHROME_HEADLESS: true
 
-      - name: Upload Test Reports
-        if: failure()
+      - name: Upload Surefire Reports
+        if: always()
         uses: actions/upload-artifact@v4
         with:
           name: surefire-reports
           path: target/surefire-reports
 
-      - name: Upload Screenshots (if any)
-        if: failure()
+      - name: Upload Extent Report (HTML + Screenshots)
+        if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: screenshots
-          path: screenshots/
+          name: extent-report
+          path: target/extent-report/

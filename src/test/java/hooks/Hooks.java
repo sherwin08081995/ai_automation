@@ -58,15 +58,21 @@ public class Hooks {
         boolean isHeadless = Boolean.parseBoolean(System.getenv().getOrDefault("CHROME_HEADLESS", ConfigReader.get("headless")));
         if (isHeadless) {
             options.addArguments("--headless=new");
+            options.addArguments("--disable-gpu");
             logger.info("🔧 Headless mode enabled.");
         }
 
-        options.addArguments("--no-sandbox", "--disable-dev-shm-usage", "--window-size=1920,1080");
+        // 🛡️ Always needed in CI environments like GitHub Actions/Jenkins
+        options.addArguments("--no-sandbox");
+        options.addArguments("--disable-dev-shm-usage");
+        options.addArguments("--window-size=1920,1080"); // Critical for full screenshots
+
         driver = new ChromeDriver(options);
 
         driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(Long.parseLong(ConfigReader.get("pageLoadTimeout"))));
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(Long.parseLong(ConfigReader.get("implicitWait"))));
 
+        // 📊 Reporting
         ExtentReports extent = ExtentReportManager.getInstance();
         ExtentTest test = extent.createTest(scenario.getName());
         ExtentTestManager.setTest(test);
@@ -74,6 +80,7 @@ public class Hooks {
         test.log(Status.INFO, "🚀 Browser launched for scenario: " + scenario.getName());
         logger.info("🚀 WebDriver setup complete for scenario: {}", scenario.getName());
 
+        // 🔐 Auto-login unless scenario is login-related
         if (!scenario.getName().toLowerCase().contains("login")) {
             performLogin();
         } else {
@@ -81,6 +88,7 @@ public class Hooks {
             logger.info("🔍 Skipping login for login-related scenario.");
         }
     }
+
 
     /**
      * Tears down the WebDriver and ends reporting after each scenario.
