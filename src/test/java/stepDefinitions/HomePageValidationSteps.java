@@ -39,6 +39,7 @@ public class HomePageValidationSteps {
     public void the_user_views_the_left_side_menu() throws InterruptedException {
         boolean isVisible = homePage.isLeftMenuVisible();
         String screenshotPath = ScreenshotUtils.takeScreenshot(driver, isVisible ? "Left_Menu_Visible" : "Left_Menu_Not_Visible");
+
         Thread.sleep(2000);
         test.log(isVisible ? Status.PASS : Status.FAIL, isVisible ? "Left menu is visible." : "Left menu is not visible.", MediaEntityBuilder.createScreenCaptureFromPath(screenshotPath).build());
 

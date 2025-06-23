@@ -8,7 +8,6 @@ import io.cucumber.java.*;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -46,6 +45,7 @@ public class Hooks {
 
     @Before
     public void setup(Scenario scenario) {
+        // Clear screenshot folder once per test run
         if (System.getProperty("screenshots.cleared") == null) {
             ScreenshotUtils.clearScreenshotFolder();
             System.setProperty("screenshots.cleared", "true");
@@ -55,38 +55,18 @@ public class Hooks {
         WebDriverManager.chromedriver().setup();
         ChromeOptions options = new ChromeOptions();
 
-        // 🧩 Load headless flags from environment if provided
-        String extraFlags = System.getenv("CHROME_HEADLESS_FLAGS");
-        if (extraFlags != null && !extraFlags.isBlank()) {
-            for (String arg : extraFlags.trim().split("\\s+")) {
-                options.addArguments(arg);
-            }
-            logger.info("🧩 Applied CHROME_HEADLESS_FLAGS from environment: " + extraFlags);
-        } else {
-            // 🔁 Fallback to CHROME_HEADLESS boolean flag
-            boolean isHeadless = Boolean.parseBoolean(System.getenv().getOrDefault("CHROME_HEADLESS", ConfigReader.get("headless")));
-            if (isHeadless) {
-                options.addArguments("--headless");         // ✅ Legacy headless mode for AShot
-                options.addArguments("--disable-gpu");
-                logger.info("🔧 Legacy headless mode enabled (default fallback).");
-            }
+        boolean isHeadless = Boolean.parseBoolean(System.getenv().getOrDefault("CHROME_HEADLESS", ConfigReader.get("headless")));
+        if (isHeadless) {
+            options.addArguments("--headless=new");
+            logger.info("🔧 Headless mode enabled.");
         }
 
-        // 💻 Recommended for CI
-        options.addArguments("--no-sandbox");
-        options.addArguments("--disable-dev-shm-usage");
-        options.addArguments("--window-size=1920,1080");
-
+        options.addArguments("--no-sandbox", "--disable-dev-shm-usage", "--window-size=1920,1080");
         driver = new ChromeDriver(options);
 
-        // 🔧 Enforce size (sometimes ignored in headless)
-        driver.manage().window().setSize(new Dimension(1920, 1080));
-
-        // ⏱️ Timeouts
         driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(Long.parseLong(ConfigReader.get("pageLoadTimeout"))));
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(Long.parseLong(ConfigReader.get("implicitWait"))));
 
-        // 📝 Reporting
         ExtentReports extent = ExtentReportManager.getInstance();
         ExtentTest test = extent.createTest(scenario.getName());
         ExtentTestManager.setTest(test);
@@ -94,7 +74,6 @@ public class Hooks {
         test.log(Status.INFO, "🚀 Browser launched for scenario: " + scenario.getName());
         logger.info("🚀 WebDriver setup complete for scenario: {}", scenario.getName());
 
-        // 🔐 Auto-login unless login page
         if (!scenario.getName().toLowerCase().contains("login")) {
             performLogin();
         } else {
@@ -102,10 +81,6 @@ public class Hooks {
             logger.info("🔍 Skipping login for login-related scenario.");
         }
     }
-
-
-
-
 
     /**
      * Tears down the WebDriver and ends reporting after each scenario.
@@ -159,18 +134,4 @@ public class Hooks {
         ExtentTestManager.getTest().log(Status.INFO, "🔐 User logged in successfully before test begins");
         logger.info("🔐 Login successfully performed via @Before hook.");
     }
-
-    @AfterStep
-    public void attachScreenshotOnFailure(Scenario scenario) {
-        if (scenario.isFailed()) {
-            String screenshotPath = ScreenshotUtils.takeScreenshot(driver, scenario.getName());
-            ExtentTestManager.getTest().fail("❌ Step failed: " + scenario.getName())
-                    .addScreenCaptureFromPath(screenshotPath);
-        }
-    }
-
-
 }
-
-
-

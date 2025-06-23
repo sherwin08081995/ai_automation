@@ -100,10 +100,6 @@ public class HomePage extends BasePage {
      * @return true if the login confirmation image has the expected alt text.
      */
 
-//    public boolean isLoginSuccessful(String expectedAltText) {
-//        String actualAltText = loginSuccessfulConfirmation.getAttribute("alt");
-//        return actualAltText != null && actualAltText.equalsIgnoreCase(expectedAltText);
-//    }
     public boolean isLoginSuccessful(String expectedAltText) {
         try {
             String actualAltText = loginSuccessfulConfirmation.getAttribute("alt");
