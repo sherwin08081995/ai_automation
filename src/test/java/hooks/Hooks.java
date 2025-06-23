@@ -55,29 +55,38 @@ public class Hooks {
         WebDriverManager.chromedriver().setup();
         ChromeOptions options = new ChromeOptions();
 
-        boolean isHeadless = Boolean.parseBoolean(System.getenv().getOrDefault("CHROME_HEADLESS", ConfigReader.get("headless")));
-        if (isHeadless) {
-            options.addArguments("--headless=new");
-            // ✅ GPU now works in headless=new, comment out below
-            // options.addArguments("--disable-gpu");
-            logger.info("🔧 Headless mode enabled.");
+        // 🧩 Load headless flags from environment if provided
+        String extraFlags = System.getenv("CHROME_HEADLESS_FLAGS");
+        if (extraFlags != null && !extraFlags.isBlank()) {
+            for (String arg : extraFlags.trim().split("\\s+")) {
+                options.addArguments(arg);
+            }
+            logger.info("🧩 Applied CHROME_HEADLESS_FLAGS from environment: " + extraFlags);
+        } else {
+            // 🔁 Fallback to CHROME_HEADLESS boolean flag
+            boolean isHeadless = Boolean.parseBoolean(System.getenv().getOrDefault("CHROME_HEADLESS", ConfigReader.get("headless")));
+            if (isHeadless) {
+                options.addArguments("--headless");         // ✅ Legacy headless mode for AShot
+                options.addArguments("--disable-gpu");
+                logger.info("🔧 Legacy headless mode enabled (default fallback).");
+            }
         }
 
-        // Critical for CI environments
+        // 💻 Recommended for CI
         options.addArguments("--no-sandbox");
         options.addArguments("--disable-dev-shm-usage");
         options.addArguments("--window-size=1920,1080");
 
         driver = new ChromeDriver(options);
 
-        // Enforce consistent resolution even in headless
+        // 🔧 Enforce size (sometimes ignored in headless)
         driver.manage().window().setSize(new Dimension(1920, 1080));
 
-        // Timeout settings
+        // ⏱️ Timeouts
         driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(Long.parseLong(ConfigReader.get("pageLoadTimeout"))));
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(Long.parseLong(ConfigReader.get("implicitWait"))));
 
-        // Reporting
+        // 📝 Reporting
         ExtentReports extent = ExtentReportManager.getInstance();
         ExtentTest test = extent.createTest(scenario.getName());
         ExtentTestManager.setTest(test);
@@ -85,7 +94,7 @@ public class Hooks {
         test.log(Status.INFO, "🚀 Browser launched for scenario: " + scenario.getName());
         logger.info("🚀 WebDriver setup complete for scenario: {}", scenario.getName());
 
-        // Conditional login
+        // 🔐 Auto-login unless login page
         if (!scenario.getName().toLowerCase().contains("login")) {
             performLogin();
         } else {
@@ -93,6 +102,8 @@ public class Hooks {
             logger.info("🔍 Skipping login for login-related scenario.");
         }
     }
+
+
 
 
 

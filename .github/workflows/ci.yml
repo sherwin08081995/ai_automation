@@ -30,6 +30,7 @@ jobs:
         run: mvn clean test
         env:
           CHROME_HEADLESS: true
+          CHROME_HEADLESS_FLAGS: "--headless --disable-gpu --window-size=1920,1080"
 
       - name: Upload Surefire Reports
         if: always()
@@ -44,3 +45,10 @@ jobs:
         with:
           name: extent-report
           path: target/extent-report/
+
+      - name: Upload Screenshots Separately (for direct access)
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: screenshots
+          path: target/extent-report/screenshots/
