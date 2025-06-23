@@ -148,6 +148,17 @@ public class Hooks {
         ExtentTestManager.getTest().log(Status.INFO, "🔐 User logged in successfully before test begins");
         logger.info("🔐 Login successfully performed via @Before hook.");
     }
+
+    @AfterStep
+    public void attachScreenshotOnFailure(Scenario scenario) {
+        if (scenario.isFailed()) {
+            String screenshotPath = ScreenshotUtils.takeScreenshot(driver, scenario.getName());
+            ExtentTestManager.getTest().fail("❌ Step failed: " + scenario.getName())
+                    .addScreenCaptureFromPath(screenshotPath);
+        }
+    }
+
+
 }
 
 

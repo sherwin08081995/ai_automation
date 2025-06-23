@@ -5,7 +5,11 @@ import org.openqa.selenium.*;
 import org.openqa.selenium.io.FileHandler;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import ru.yandex.qatools.ashot.AShot;
+import ru.yandex.qatools.ashot.Screenshot;
+import ru.yandex.qatools.ashot.shooting.ShootingStrategies;
 
+import javax.imageio.ImageIO;
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
@@ -23,49 +27,27 @@ public class ScreenshotUtils {
     public static String takeScreenshot(WebDriver driver, String screenshotName) {
         String timestamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
         String fileName = screenshotName + "_" + timestamp + ".png";
-        File destFile = new File(SCREENSHOT_PATH + fileName);
+        String path = "target/extent-report/screenshots/" + fileName;
 
         try {
-            new File(SCREENSHOT_PATH).mkdirs();
+            new File("target/extent-report/screenshots/").mkdirs();
 
-            // Force consistent resolution
+            // Ensure proper size for headless
             driver.manage().window().setSize(new Dimension(1920, 1080));
 
-            // Wait until the visible part of the DOM is ready
-            new WebDriverWait(driver, Duration.ofSeconds(15))
-                    .until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("body")));
+            Screenshot fpScreenshot = new AShot()
+                    .shootingStrategy(ShootingStrategies.viewportPasting(1000)) // Delay between scrolls
+                    .takeScreenshot(driver);
 
-            JavascriptExecutor js = (JavascriptExecutor) driver;
-
-            // Trigger scroll rendering
-            js.executeScript("window.scrollTo(0, document.body.scrollHeight);");
-            Thread.sleep(800);
-            js.executeScript("window.scrollTo(0, 0);");
-            Thread.sleep(1000);
-
-            // Optional: Force a redraw
-            js.executeScript("document.body.style.outline='1px solid transparent';");
-
-            // Take initial screenshot
-            File srcFile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
-            FileHandler.copy(srcFile, destFile);
-
-            // Retry if file is suspiciously small
-            long fileSize = destFile.length();
-            if (fileSize < 10_000) {
-                System.err.println("⚠️ Screenshot might be blank (" + fileSize + " bytes), retrying: " + destFile.getAbsolutePath());
-                Thread.sleep(1000);
-                srcFile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
-                FileHandler.copy(srcFile, destFile);
-            }
-
-            System.out.println("📸 Screenshot saved at: " + destFile.getAbsolutePath());
+            ImageIO.write(fpScreenshot.getImage(), "PNG", new File(path));
+            System.out.println("📸 Full-page screenshot saved: " + path);
         } catch (Exception e) {
-            System.err.println("❌ Screenshot failed: " + e.getMessage());
+            System.err.println("❌ AShot screenshot failed: " + e.getMessage());
         }
 
-        return "screenshots/" + fileName;
+        return "screenshots/" + fileName; // for ExtentReports embedding
     }
+
 
 
 
