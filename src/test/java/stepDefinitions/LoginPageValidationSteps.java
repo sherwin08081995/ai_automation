@@ -42,12 +42,10 @@ public class LoginPageValidationSteps {
 
             String screenshot = ScreenshotUtils.getBase64Screenshot(driver);
             test.log(Status.PASS, "Login page subtitle is correct.", MediaEntityBuilder.createScreenCaptureFromBase64String(screenshot, "image/png").build());
-            test.log(Status.INFO, "<img src='data:image/png;base64," + screenshot + "' height='400' width='600'/>");
 
         } catch (AssertionError ae) {
             String screenshot = ScreenshotUtils.getBase64Screenshot(driver);
             test.log(Status.FAIL, "Login subtitle check failed.", MediaEntityBuilder.createScreenCaptureFromBase64String(screenshot, "image/png").build());
-            test.log(Status.INFO, "<img src='data:image/png;base64," + screenshot + "' height='400' width='600'/>");
             throw ae;
         } catch (Exception e) {
             test.log(Status.FAIL, "Unexpected error on login page: " + e.getMessage());
@@ -64,7 +62,6 @@ public class LoginPageValidationSteps {
 
             String screenshot = ScreenshotUtils.getBase64Screenshot(driver);
             test.log(Status.PASS, "Email field ready and email entered: " + email, MediaEntityBuilder.createScreenCaptureFromBase64String(screenshot, "image/png").build());
-            test.log(Status.INFO, "<img src='data:image/png;base64," + screenshot + "' height='400' width='600'/>");
 
             boolean isSendOtpButtonReady = loginPage.isSendOtpButtonVisibleAndEnabled();
             Assert.assertTrue(isSendOtpButtonReady, "OTP button is not visible/enabled");
@@ -72,12 +69,10 @@ public class LoginPageValidationSteps {
 
             screenshot = ScreenshotUtils.getBase64Screenshot(driver);
             test.log(Status.PASS, "Clicked Get OTP button.", MediaEntityBuilder.createScreenCaptureFromBase64String(screenshot, "image/png").build());
-            test.log(Status.INFO, "<img src='data:image/png;base64," + screenshot + "' height='400' width='600'/>");
 
         } catch (AssertionError ae) {
             String screenshot = ScreenshotUtils.getBase64Screenshot(driver);
             test.log(Status.FAIL, "Email or OTP button step failed: " + ae.getMessage(), MediaEntityBuilder.createScreenCaptureFromBase64String(screenshot, "image/png").build());
-            test.log(Status.INFO, "<img src='data:image/png;base64," + screenshot + "' height='400' width='600'/>");
             throw ae;
         } catch (Exception e) {
             test.log(Status.FAIL, "Exception in entering email or clicking OTP: " + e.getMessage());
@@ -93,18 +88,15 @@ public class LoginPageValidationSteps {
 
             String screenshot = ScreenshotUtils.getBase64Screenshot(driver);
             test.log(Status.PASS, "OTP field is ready.", MediaEntityBuilder.createScreenCaptureFromBase64String(screenshot, "image/png").build());
-            test.log(Status.INFO, "<img src='data:image/png;base64," + screenshot + "' height='400' width='600'/>");
 
             loginPage.enterOtp(otp);
 
             screenshot = ScreenshotUtils.getBase64Screenshot(driver);
-            test.log(Status.INFO, "Entered OTP: " + otp, MediaEntityBuilder.createScreenCaptureFromBase64String(screenshot, "image/png").build());
-            test.log(Status.INFO, "<img src='data:image/png;base64," + screenshot + "' height='400' width='600'/>");
+            test.log(Status.PASS, "Entered OTP: " + otp, MediaEntityBuilder.createScreenCaptureFromBase64String(screenshot, "image/png").build());
 
         } catch (AssertionError ae) {
             String screenshot = ScreenshotUtils.getBase64Screenshot(driver);
             test.log(Status.FAIL, "OTP field validation failed.", MediaEntityBuilder.createScreenCaptureFromBase64String(screenshot, "image/png").build());
-            test.log(Status.INFO, "<img src='data:image/png;base64," + screenshot + "' height='400' width='600'/>");
             throw ae;
         } catch (Exception e) {
             test.log(Status.FAIL, "Unexpected error entering OTP: " + e.getMessage());
@@ -120,12 +112,10 @@ public class LoginPageValidationSteps {
 
             String screenshot = ScreenshotUtils.getBase64Screenshot(driver);
             test.log(Status.PASS, "User redirected to homepage successfully.", MediaEntityBuilder.createScreenCaptureFromBase64String(screenshot, "image/png").build());
-            test.log(Status.INFO, "<img src='data:image/png;base64," + screenshot + "' height='400' width='600'/>");
 
         } catch (AssertionError ae) {
             String screenshot = ScreenshotUtils.getBase64Screenshot(driver);
             test.log(Status.FAIL, "Login failed or homepage not loaded properly.", MediaEntityBuilder.createScreenCaptureFromBase64String(screenshot, "image/png").build());
-            test.log(Status.INFO, "<img src='data:image/png;base64," + screenshot + "' height='400' width='600'/>");
             throw ae;
         } catch (Exception e) {
             test.log(Status.FAIL, "Error during homepage redirection validation: " + e.getMessage());
