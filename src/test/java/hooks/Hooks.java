@@ -8,6 +8,7 @@ import io.cucumber.java.*;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -62,17 +63,21 @@ public class Hooks {
             logger.info("🔧 Headless mode enabled.");
         }
 
-        // 🛡️ Always needed in CI environments like GitHub Actions/Jenkins
+        // Required for Jenkins/GitHub Actions Docker/Linux environments
         options.addArguments("--no-sandbox");
         options.addArguments("--disable-dev-shm-usage");
-        options.addArguments("--window-size=1920,1080"); // Critical for full screenshots
+        options.addArguments("--window-size=1920,1080");
 
         driver = new ChromeDriver(options);
 
+        // Extra safety: set size again (some systems ignore window-size)
+        driver.manage().window().setSize(new Dimension(1920, 1080));
+
+        // Timeouts
         driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(Long.parseLong(ConfigReader.get("pageLoadTimeout"))));
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(Long.parseLong(ConfigReader.get("implicitWait"))));
 
-        // 📊 Reporting
+        // Reporting setup
         ExtentReports extent = ExtentReportManager.getInstance();
         ExtentTest test = extent.createTest(scenario.getName());
         ExtentTestManager.setTest(test);
@@ -80,7 +85,7 @@ public class Hooks {
         test.log(Status.INFO, "🚀 Browser launched for scenario: " + scenario.getName());
         logger.info("🚀 WebDriver setup complete for scenario: {}", scenario.getName());
 
-        // 🔐 Auto-login unless scenario is login-related
+        // Auto-login if needed
         if (!scenario.getName().toLowerCase().contains("login")) {
             performLogin();
         } else {

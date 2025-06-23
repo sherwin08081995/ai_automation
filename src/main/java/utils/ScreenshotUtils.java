@@ -1,14 +1,15 @@
 package utils;
 
 import org.apache.commons.io.FileUtils;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.OutputType;
-import org.openqa.selenium.TakesScreenshot;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.*;
+import org.openqa.selenium.io.FileHandler;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.time.Duration;
 import java.util.Date;
 
 /**
@@ -25,23 +26,38 @@ public class ScreenshotUtils {
         File destFile = new File(SCREENSHOT_PATH + fileName);
 
         try {
-            // Ensure folder exists
+            // Create screenshot folder if not exists
             new File(SCREENSHOT_PATH).mkdirs();
 
-            // 🔁 Trigger layout & visual refresh
+            // Maximize or set fixed size for headless environments
+            driver.manage().window().setSize(new Dimension(1920, 1080));
+
+            // Wait for page to visually load
+            new WebDriverWait(driver, Duration.ofSeconds(10))
+                    .until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("body")));
+
+
             JavascriptExecutor js = (JavascriptExecutor) driver;
-            js.executeScript("window.scrollTo(0, document.body.scrollHeight);"); // Scroll to bottom
-            Thread.sleep(500);
-            js.executeScript("window.scrollTo(0, 0);"); // Scroll to top
-            Thread.sleep(800); // Allow animation/render
 
-            // 📸 Capture screenshot
+            // Scroll to force full render
+            js.executeScript("window.scrollTo(0, document.body.scrollHeight);");
+            Thread.sleep(800);
+            js.executeScript("window.scrollTo(0, 0);");
+            Thread.sleep(1000);
+
+            // Force a redraw
+            js.executeScript("document.body.style.outline='1px solid transparent';");
+
+            // Take screenshot
             File srcFile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
-            FileUtils.copyFile(srcFile, destFile);
+            FileHandler.copy(srcFile, destFile);
 
-            // ⚠️ Warn if likely blank
+            // Check if screenshot is too small (likely blank) – Retry once
             if (destFile.length() < 10_000) {
-                System.err.println("⚠️ Screenshot might be blank: " + destFile.getAbsolutePath());
+                System.err.println("⚠️ Screenshot might be blank, retrying once: " + destFile.getAbsolutePath());
+                Thread.sleep(1000);
+                srcFile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
+                FileHandler.copy(srcFile, destFile);
             }
 
             System.out.println("📸 Screenshot saved at: " + destFile.getAbsolutePath());
@@ -52,6 +68,7 @@ public class ScreenshotUtils {
 
         return "screenshots/" + fileName;
     }
+
 
 
 
