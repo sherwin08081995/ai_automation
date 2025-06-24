@@ -20,7 +20,6 @@ public class Hooks {
 
     @Before
     public void setup(Scenario scenario) {
-        // Clean screenshots only once per run
         if (System.getProperty("screenshots.cleared") == null) {
             ScreenshotUtils.clearScreenshotFolder();
             System.setProperty("screenshots.cleared", "true");
@@ -30,35 +29,26 @@ public class Hooks {
         WebDriverManager.chromedriver().setup();
         ChromeOptions options = new ChromeOptions();
 
-        // Headless or not
-        boolean isHeadless = Boolean.parseBoolean(System.getenv().getOrDefault("CHROME_HEADLESS", ConfigReader.get("headless")));
+        // 🔒 Force headless in CI environments for consistent rendering
+        options.addArguments("--headless=chrome"); // ✅ Stable headless rendering
+        options.addArguments("--disable-gpu");
+        options.addArguments("--no-sandbox");
+        options.addArguments("--disable-dev-shm-usage");
+        options.addArguments("--window-size=1920,1080"); // ✅ Critical for full DOM
+        options.addArguments("--force-device-scale-factor=1"); // ✅ Optional: clean render
+        options.addArguments("--hide-scrollbars");
+        options.addArguments("--remote-allow-origins=*");
 
-        if (isHeadless) {
-            options.addArguments("--headless=chrome"); // Classic stable headless
-            options.addArguments("--disable-gpu");
-            options.addArguments("--no-sandbox");
-            options.addArguments("--disable-dev-shm-usage");
-            options.addArguments("--window-size=1920,1080");
-            logger.info("🔧 Running in stable headless mode (chrome).");
-        } else {
-            options.addArguments("--start-maximized");
-            logger.info("🖥️ Running in headed mode.");
-        }
+        logger.info("🔧 Running in forced headless mode with resolution 1920x1080");
 
-        options.addArguments("--remote-allow-origins=*"); // optional for modern Chrome
         driver = new ChromeDriver(options);
 
-        // Ensure window size even in headless mode
-        if (isHeadless) {
-            driver.manage().window().setSize(new Dimension(1920, 1080));
-        } else {
-            driver.manage().window().maximize();
-        }
+        // ✅ Ensure Chrome respects the correct viewport size
+        driver.manage().window().setSize(new Dimension(1920, 1080));
 
         driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(Long.parseLong(ConfigReader.get("pageLoadTimeout"))));
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(Long.parseLong(ConfigReader.get("implicitWait"))));
 
-        // Start extent reporting
         ExtentReports extent = ExtentReportManager.getInstance();
         ExtentTest test = extent.createTest(scenario.getName());
         ExtentTestManager.setTest(test);
@@ -66,7 +56,7 @@ public class Hooks {
         test.log(Status.INFO, "🚀 Browser launched for scenario: " + scenario.getName());
         logger.info("🚀 WebDriver setup complete for scenario: {}", scenario.getName());
 
-        // Login for all except login tests
+        // Auto-login
         if (!scenario.getName().toLowerCase().contains("login")) {
             performLogin();
         } else {
@@ -74,6 +64,7 @@ public class Hooks {
             logger.info("🔍 Skipping login for login-related scenario.");
         }
     }
+
 
     @After
     public void tearDown(Scenario scenario) {
