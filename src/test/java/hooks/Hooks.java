@@ -37,6 +37,7 @@ public class Hooks {
 
     @Before
     public void setup(Scenario scenario) {
+        // Clean screenshots only once per suite
         if (System.getProperty("screenshots.cleared") == null) {
             ScreenshotUtils.clearScreenshotFolder();
             System.setProperty("screenshots.cleared", "true");
@@ -46,18 +47,23 @@ public class Hooks {
         WebDriverManager.chromedriver().setup();
         ChromeOptions options = new ChromeOptions();
 
-        boolean isHeadless = Boolean.parseBoolean(System.getenv().getOrDefault("CHROME_HEADLESS", ConfigReader.get("headless")));
+        // Headless mode (priority: ENV > config.properties)
+        boolean isHeadless = Boolean.parseBoolean(
+                System.getenv().getOrDefault("CHROME_HEADLESS", ConfigReader.get("headless"))
+        );
         if (isHeadless) {
-            options.addArguments("--headless=new");
-            logger.info("🔧 Headless mode enabled.");
+            options.addArguments("--headless=new", "--disable-gpu");
+            logger.info("🔧 Headless mode enabled via config/env.");
         }
 
+        // Ensure consistent rendering for screenshots
         options.addArguments("--no-sandbox", "--disable-dev-shm-usage", "--window-size=1920,1080");
-        driver = new ChromeDriver(options);
 
+        driver = new ChromeDriver(options);
         driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(Long.parseLong(ConfigReader.get("pageLoadTimeout"))));
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(Long.parseLong(ConfigReader.get("implicitWait"))));
 
+        // Reporting setup
         ExtentReports extent = ExtentReportManager.getInstance();
         ExtentTest test = extent.createTest(scenario.getName());
         ExtentTestManager.setTest(test);
@@ -68,34 +74,36 @@ public class Hooks {
         if (!scenario.getName().toLowerCase().contains("login")) {
             performLogin();
         } else {
-            test.log(Status.INFO, "🔍 Skipping login for Login Page validation scenario");
+            test.log(Status.INFO, "🔍 Skipping login for login-related scenario");
             logger.info("🔍 Skipping login for login-related scenario.");
         }
 
-        Allure.addAttachment("Test Name", scenario.getName());
+        Allure.addAttachment("Scenario", scenario.getName());
     }
 
     @After
     public void tearDown(Scenario scenario) {
-        if (scenario.isFailed()) {
-            String screenshotName = "Failure_" + scenario.getName().replace(" ", "_");
+        String scenarioName = scenario.getName().replace(" ", "_");
 
-            // Save locally (optional)
+        if (scenario.isFailed()) {
+            String screenshotName = "Failure_" + scenarioName;
+
+            // Save local screenshot
             ScreenshotUtils.takeScreenshot(driver, screenshotName);
 
-            // Extent Report (Base64)
+            // Attach to Extent (Base64)
             String base64 = ScreenshotUtils.getBase64Screenshot(driver);
             ExtentTestManager.getTest().fail("❌ Scenario failed: " + scenario.getName(),
-                    MediaEntityBuilder.createScreenCaptureFromBase64String(base64, "image/png").build());
+                    MediaEntityBuilder.createScreenCaptureFromBase64String(base64, "Failure Screenshot").build());
 
-            // Allure Report
-            ScreenshotUtils.attachScreenshotToAllure(driver,screenshotName);
+            // Attach to Allure
+            ScreenshotUtils.attachScreenshotToAllure(driver, screenshotName);
             Allure.addAttachment("Failure Reason", scenario.getStatus().name());
         }
 
         if (driver != null) {
             driver.quit();
-            ExtentTestManager.getTest().log(Status.INFO, "🧹 Browser closed for scenario: " + scenario.getName());
+            ExtentTestManager.getTest().log(Status.INFO, "🧹 Browser closed after scenario: " + scenario.getName());
             logger.info("🧹 Browser closed after scenario: {}", scenario.getName());
         }
 
@@ -120,6 +128,6 @@ public class Hooks {
         }
 
         ExtentTestManager.getTest().log(Status.INFO, "🔐 User logged in successfully before test begins");
-        logger.info("🔐 Login successfully performed via @Before hook.");
+        logger.info("🔐 Login successful.");
     }
 }

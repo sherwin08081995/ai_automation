@@ -38,6 +38,10 @@ public class ExtentReportManager {
     }
 
 
+
+
+
+
     /**
      * Returns a singleton instance of {@link ExtentReports}.
      * If not already initialized, it will:
