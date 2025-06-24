@@ -49,7 +49,11 @@ public class Hooks {
         driver = new ChromeDriver(options);
 
         // Ensure window size even in headless mode
-        driver.manage().window().setSize(new Dimension(1920, 1080));
+        if (isHeadless) {
+            driver.manage().window().setSize(new Dimension(1920, 1080));
+        } else {
+            driver.manage().window().maximize();
+        }
 
         driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(Long.parseLong(ConfigReader.get("pageLoadTimeout"))));
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(Long.parseLong(ConfigReader.get("implicitWait"))));

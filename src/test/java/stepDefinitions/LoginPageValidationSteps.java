@@ -90,12 +90,12 @@ public class LoginPageValidationSteps {
     }
 
     @Then("the user should be redirected to the homepage {string}")
-    public void the_user_should_be_redirected_to_the_homepage(String expectedAltText) {
+    public void the_user_should_be_redirected_to_the_homepage(String expectedAltText) throws InterruptedException {
         try {
             boolean loginSuccess = loginPage.isLoginSuccessful(expectedAltText);
             Assert.assertTrue(loginSuccess, "Login failed or homepage not loaded");
-
             logStep("🏠 User redirected to homepage successfully.");
+            Thread.sleep(2000);
             ScreenshotUtils.attachScreenshotToAllure(driver, "Homepage_Redirected");
 
         } catch (AssertionError ae) {
