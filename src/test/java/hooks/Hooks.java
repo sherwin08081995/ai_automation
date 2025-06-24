@@ -34,25 +34,22 @@ public class Hooks {
         boolean isHeadless = Boolean.parseBoolean(System.getenv().getOrDefault("CHROME_HEADLESS", ConfigReader.get("headless")));
 
         if (isHeadless) {
-            options.addArguments("--headless");
+            options.addArguments("--headless=chrome"); // Classic stable headless
             options.addArguments("--disable-gpu");
-            logger.info("🔧 Running in headless mode.");
+            options.addArguments("--no-sandbox");
+            options.addArguments("--disable-dev-shm-usage");
+            options.addArguments("--window-size=1920,1080");
+            logger.info("🔧 Running in stable headless mode (chrome).");
         } else {
             options.addArguments("--start-maximized");
             logger.info("🖥️ Running in headed mode.");
         }
 
-        options.addArguments("--no-sandbox");
-        options.addArguments("--disable-dev-shm-usage");
-        options.addArguments("--window-size=1920,1080");
         options.addArguments("--remote-allow-origins=*"); // optional for modern Chrome
-
         driver = new ChromeDriver(options);
 
-        // Only maximize if not headless
-        if (!isHeadless) {
-            driver.manage().window().maximize();
-        }
+        // Ensure window size even in headless mode
+        driver.manage().window().setSize(new Dimension(1920, 1080));
 
         driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(Long.parseLong(ConfigReader.get("pageLoadTimeout"))));
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(Long.parseLong(ConfigReader.get("implicitWait"))));
@@ -90,8 +87,8 @@ public class Hooks {
 
         if (driver != null) {
             driver.quit();
-            ExtentTestManager.getTest().log(Status.INFO, "🧹 Browser closed after scenario: " + scenario.getName());
-            logger.info("🧹 Browser closed after scenario: {}", scenario.getName());
+            ExtentTestManager.getTest().log(Status.INFO, "🪚 Browser closed after scenario: " + scenario.getName());
+            logger.info("🪚 Browser closed after scenario: {}", scenario.getName());
         }
 
         ExtentTestManager.removeTest();
