@@ -26,6 +26,7 @@ public class LoginPageValidationSteps {
     public void the_user_is_on_the_login_page() {
         try {
             driver.get(ConfigReader.get("baseUrl"));
+
             boolean subtitleCorrect = loginPage.isLoginSubtitleCorrect();
             Assert.assertTrue(subtitleCorrect, "Login subtitle is not displayed as expected");
 
@@ -109,6 +110,6 @@ public class LoginPageValidationSteps {
 
     @Step("{message}")
     public void logStep(String message) {
-        // Just a wrapper to mark Allure steps
+        // This method marks steps in Allure report
     }
 }

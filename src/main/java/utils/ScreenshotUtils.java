@@ -1,5 +1,6 @@
 package utils;
 
+import io.qameta.allure.Attachment;
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
@@ -13,7 +14,7 @@ import java.util.Date;
 
 public class ScreenshotUtils {
 
-    // Folder for screenshots (inside target/extent-report)
+    // Folder for ExtentReports screenshots
     private static final String SCREENSHOT_FOLDER = System.getProperty("user.dir") + "/target/extent-report/screenshots/";
 
     /**
@@ -29,20 +30,15 @@ public class ScreenshotUtils {
         File destFile = new File(SCREENSHOT_FOLDER + fileName);
 
         try {
-            // Ensure screenshot directory exists
-            FileUtils.forceMkdirParent(destFile);
-
-            // Take screenshot and save to file
+            FileUtils.forceMkdirParent(destFile); // Create directory if missing
             File srcFile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
             FileUtils.copyFile(srcFile, destFile);
-
             System.out.println("📸 Screenshot saved at: " + destFile.getAbsolutePath());
         } catch (IOException e) {
             System.err.println("❌ Failed to save screenshot: " + e.getMessage());
         }
 
-        // Return relative path for ExtentReports
-        return "screenshots/" + fileName;
+        return "screenshots/" + fileName; // For ExtentReports
     }
 
     /**
@@ -53,24 +49,27 @@ public class ScreenshotUtils {
     }
 
     /**
-     * Builds HTML image tag from Base64 string (for advanced inlining).
+     * Builds HTML image tag from Base64 string (for advanced inlining in Extent).
      */
     public static String getInlineBase64Img(String base64, int height) {
         return "<br><img src='data:image/png;base64," + base64 + "' height='" + height + "' />";
     }
 
-
-
+    /**
+     * Attaches screenshot to Allure Report (INLINE in step or method).
+     * Call this inside your test or step method.
+     *
+     * @param screenshotName Screenshot label in report
+     * @param driver         WebDriver instance
+     */
     public static void attachScreenshotToAllure(WebDriver driver, String screenshotName) {
         try {
             byte[] screenshot = ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
-            Allure.addAttachment(screenshotName, new ByteArrayInputStream(screenshot));
+            Allure.addAttachment(screenshotName, "image/png", new ByteArrayInputStream(screenshot), ".png");
         } catch (Exception e) {
             System.err.println("❌ Failed to attach screenshot to Allure: " + e.getMessage());
         }
     }
-
-
 
 
     /**

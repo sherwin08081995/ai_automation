@@ -2472,3 +2472,43 @@ java.lang.NullPointerException: Cannot invoke "com.aventstack.extentreports.Exte
 2025-06-24 11:08:46 [main] INFO  hooks.Hooks - 🧹 Browser closed after scenario: Login with valid user credentials and OTP
 2025-06-24 11:08:46 [main] INFO  listeners.TestListener - Skipping onTestSuccess for Cucumber scenario: runScenario
 2025-06-24 11:08:46 [main] INFO  listeners.TestListener - >>> Test Suite Finished: Zolvit Tests
+2025-06-24 11:20:31 [main] INFO  listeners.TestListener - >>> Test Suite Started: Zolvit Tests
+2025-06-24 11:20:32 [main] WARN  listeners.TestListener - Skipping ExtentTest creation for method: runScenario (handled via Hooks)
+2025-06-24 11:20:32 [main] INFO  hooks.Hooks - ✅ Screenshot folder cleaned.
+2025-06-24 11:20:34 [main] INFO  hooks.Hooks - 🚀 WebDriver setup complete for scenario: Login with valid user credentials and OTP
+2025-06-24 11:20:34 [main] INFO  hooks.Hooks - 🔍 Skipping login for login-related scenario.
+2025-06-24 11:20:44 [main] INFO  hooks.Hooks - 🧹 Browser closed after scenario: Login with valid user credentials and OTP
+2025-06-24 11:20:44 [main] INFO  listeners.TestListener - Skipping onTestSuccess for Cucumber scenario: runScenario
+2025-06-24 11:20:45 [main] INFO  listeners.TestListener - >>> Test Suite Finished: Zolvit Tests
+2025-06-24 11:21:52 [main] INFO  listeners.TestListener - >>> Test Suite Started: Zolvit Tests
+2025-06-24 11:21:53 [main] WARN  listeners.TestListener - Skipping ExtentTest creation for method: runScenario (handled via Hooks)
+2025-06-24 11:21:53 [main] INFO  hooks.Hooks - ✅ Screenshot folder cleaned.
+2025-06-24 11:21:55 [main] INFO  hooks.Hooks - 🚀 WebDriver setup complete for scenario: Login with valid user credentials and OTP
+2025-06-24 11:21:55 [main] INFO  hooks.Hooks - 🔍 Skipping login for login-related scenario.
+2025-06-24 11:22:07 [main] INFO  hooks.Hooks - 🧹 Browser closed after scenario: Login with valid user credentials and OTP
+2025-06-24 11:22:07 [main] INFO  listeners.TestListener - Skipping onTestSuccess for Cucumber scenario: runScenario
+2025-06-24 11:22:07 [main] INFO  listeners.TestListener - >>> Test Suite Finished: Zolvit Tests
+2025-06-24 11:25:40 [main] INFO  listeners.TestListener - >>> Test Suite Started: Zolvit Tests
+2025-06-24 11:25:41 [main] WARN  listeners.TestListener - Skipping ExtentTest creation for method: runScenario (handled via Hooks)
+2025-06-24 11:25:42 [main] INFO  hooks.Hooks - ✅ Screenshot folder cleaned.
+2025-06-24 11:25:44 [main] INFO  hooks.Hooks - 🚀 WebDriver setup complete for scenario: Login with valid user credentials and OTP
+2025-06-24 11:25:44 [main] INFO  hooks.Hooks - 🔍 Skipping login for login-related scenario.
+2025-06-24 11:25:56 [main] INFO  hooks.Hooks - 🧹 Browser closed after scenario: Login with valid user credentials and OTP
+2025-06-24 11:25:56 [main] INFO  listeners.TestListener - Skipping onTestSuccess for Cucumber scenario: runScenario
+2025-06-24 11:25:56 [main] INFO  listeners.TestListener - >>> Test Suite Finished: Zolvit Tests
+2025-06-24 11:31:27 [main] INFO  listeners.TestListener - >>> Test Suite Started: Zolvit Tests
+2025-06-24 11:31:28 [main] WARN  listeners.TestListener - Skipping ExtentTest creation for method: runScenario (handled via Hooks)
+2025-06-24 11:31:28 [main] INFO  hooks.Hooks - ✅ Screenshot folder cleaned.
+2025-06-24 11:31:31 [main] INFO  hooks.Hooks - 🚀 WebDriver setup complete for scenario: Login with valid user credentials and OTP
+2025-06-24 11:31:31 [main] INFO  hooks.Hooks - 🔍 Skipping login for login-related scenario.
+2025-06-24 11:31:42 [main] INFO  hooks.Hooks - 🧹 Browser closed after scenario: Login with valid user credentials and OTP
+2025-06-24 11:31:42 [main] INFO  listeners.TestListener - Skipping onTestSuccess for Cucumber scenario: runScenario
+2025-06-24 11:31:42 [main] INFO  listeners.TestListener - >>> Test Suite Finished: Zolvit Tests
+2025-06-24 11:34:41 [main] INFO  listeners.TestListener - >>> Test Suite Started: Zolvit Tests
+2025-06-24 11:34:42 [main] WARN  listeners.TestListener - Skipping ExtentTest creation for method: runScenario (handled via Hooks)
+2025-06-24 11:34:42 [main] INFO  hooks.Hooks - ✅ Screenshot folder cleaned.
+2025-06-24 11:34:44 [main] INFO  hooks.Hooks - 🚀 WebDriver setup complete for scenario: Login with valid user credentials and OTP
+2025-06-24 11:34:44 [main] INFO  hooks.Hooks - 🔍 Skipping login for login-related scenario.
+2025-06-24 11:34:54 [main] INFO  hooks.Hooks - 🧹 Browser closed after scenario: Login with valid user credentials and OTP
+2025-06-24 11:34:54 [main] INFO  listeners.TestListener - Skipping onTestSuccess for Cucumber scenario: runScenario
+2025-06-24 11:34:54 [main] INFO  listeners.TestListener - >>> Test Suite Finished: Zolvit Tests

@@ -6,6 +6,7 @@ import com.aventstack.extentreports.MediaEntityBuilder;
 import com.aventstack.extentreports.Status;
 import io.cucumber.java.*;
 import io.github.bonigarcia.wdm.WebDriverManager;
+import io.qameta.allure.Allure;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebDriver;
@@ -30,22 +31,12 @@ import java.time.Duration;
 
 
 public class Hooks {
+
     public static WebDriver driver;
     private static final Logger logger = LogManager.getLogger(Hooks.class);
 
-    /**
-     * Sets up the WebDriver and test environment before each scenario.
-     * - Clears screenshots once per test run
-     * - Launches browser with configured options
-     * - Initializes reporting
-     * - Performs login unless scenario name includes 'login'
-     *
-     * @param scenario The Cucumber scenario about to be executed
-     */
-
     @Before
     public void setup(Scenario scenario) {
-        // Clear screenshot folder once per test run
         if (System.getProperty("screenshots.cleared") == null) {
             ScreenshotUtils.clearScreenshotFolder();
             System.setProperty("screenshots.cleared", "true");
@@ -80,28 +71,26 @@ public class Hooks {
             test.log(Status.INFO, "🔍 Skipping login for Login Page validation scenario");
             logger.info("🔍 Skipping login for login-related scenario.");
         }
-    }
 
-    /**
-     * Tears down the WebDriver and ends reporting after each scenario.
-     * - Closes the browser
-     * - Logs closure into the report
-     * - Removes test from ExtentTestManager
-     *
-     * @param scenario The Cucumber scenario just executed
-     */
+        Allure.addAttachment("Test Name", scenario.getName());
+    }
 
     @After
     public void tearDown(Scenario scenario) {
-
         if (scenario.isFailed()) {
-            // Optional: still save to file for local inspection
-            ScreenshotUtils.takeScreenshot(driver, "Failure_" + scenario.getName().replace(" ", "_"));
+            String screenshotName = "Failure_" + scenario.getName().replace(" ", "_");
 
-            // ✅ Embed screenshot as base64 to work inside Jenkins report
+            // Save locally (optional)
+            ScreenshotUtils.takeScreenshot(driver, screenshotName);
+
+            // Extent Report (Base64)
             String base64 = ScreenshotUtils.getBase64Screenshot(driver);
             ExtentTestManager.getTest().fail("❌ Scenario failed: " + scenario.getName(),
                     MediaEntityBuilder.createScreenCaptureFromBase64String(base64, "image/png").build());
+
+            // Allure Report
+            ScreenshotUtils.attachScreenshotToAllure(driver,screenshotName);
+            Allure.addAttachment("Failure Reason", scenario.getStatus().name());
         }
 
         if (driver != null) {
@@ -112,13 +101,6 @@ public class Hooks {
 
         ExtentTestManager.removeTest();
     }
-
-
-    /**
-     * Performs application login before each non-login scenario.
-     * Navigates to base URL and logs in using credentials from the config file.
-     * Fails the test if login verification fails.
-     */
 
     private void performLogin() {
         driver.get(ConfigReader.get("baseUrl"));
