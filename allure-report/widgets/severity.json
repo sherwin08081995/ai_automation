@@ -1,0 +1,1 @@
+[{"uid":"861526066fd65d85","name":"setUpClass","time":{"start":1750702361968,"stop":1750702361970,"duration":2},"status":"broken","severity":"normal"},{"uid":"8ded5edb45753555","name":"Login with valid user credentials and OTP","time":{"start":1750702447464,"stop":1750702456102,"duration":8638},"status":"passed","severity":"normal"}]

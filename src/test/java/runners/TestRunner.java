@@ -10,6 +10,7 @@ import org.junit.runner.RunWith;
         features = { "src/test/resources/login.feature" },
         glue = {"stepDefinitions", "hooks"},
         plugin = {"pretty",
+                "io.qameta.allure.cucumber7jvm.AllureCucumber7Jvm",
                 "html:target/cucumber-reports/cucumber-html-report.html",
                 "json:target/cucumber-reports/Cucumber.json"
         },

@@ -4,7 +4,8 @@ import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
-
+import io.qameta.allure.Allure;
+import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
@@ -57,6 +58,20 @@ public class ScreenshotUtils {
     public static String getInlineBase64Img(String base64, int height) {
         return "<br><img src='data:image/png;base64," + base64 + "' height='" + height + "' />";
     }
+
+
+
+    public static void attachScreenshotToAllure(WebDriver driver, String screenshotName) {
+        try {
+            byte[] screenshot = ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
+            Allure.addAttachment(screenshotName, new ByteArrayInputStream(screenshot));
+        } catch (Exception e) {
+            System.err.println("❌ Failed to attach screenshot to Allure: " + e.getMessage());
+        }
+    }
+
+
+
 
     /**
      * Clears or creates the screenshot folder at test start.
