@@ -6,7 +6,6 @@ import com.aventstack.extentreports.MediaEntityBuilder;
 import com.aventstack.extentreports.Status;
 import io.cucumber.java.*;
 import io.github.bonigarcia.wdm.WebDriverManager;
-import io.qameta.allure.Allure;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebDriver;
@@ -21,15 +20,6 @@ import utils.ScreenshotUtils;
 
 import java.time.Duration;
 
-/**
- * Hooks class manages setup and teardown activities for each Cucumber scenario.
- * It includes WebDriver initialization, login, report logging, and cleanup tasks.
- *
- * @author Sherwin
- * @since 09-06-2025
- */
-
-
 public class Hooks {
 
     public static WebDriver driver;
@@ -37,7 +27,7 @@ public class Hooks {
 
     @Before
     public void setup(Scenario scenario) {
-        // Clean screenshots only once per suite
+        // Clear screenshot folder only once per run
         if (System.getProperty("screenshots.cleared") == null) {
             ScreenshotUtils.clearScreenshotFolder();
             System.setProperty("screenshots.cleared", "true");
@@ -47,23 +37,21 @@ public class Hooks {
         WebDriverManager.chromedriver().setup();
         ChromeOptions options = new ChromeOptions();
 
-        // Headless mode (priority: ENV > config.properties)
-        boolean isHeadless = Boolean.parseBoolean(
-                System.getenv().getOrDefault("CHROME_HEADLESS", ConfigReader.get("headless"))
-        );
+        // Headless mode: prefer ENV var > config file
+        boolean isHeadless = Boolean.parseBoolean(System.getenv().getOrDefault("CHROME_HEADLESS", ConfigReader.get("headless")));
         if (isHeadless) {
             options.addArguments("--headless=new", "--disable-gpu");
             logger.info("🔧 Headless mode enabled via config/env.");
         }
 
-        // Ensure consistent rendering for screenshots
         options.addArguments("--no-sandbox", "--disable-dev-shm-usage", "--window-size=1920,1080");
 
         driver = new ChromeDriver(options);
+        driver.manage().window().maximize();
         driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(Long.parseLong(ConfigReader.get("pageLoadTimeout"))));
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(Long.parseLong(ConfigReader.get("implicitWait"))));
 
-        // Reporting setup
+        // Extent reporting setup
         ExtentReports extent = ExtentReportManager.getInstance();
         ExtentTest test = extent.createTest(scenario.getName());
         ExtentTestManager.setTest(test);
@@ -71,14 +59,13 @@ public class Hooks {
         test.log(Status.INFO, "🚀 Browser launched for scenario: " + scenario.getName());
         logger.info("🚀 WebDriver setup complete for scenario: {}", scenario.getName());
 
+        // Auto login unless it’s a login scenario
         if (!scenario.getName().toLowerCase().contains("login")) {
             performLogin();
         } else {
             test.log(Status.INFO, "🔍 Skipping login for login-related scenario");
             logger.info("🔍 Skipping login for login-related scenario.");
         }
-
-        Allure.addAttachment("Scenario", scenario.getName());
     }
 
     @After
@@ -88,17 +75,15 @@ public class Hooks {
         if (scenario.isFailed()) {
             String screenshotName = "Failure_" + scenarioName;
 
-            // Save local screenshot
+            // Save locally for ExtentReport reference
             ScreenshotUtils.takeScreenshot(driver, screenshotName);
 
             // Attach to Extent (Base64)
             String base64 = ScreenshotUtils.getBase64Screenshot(driver);
-            ExtentTestManager.getTest().fail("❌ Scenario failed: " + scenario.getName(),
-                    MediaEntityBuilder.createScreenCaptureFromBase64String(base64, "Failure Screenshot").build());
+            ExtentTestManager.getTest().fail("❌ Scenario failed: " + scenario.getName(), MediaEntityBuilder.createScreenCaptureFromBase64String(base64, "Failure Screenshot").build());
 
-            // Attach to Allure
+            // Attach to Allure (byte[] method for reliability)
             ScreenshotUtils.attachScreenshotToAllure(driver, screenshotName);
-            Allure.addAttachment("Failure Reason", scenario.getStatus().name());
         }
 
         if (driver != null) {

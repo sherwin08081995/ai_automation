@@ -1,11 +1,11 @@
 package utils;
 
-import io.qameta.allure.Attachment;
+import io.qameta.allure.Allure;
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
-import io.qameta.allure.Allure;
+
 import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.IOException;
@@ -14,15 +14,10 @@ import java.util.Date;
 
 public class ScreenshotUtils {
 
-    // Folder for ExtentReports screenshots
     private static final String SCREENSHOT_FOLDER = System.getProperty("user.dir") + "/target/extent-report/screenshots/";
 
     /**
      * Captures screenshot and returns the relative path to be used in ExtentReports.
-     *
-     * @param driver         WebDriver instance
-     * @param screenshotName Custom name for screenshot
-     * @return Relative path (e.g., "screenshots/abc_20250623_224533.png")
      */
     public static String takeScreenshot(WebDriver driver, String screenshotName) {
         String timestamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
@@ -30,7 +25,7 @@ public class ScreenshotUtils {
         File destFile = new File(SCREENSHOT_FOLDER + fileName);
 
         try {
-            FileUtils.forceMkdirParent(destFile); // Create directory if missing
+            FileUtils.forceMkdirParent(destFile);
             File srcFile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
             FileUtils.copyFile(srcFile, destFile);
             System.out.println("📸 Screenshot saved at: " + destFile.getAbsolutePath());
@@ -38,7 +33,7 @@ public class ScreenshotUtils {
             System.err.println("❌ Failed to save screenshot: " + e.getMessage());
         }
 
-        return "screenshots/" + fileName; // For ExtentReports
+        return "screenshots/" + fileName;
     }
 
     /**
@@ -49,28 +44,30 @@ public class ScreenshotUtils {
     }
 
     /**
-     * Builds HTML image tag from Base64 string (for advanced inlining in Extent).
+     * Builds HTML image tag from Base64 string (for Extent).
      */
     public static String getInlineBase64Img(String base64, int height) {
         return "<br><img src='data:image/png;base64," + base64 + "' height='" + height + "' />";
     }
 
     /**
-     * Attaches screenshot to Allure Report (INLINE in step or method).
-     * Call this inside your test or step method.
-     *
-     * @param screenshotName Screenshot label in report
-     * @param driver         WebDriver instance
+     * Attaches screenshot to Allure Report using ByteArrayInputStream (CI safe, reliable).
      */
     public static void attachScreenshotToAllure(WebDriver driver, String screenshotName) {
         try {
+            // Wait a bit to ensure page is fully rendered
+            Thread.sleep(200);
+
             byte[] screenshot = ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
+            System.out.println("🧾 Screenshot size: " + screenshot.length + " bytes");
+
+            // Attach screenshot to Allure
             Allure.addAttachment(screenshotName, "image/png", new ByteArrayInputStream(screenshot), ".png");
+
         } catch (Exception e) {
             System.err.println("❌ Failed to attach screenshot to Allure: " + e.getMessage());
         }
     }
-
 
     /**
      * Clears or creates the screenshot folder at test start.
