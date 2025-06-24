@@ -1,1 +1,1 @@
-{"total":1,"items":[{"uid":"2c6952e9ed76ae3479159c302d0139fd","name":"Login Page Functionality","statistic":{"failed":0,"broken":0,"skipped":0,"passed":1,"unknown":0,"total":1}}]}
+{"total":2,"items":[{"uid":"0d7cdbe6d3981dab704932f812a46e16","name":"Home Page Functionality","statistic":{"failed":1,"broken":0,"skipped":0,"passed":2,"unknown":0,"total":3}},{"uid":"2c6952e9ed76ae3479159c302d0139fd","name":"Login Page Functionality","statistic":{"failed":0,"broken":0,"skipped":0,"passed":1,"unknown":0,"total":1}}]}

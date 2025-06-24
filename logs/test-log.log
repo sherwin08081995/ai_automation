@@ -2605,3 +2605,57 @@ java.lang.NullPointerException: Cannot invoke "com.aventstack.extentreports.Exte
 2025-06-24 15:49:55 [main] INFO  hooks.Hooks - 🪚 Browser closed after scenario: Login with valid user credentials and OTP
 2025-06-24 15:49:55 [main] INFO  listeners.TestListener - Skipping onTestSuccess for Cucumber scenario: runScenario
 2025-06-24 15:49:55 [main] INFO  listeners.TestListener - >>> Test Suite Finished: Zolvit Tests
+2025-06-24 16:22:42 [main] INFO  listeners.TestListener - >>> Test Suite Started: Zolvit Tests
+2025-06-24 16:22:42 [main] WARN  listeners.TestListener - Skipping ExtentTest creation for method: runScenario (handled via Hooks)
+2025-06-24 16:22:43 [main] INFO  hooks.Hooks - ✅ Screenshot folder cleaned.
+2025-06-24 16:22:43 [main] INFO  hooks.Hooks - 🔧 Running in forced headless mode with resolution 1920x1080
+2025-06-24 16:22:45 [main] INFO  hooks.Hooks - 🚀 WebDriver setup complete for scenario: Validate left side menu
+2025-06-24 16:22:46 [main] INFO  hooks.Hooks - 🌐 Navigated to: https://qe-grc.vakilsearch.com/grc/login
+2025-06-24 16:22:51 [main] INFO  hooks.Hooks - 🔐 Login successful.
+2025-06-24 16:23:10 [main] INFO  hooks.Hooks - 🪚 Browser closed after scenario: Validate left side menu
+2025-06-24 16:23:10 [main] INFO  listeners.TestListener - Skipping onTestSuccess for Cucumber scenario: runScenario
+2025-06-24 16:23:10 [main] WARN  listeners.TestListener - Skipping ExtentTest creation for method: runScenario (handled via Hooks)
+2025-06-24 16:23:10 [main] INFO  hooks.Hooks - 🔧 Running in forced headless mode with resolution 1920x1080
+2025-06-24 16:23:10 [main] INFO  hooks.Hooks - 🚀 WebDriver setup complete for scenario: Verify the Overall Compliances count
+2025-06-24 16:23:12 [main] INFO  hooks.Hooks - 🌐 Navigated to: https://qe-grc.vakilsearch.com/grc/login
+2025-06-24 16:23:16 [main] INFO  hooks.Hooks - 🔐 Login successful.
+2025-06-24 16:23:20 [main] INFO  hooks.Hooks - 🪚 Browser closed after scenario: Verify the Overall Compliances count
+2025-06-24 16:23:20 [main] INFO  listeners.TestListener - Skipping onTestSuccess for Cucumber scenario: runScenario
+2025-06-24 16:23:20 [main] WARN  listeners.TestListener - Skipping ExtentTest creation for method: runScenario (handled via Hooks)
+2025-06-24 16:23:20 [main] INFO  hooks.Hooks - 🔧 Running in forced headless mode with resolution 1920x1080
+2025-06-24 16:23:20 [main] INFO  hooks.Hooks - 🚀 WebDriver setup complete for scenario: Verify each Compliance tab navigates and displays correct record count
+2025-06-24 16:23:22 [main] INFO  hooks.Hooks - 🌐 Navigated to: https://qe-grc.vakilsearch.com/grc/login
+2025-06-24 16:23:26 [main] INFO  hooks.Hooks - 🔐 Login successful.
+2025-06-24 16:23:39 [main] INFO  hooks.Hooks - 🪚 Browser closed after scenario: Verify each Compliance tab navigates and displays correct record count
+2025-06-24 16:23:39 [main] INFO  listeners.TestListener - Skipping onTestFailure for Cucumber scenario: runScenario
+2025-06-24 16:23:39 [main] INFO  listeners.TestListener - >>> Test Suite Finished: Zolvit Tests
+2025-06-24 16:25:50 [main] INFO  listeners.TestListener - >>> Test Suite Started: Zolvit Tests
+2025-06-24 16:25:51 [main] WARN  listeners.TestListener - Skipping ExtentTest creation for method: runScenario (handled via Hooks)
+2025-06-24 16:25:51 [main] INFO  hooks.Hooks - ✅ Screenshot folder cleaned.
+2025-06-24 16:25:51 [main] INFO  hooks.Hooks - 🔧 Running in forced headless mode with resolution 1920x1080
+2025-06-24 16:25:52 [main] INFO  hooks.Hooks - 🚀 WebDriver setup complete for scenario: Validate left side menu
+2025-06-24 16:25:54 [main] INFO  hooks.Hooks - 🌐 Navigated to: https://qe-grc.vakilsearch.com/grc/login
+2025-06-24 16:25:58 [main] INFO  hooks.Hooks - 🔐 Login successful.
+2025-06-24 16:26:17 [main] INFO  hooks.Hooks - 🪚 Browser closed after scenario: Validate left side menu
+2025-06-24 16:26:17 [main] INFO  listeners.TestListener - Skipping onTestSuccess for Cucumber scenario: runScenario
+2025-06-24 16:26:17 [main] WARN  listeners.TestListener - Skipping ExtentTest creation for method: runScenario (handled via Hooks)
+2025-06-24 16:26:17 [main] INFO  hooks.Hooks - 🔧 Running in forced headless mode with resolution 1920x1080
+2025-06-24 16:26:17 [main] INFO  hooks.Hooks - 🚀 WebDriver setup complete for scenario: Verify the Overall Compliances count
+2025-06-24 16:26:18 [main] INFO  hooks.Hooks - 🌐 Navigated to: https://qe-grc.vakilsearch.com/grc/login
+2025-06-24 16:26:22 [main] INFO  hooks.Hooks - 🔐 Login successful.
+2025-06-24 16:26:27 [main] INFO  hooks.Hooks - 🪚 Browser closed after scenario: Verify the Overall Compliances count
+2025-06-24 16:26:27 [main] INFO  listeners.TestListener - Skipping onTestSuccess for Cucumber scenario: runScenario
+2025-06-24 16:26:27 [main] WARN  listeners.TestListener - Skipping ExtentTest creation for method: runScenario (handled via Hooks)
+2025-06-24 16:26:27 [main] INFO  hooks.Hooks - 🔧 Running in forced headless mode with resolution 1920x1080
+2025-06-24 16:26:28 [main] INFO  hooks.Hooks - 🚀 WebDriver setup complete for scenario: Verify each Compliance tab navigates and displays correct record count
+2025-06-24 16:26:30 [main] INFO  hooks.Hooks - 🌐 Navigated to: https://qe-grc.vakilsearch.com/grc/login
+2025-06-24 16:26:34 [main] INFO  hooks.Hooks - 🔐 Login successful.
+2025-06-24 16:26:49 [main] INFO  hooks.Hooks - 🪚 Browser closed after scenario: Verify each Compliance tab navigates and displays correct record count
+2025-06-24 16:26:49 [main] INFO  listeners.TestListener - Skipping onTestFailure for Cucumber scenario: runScenario
+2025-06-24 16:26:49 [main] WARN  listeners.TestListener - Skipping ExtentTest creation for method: runScenario (handled via Hooks)
+2025-06-24 16:26:49 [main] INFO  hooks.Hooks - 🔧 Running in forced headless mode with resolution 1920x1080
+2025-06-24 16:26:50 [main] INFO  hooks.Hooks - 🚀 WebDriver setup complete for scenario: Login with valid user credentials and OTP
+2025-06-24 16:26:50 [main] INFO  hooks.Hooks - 🔍 Skipping login for login-related scenario.
+2025-06-24 16:27:01 [main] INFO  hooks.Hooks - 🪚 Browser closed after scenario: Login with valid user credentials and OTP
+2025-06-24 16:27:01 [main] INFO  listeners.TestListener - Skipping onTestSuccess for Cucumber scenario: runScenario
+2025-06-24 16:27:01 [main] INFO  listeners.TestListener - >>> Test Suite Finished: Zolvit Tests
