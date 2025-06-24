@@ -87,6 +87,7 @@ public class LoginPage extends BasePage {
     public boolean isLoginSubtitleCorrect() {
         try {
             String expected = "Log into your account";
+            Thread.sleep(2000);
             WebElement subtitleElement = wait.waitForVisibility(loginSubtitleText);
             String actual = subtitleElement.getText().trim();
             if (!expected.equals(actual)) {

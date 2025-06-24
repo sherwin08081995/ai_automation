@@ -2544,3 +2544,19 @@ java.lang.NullPointerException: Cannot invoke "com.aventstack.extentreports.Exte
 2025-06-24 14:11:55 [main] INFO  hooks.Hooks - 🧹 Browser closed after scenario: Login with valid user credentials and OTP
 2025-06-24 14:11:55 [main] INFO  listeners.TestListener - Skipping onTestSuccess for Cucumber scenario: runScenario
 2025-06-24 14:11:55 [main] INFO  listeners.TestListener - >>> Test Suite Finished: Zolvit Tests
+2025-06-24 14:15:59 [main] INFO  listeners.TestListener - >>> Test Suite Started: Zolvit Tests
+2025-06-24 14:16:00 [main] WARN  listeners.TestListener - Skipping ExtentTest creation for method: runScenario (handled via Hooks)
+2025-06-24 14:16:00 [main] INFO  hooks.Hooks - ✅ Screenshot folder cleaned.
+2025-06-24 14:16:02 [main] INFO  hooks.Hooks - 🚀 WebDriver setup complete for scenario: Login with valid user credentials and OTP
+2025-06-24 14:16:02 [main] INFO  hooks.Hooks - 🔍 Skipping login for login-related scenario.
+2025-06-24 14:16:16 [main] INFO  hooks.Hooks - 🧹 Browser closed after scenario: Login with valid user credentials and OTP
+2025-06-24 14:16:16 [main] INFO  listeners.TestListener - Skipping onTestSuccess for Cucumber scenario: runScenario
+2025-06-24 14:16:16 [main] INFO  listeners.TestListener - >>> Test Suite Finished: Zolvit Tests
+2025-06-24 15:15:45 [main] INFO  listeners.TestListener - >>> Test Suite Started: Zolvit Tests
+2025-06-24 15:15:46 [main] WARN  listeners.TestListener - Skipping ExtentTest creation for method: runScenario (handled via Hooks)
+2025-06-24 15:15:46 [main] INFO  hooks.Hooks - ✅ Screenshot folder cleaned.
+2025-06-24 15:15:48 [main] INFO  hooks.Hooks - 🚀 WebDriver setup complete for scenario: Login with valid user credentials and OTP
+2025-06-24 15:15:48 [main] INFO  hooks.Hooks - 🔍 Skipping login for login-related scenario.
+2025-06-24 15:15:58 [main] INFO  hooks.Hooks - 🧹 Browser closed after scenario: Login with valid user credentials and OTP
+2025-06-24 15:15:58 [main] INFO  listeners.TestListener - Skipping onTestSuccess for Cucumber scenario: runScenario
+2025-06-24 15:15:58 [main] INFO  listeners.TestListener - >>> Test Suite Finished: Zolvit Tests

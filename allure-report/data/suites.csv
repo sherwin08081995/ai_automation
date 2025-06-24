@@ -1,2 +1,2 @@
 "DESCRIPTION","DURATION IN MS","NAME","PARENT SUITE","START TIME","STATUS","STOP TIME","SUB SUITE","SUITE","TEST CLASS","TEST METHOD"
-"","14761","Login with valid user credentials and OTP","","Tue Jun 24 14:11:40 IST 2025","passed","Tue Jun 24 14:11:55 IST 2025","","Login Page Functionality","Login with valid user credentials and OTP",""
+"","11995","Login with valid user credentials and OTP","","Tue Jun 24 15:15:46 IST 2025","passed","Tue Jun 24 15:15:58 IST 2025","","Login Page Functionality","Login with valid user credentials and OTP",""

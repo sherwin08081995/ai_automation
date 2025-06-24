@@ -37,21 +37,29 @@ public class Hooks {
         WebDriverManager.chromedriver().setup();
         ChromeOptions options = new ChromeOptions();
 
-        // Headless mode: prefer ENV var > config file
+        // Detect headless mode
         boolean isHeadless = Boolean.parseBoolean(System.getenv().getOrDefault("CHROME_HEADLESS", ConfigReader.get("headless")));
+
         if (isHeadless) {
-            options.addArguments("--headless=new", "--disable-gpu");
+            options.addArguments("--headless"); // ✅ Use classic headless for better CI stability
+            options.addArguments("--disable-gpu");
             logger.info("🔧 Headless mode enabled via config/env.");
         }
 
+        // Set consistent rendering size
         options.addArguments("--no-sandbox", "--disable-dev-shm-usage", "--window-size=1920,1080");
 
         driver = new ChromeDriver(options);
-        driver.manage().window().maximize();
+
+        // Maximize only in non-headless (headed) mode
+        if (!isHeadless) {
+            driver.manage().window().maximize();
+        }
+
         driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(Long.parseLong(ConfigReader.get("pageLoadTimeout"))));
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(Long.parseLong(ConfigReader.get("implicitWait"))));
 
-        // Extent reporting setup
+        // Extent report setup
         ExtentReports extent = ExtentReportManager.getInstance();
         ExtentTest test = extent.createTest(scenario.getName());
         ExtentTestManager.setTest(test);
@@ -59,7 +67,7 @@ public class Hooks {
         test.log(Status.INFO, "🚀 Browser launched for scenario: " + scenario.getName());
         logger.info("🚀 WebDriver setup complete for scenario: {}", scenario.getName());
 
-        // Auto login unless it’s a login scenario
+        // Auto-login unless scenario name includes "login"
         if (!scenario.getName().toLowerCase().contains("login")) {
             performLogin();
         } else {
@@ -75,14 +83,14 @@ public class Hooks {
         if (scenario.isFailed()) {
             String screenshotName = "Failure_" + scenarioName;
 
-            // Save locally for ExtentReport reference
+            // Save for ExtentReports
             ScreenshotUtils.takeScreenshot(driver, screenshotName);
 
             // Attach to Extent (Base64)
             String base64 = ScreenshotUtils.getBase64Screenshot(driver);
             ExtentTestManager.getTest().fail("❌ Scenario failed: " + scenario.getName(), MediaEntityBuilder.createScreenCaptureFromBase64String(base64, "Failure Screenshot").build());
 
-            // Attach to Allure (byte[] method for reliability)
+            // Attach to Allure
             ScreenshotUtils.attachScreenshotToAllure(driver, screenshotName);
         }
 
