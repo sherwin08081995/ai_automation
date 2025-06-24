@@ -1,22 +1,15 @@
 package hooks;
 
-import com.aventstack.extentreports.ExtentReports;
-import com.aventstack.extentreports.ExtentTest;
-import com.aventstack.extentreports.MediaEntityBuilder;
+import com.aventstack.extentreports.*;
 import com.aventstack.extentreports.Status;
 import io.cucumber.java.*;
 import io.github.bonigarcia.wdm.WebDriverManager;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
+import org.apache.logging.log4j.*;
+import org.openqa.selenium.*;
+import org.openqa.selenium.chrome.*;
 import pages.HomePage;
 import pages.LoginPage;
-import utils.ConfigReader;
-import utils.ExtentReportManager;
-import utils.ExtentTestManager;
-import utils.ScreenshotUtils;
+import utils.*;
 
 import java.time.Duration;
 
@@ -27,7 +20,7 @@ public class Hooks {
 
     @Before
     public void setup(Scenario scenario) {
-        // Clear screenshot folder only once per run
+        // Clean screenshots only once per run
         if (System.getProperty("screenshots.cleared") == null) {
             ScreenshotUtils.clearScreenshotFolder();
             System.setProperty("screenshots.cleared", "true");
@@ -37,21 +30,26 @@ public class Hooks {
         WebDriverManager.chromedriver().setup();
         ChromeOptions options = new ChromeOptions();
 
-        // Detect headless mode
+        // Headless or not
         boolean isHeadless = Boolean.parseBoolean(System.getenv().getOrDefault("CHROME_HEADLESS", ConfigReader.get("headless")));
 
         if (isHeadless) {
-            options.addArguments("--headless"); // ✅ Use classic headless for better CI stability
+            options.addArguments("--headless");
             options.addArguments("--disable-gpu");
-            logger.info("🔧 Headless mode enabled via config/env.");
+            logger.info("🔧 Running in headless mode.");
+        } else {
+            options.addArguments("--start-maximized");
+            logger.info("🖥️ Running in headed mode.");
         }
 
-        // Set consistent rendering size
-        options.addArguments("--no-sandbox", "--disable-dev-shm-usage", "--window-size=1920,1080");
+        options.addArguments("--no-sandbox");
+        options.addArguments("--disable-dev-shm-usage");
+        options.addArguments("--window-size=1920,1080");
+        options.addArguments("--remote-allow-origins=*"); // optional for modern Chrome
 
         driver = new ChromeDriver(options);
 
-        // Maximize only in non-headless (headed) mode
+        // Only maximize if not headless
         if (!isHeadless) {
             driver.manage().window().maximize();
         }
@@ -59,7 +57,7 @@ public class Hooks {
         driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(Long.parseLong(ConfigReader.get("pageLoadTimeout"))));
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(Long.parseLong(ConfigReader.get("implicitWait"))));
 
-        // Extent report setup
+        // Start extent reporting
         ExtentReports extent = ExtentReportManager.getInstance();
         ExtentTest test = extent.createTest(scenario.getName());
         ExtentTestManager.setTest(test);
@@ -67,7 +65,7 @@ public class Hooks {
         test.log(Status.INFO, "🚀 Browser launched for scenario: " + scenario.getName());
         logger.info("🚀 WebDriver setup complete for scenario: {}", scenario.getName());
 
-        // Auto-login unless scenario name includes "login"
+        // Login for all except login tests
         if (!scenario.getName().toLowerCase().contains("login")) {
             performLogin();
         } else {
@@ -82,15 +80,11 @@ public class Hooks {
 
         if (scenario.isFailed()) {
             String screenshotName = "Failure_" + scenarioName;
-
-            // Save for ExtentReports
             ScreenshotUtils.takeScreenshot(driver, screenshotName);
 
-            // Attach to Extent (Base64)
             String base64 = ScreenshotUtils.getBase64Screenshot(driver);
             ExtentTestManager.getTest().fail("❌ Scenario failed: " + scenario.getName(), MediaEntityBuilder.createScreenCaptureFromBase64String(base64, "Failure Screenshot").build());
 
-            // Attach to Allure
             ScreenshotUtils.attachScreenshotToAllure(driver, screenshotName);
         }
 
