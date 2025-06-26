@@ -8,9 +8,30 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * HomePage.java
+ * <p>
+ * Purpose:
+ * Page Object Model (POM) for the Home Page of the application.
+ * This class encapsulates:
+ * <p>
+ * ✅ Validation of successful login through logo verification
+ * ✅ Interaction with left-side navigation menu and tab selections
+ * ✅ Retrieval and validation of compliance counts (Overall, Needs Action, In Progress, etc.)
+ * ✅ Compliance tab navigation, record count verification, and screen validations
+ * ✅ Return-to-home functionality and dynamic XPath-based element access
+ * ✅ Exception-safe click operations with JS fallback and wait handling
+ * <p>
+ * Related Utilities:
+ * - BasePage.java (common foundation for all pages)
+ * - Helpers (for JS click, scroll, and wait utilities)
+ * - WaitUtils (explicit wait handling)
+ * <p>
+ * Author:
+ *
  * @author Sherwin
  * @since 17-06-2025
  */
+
 
 public class HomePage extends BasePage {
 

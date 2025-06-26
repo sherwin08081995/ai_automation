@@ -8,28 +8,47 @@ import org.openqa.selenium.support.FindBy;
 import java.util.List;
 
 /**
- * Page Object Model class for the Login page.
- * Handles login interactions like entering username, OTP, and validation.
+ * LoginPage.java
+ * <p>
+ * Purpose:
+ * Page Object Model (POM) for the Login Page of the application.
+ * This class handles:
+ * <p>
+ * ✅ Entering username/email/mobile into the login input
+ * ✅ OTP-based login workflow: triggering OTP and entering values into OTP fields
+ * ✅ Verification of successful login via confirmation logo
+ * ✅ UI validations: subtitle check, field visibility, button status
+ * ✅ Support for automation-friendly interaction via waits and retries
+ * <p>
+ * Related Utilities:
+ * - BasePage.java (parent class providing wait and helper utilities)
+ * - WaitUtils.java (explicit wait handling)
+ * <p>
+ * Author:
  *
  * @author Sherwin
  * @since 09-06-2025
  */
 
+
 public class LoginPage extends BasePage {
 
-    @FindBy(xpath = "(//input[@id='mobile'])[2]")
+    @FindBy(xpath = "//input[@id='loginId']")
     private WebElement userName;
 
-    @FindBy(xpath = "//button[@type='button']//following::p[normalize-space()='Get OTP']")
+    @FindBy(xpath = "//p[normalize-space()='Login with OTP']")
     private WebElement otpBtn;
+
+    @FindBy(xpath = "//p[normalize-space()='Get OTP']")
+    private WebElement getOtpBtn;
 
     @FindBy(xpath = "//p[text()='Enter OTP']/following-sibling::div//input[@inputmode='numeric' and @maxlength='1']")
     private List<WebElement> otpInputs;
 
-    @FindBy(xpath = "(//p[text()='Enter OTP']/following-sibling::div//input[@inputmode='numeric' and @maxlength='1'])[7]")
+    @FindBy(xpath = "//p[text()='Enter OTP']/following-sibling::div//input[@inputmode='numeric' and @maxlength='1']")
     private WebElement otpInputBox;
 
-    @FindBy(xpath = "(//p[normalize-space()='Log into your account'])[2]")
+    @FindBy(xpath = "//h1[normalize-space()='Log into your account']")
     private WebElement loginSubtitleText;
 
     @FindBy(xpath = "//img[@alt='Vakilsearch']")
@@ -50,12 +69,22 @@ public class LoginPage extends BasePage {
     }
 
     /**
+     * Clicks the "Login with OTP" button.
+     */
+
+    public void clickLoginWithOtpButton() {
+        wait.waitForElementToBeClickable(otpBtn).click();
+    }
+
+
+    /**
      * Clicks the "Get OTP" button.
      */
 
-    public void clickOtpButton() {
-        wait.waitForElementToBeClickable(otpBtn).click();
+    public void clickGetOtpButton() {
+        wait.waitForElementToBeClickable(getOtpBtn).click();
     }
+
 
     /**
      * Enters the given OTP into the OTP input fields (starting from index 6).
@@ -64,19 +93,20 @@ public class LoginPage extends BasePage {
      */
 
     public void enterOtp(String otp) {
-        int startIndex = 6;
-
-        // Safety check to avoid IndexOutOfBoundsException
-        if (otpInputs.size() < startIndex + otp.length()) {
-            throw new RuntimeException("Not enough OTP input boxes. Found: " + otpInputs.size() + ", Required: " + (startIndex + otp.length()));
+        // Safety check: OTP must be 6 digits, and 6 input boxes should exist
+        if (otpInputs.size() != otp.length()) {
+            throw new RuntimeException("Mismatch between OTP digits and input boxes. Found boxes: " + otpInputs.size() + ", OTP length: " + otp.length());
         }
 
         for (int i = 0; i < otp.length(); i++) {
-            WebElement inputBox = wait.waitForElementToBeClickable(otpInputs.get(startIndex + i));
+            WebElement inputBox = wait.waitForElementToBeClickable(otpInputs.get(i));
             inputBox.clear();
             inputBox.sendKeys(String.valueOf(otp.charAt(i)));
+
+
         }
     }
+
 
     /**
      * Checks whether the login subtitle is correct and matches expectations.
@@ -120,7 +150,6 @@ public class LoginPage extends BasePage {
     }
 
 
-
     /**
      * Checks whether the "Get OTP" button is visible and enabled.
      *
@@ -136,6 +165,11 @@ public class LoginPage extends BasePage {
             return false;
         }
     }
+
+    public List<WebElement> getOtpInputs() {
+        return otpInputs;
+    }
+
 
     /**
      * Checks whether the email/mobile input field is visible and enabled.

@@ -13,6 +13,41 @@ import utils.*;
 
 import java.time.Duration;
 
+/**
+ * Hooks.java
+ * <p>
+ * Purpose:
+ * This class contains Cucumber Hooks for setting up and tearing down the WebDriver
+ * before and after each test scenario. It supports:
+ * <p>
+ * ✅ WebDriver initialization with Chrome (headless or headed)
+ * ✅ Screenshot folder cleanup (once per test run)
+ * ✅ Page timeouts and window sizing
+ * ✅ Auto-login before non-login scenarios
+ * ✅ ExtentReports & Allure reporting integration
+ * ✅ Screenshot capture and embedding for failed scenarios
+ * <p>
+ * Configuration-driven: Uses ConfigReader to pull values for:
+ * - headless mode
+ * - timeouts
+ * - base URL
+ * - login credentials (email, OTP)
+ * <p>
+ * Associated Utilities:
+ * - ScreenshotUtils: Folder cleanup, capture, Allure attachment
+ * - ExtentReportManager & ExtentTestManager: Reporting
+ * - ConfigReader: Loads config from properties file
+ * - LoginPage & HomePage: Page Object Model (POM) for login automation
+ * <p>
+ * Usage:
+ * - Automatically invoked before and after each Cucumber scenario
+ * - Add this class in your Cucumber glue path
+ *
+ * @author Sherwin
+ * @since 17-06-2025
+ */
+
+
 public class Hooks {
 
     public static WebDriver driver;
@@ -29,8 +64,17 @@ public class Hooks {
         WebDriverManager.chromedriver().setup();
         ChromeOptions options = new ChromeOptions();
 
+        String headless = System.getProperty("headless", ConfigReader.get("headless"));
+
+        if (Boolean.parseBoolean(headless)) {
+            options.addArguments("--headless=chrome");
+            logger.info("🔧 Running in headless mode (system or config).");
+        } else {
+            logger.info("🖥️ Running in visible (headed) mode.");
+        }
+
         // 🔒 Force headless in CI environments for consistent rendering
-        options.addArguments("--headless=chrome"); // ✅ Stable headless rendering
+        //options.addArguments("--headless=chrome"); // ✅ Stable headless rendering
         options.addArguments("--disable-gpu");
         options.addArguments("--no-sandbox");
         options.addArguments("--disable-dev-shm-usage");
@@ -89,13 +133,25 @@ public class Hooks {
         ExtentTestManager.removeTest();
     }
 
+
+    /**
+     * Performs automated login before executing test scenarios.
+     *
+     * Notes:
+     * - This method is called only for non-login scenarios to avoid redundancy.
+     * - Throws an IllegalStateException if login verification fails.
+     * - Logs status in both ExtentReports and Log4j.`.
+     */
+
+
     private void performLogin() {
         driver.get(ConfigReader.get("baseUrl"));
         logger.info("🌐 Navigated to: {}", ConfigReader.get("baseUrl"));
 
         LoginPage loginPage = new LoginPage(driver);
         loginPage.enterEmail(ConfigReader.get("email"));
-        loginPage.clickOtpButton();
+        loginPage.clickLoginWithOtpButton();
+        loginPage.clickGetOtpButton();
         loginPage.enterOtp(ConfigReader.get("otp"));
 
         HomePage homePage = new HomePage(driver);
