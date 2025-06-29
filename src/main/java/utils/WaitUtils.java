@@ -1,14 +1,13 @@
 package utils;
 
-import org.openqa.selenium.Alert;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.apache.logging.log4j.Logger;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
 import java.util.List;
+import java.util.function.Function;
 
 
 /**
@@ -24,6 +23,7 @@ public class WaitUtils {
 
     private WebDriver driver;
     private WebDriverWait wait;
+    Logger logger;
 
     /**
      * Initializes the WaitUtils with a configured timeout.
@@ -189,4 +189,34 @@ public class WaitUtils {
     public long getPageLoadTimeoutInSeconds() {
         return driver.manage().timeouts().getPageLoadTimeout().getSeconds();
     }
+
+
+    /**
+     * Waits until the specified condition is met or the timeout is reached.
+     *
+     * @param condition A function representing the condition to be evaluated.
+     *                  Typically used for custom waits like checking element text, attribute, or state.
+     */
+    public void waitUntil(Function<WebDriver, Boolean> condition) {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        wait.until(condition);
+    }
+
+    public void waitForPageToLoad() {
+        new WebDriverWait(driver, Duration.ofSeconds(20)).until(
+                webDriver -> ((JavascriptExecutor) webDriver)
+                        .executeScript("return document.readyState").equals("complete")
+        );
+        // Add a small buffer wait if UI is animation-heavy
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+        }
+    }
+
+
+
+
+
 }

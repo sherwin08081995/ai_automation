@@ -3,7 +3,6 @@ package pages;
 import base.BasePage;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -113,6 +112,12 @@ public class HomePage extends BasePage {
 
     @FindBy(xpath = "//p[normalize-space()='%s' and contains(@class,'text-gray-400')]/preceding-sibling::p[contains(@class,'text-[2.4rem]')]")
     private WebElement complianceStatusTabs;
+
+    @FindBy(xpath = "//div[contains(@class,'css-wujj2v-control')]")
+    private WebElement dueDateDropdown;
+
+    @FindBy(xpath = "//p[contains(normalize-space(),'Overall Compliances')]/span")
+    private WebElement toGetOverallComplianceCount;
 
     /**
      * Verifies if login is successful by checking the presence of a confirmation logo.
@@ -447,4 +452,227 @@ public class HomePage extends BasePage {
         }
     }
 
+    public String getSelectedDueDateFilter() {
+        try {
+            // Locate the selected value dynamically (class changes slightly, so we use contains)
+            WebElement selectedValueElement = wait.waitForVisibility(By.xpath("//div[@class='css-2p0j19-singleValue'][normalize-space()='This Month']"));
+            String selectedText = selectedValueElement.getText().trim();
+            if (selectedText.isEmpty()) {
+                throw new IllegalStateException("Selected Due Date dropdown value is blank.");
+            }
+            return selectedText;
+        } catch (TimeoutException e) {
+            throw new IllegalStateException("Due Date selected value not found after waiting.", e);
+        }
+    }
+
+
+    /**
+     * Clicks the Due Date filter dropdown after validating its presence and interactivity.
+     */
+    public void clickDueDateDropdown() {
+        try {
+            WebElement dropdown = wait.waitForElementToBeClickable(dueDateDropdown);
+
+            if (dropdown == null || !dropdown.isDisplayed() || !dropdown.isEnabled()) {
+                throw new IllegalStateException("Due Date dropdown is either not visible or not enabled.");
+            }
+            dropdown.click();
+            logger.info("Clicked the Due Date dropdown successfully.");
+
+        } catch (Exception e) {
+            logger.error("Failed to click the Due Date dropdown: {}", e.getMessage());
+            throw new RuntimeException("Unable to click Due Date dropdown.", e);
+        }
+    }
+
+
+    /**
+     * Retrieves all options listed in the Due Date filter dropdown.
+     *
+     * @return list of dropdown option texts.
+     */
+    public List<String> getDueDateFilterOptions() {
+        try {
+            // Wait for dropdown menu with options to be visible
+            List<WebElement> options = wait.waitForVisibilityOfAllElements(By.xpath("//div[@role='option']"));
+
+            if (options.isEmpty()) {
+                throw new RuntimeException("No dropdown options found.");
+            }
+
+            List<String> optionTexts = new ArrayList<>();
+            for (WebElement option : options) {
+                String rawText = option.getText();
+                String cleanedText = rawText.replace("\u00A0", " ") // replace non-breaking space
+                        .replaceAll("\\s+", " ") // normalize multiple spaces
+                        .trim();
+                logger.info("Dropdown option found: '{}'", cleanedText);
+                optionTexts.add(cleanedText);
+            }
+
+            logger.info("Final normalized options list: {}", optionTexts);
+            return optionTexts;
+
+        } catch (Exception e) {
+            logger.error("Failed to fetch Due Date dropdown options: {}", e.getMessage());
+            throw e;
+        }
+    }
+
+
+    /**
+     * Selects a specific option from the Due Date filter dropdown.
+     *
+     * @param valueToSelect The visible text of the dropdown option to select (e.g., "This Month", "Previous Quarter").
+     * @throws RuntimeException if the dropdown or the specified option is not found or clickable.
+     */
+
+    public void selectDueDateFromDropdown(String valueToSelect) {
+        try {
+            // Click the dropdown trigger
+            WebElement dropdownTrigger = wait.waitForElementToBeClickable(By.cssSelector(".css-wujj2v-control"));
+            dropdownTrigger.click();
+
+            // Build XPath for the desired option
+            String optionXpath = String.format("//div[@role='option' and normalize-space()='%s']", valueToSelect);
+
+            // Wait until the desired option is clickable (not just visible)
+            wait.waitForElementToBeClickable(By.xpath(optionXpath)).click();
+
+            // Optional: wait for loading/refresh after selection (if any)
+            wait.waitForInvisibility(By.cssSelector(".loading-indicator"));
+
+            logger.info("✅ Successfully selected Due Date option: {}", valueToSelect);
+
+        } catch (StaleElementReferenceException staleEx) {
+            logger.warn("♻️ Retrying after stale element for '{}'", valueToSelect);
+            // Retry once more (optionally add a loop or retry logic here)
+            WebElement dropdownTrigger = wait.waitForElementToBeClickable(By.cssSelector(".css-wujj2v-control"));
+            dropdownTrigger.click();
+
+            String optionXpath = String.format("//div[@role='option' and normalize-space()='%s']", valueToSelect);
+            wait.waitForElementToBeClickable(By.xpath(optionXpath)).click();
+
+            logger.info("✅ Successfully retried selection for: {}", valueToSelect);
+
+        } catch (Exception e) {
+            logger.error("❌ Failed in HomePage.selectDueDateFromDropdown: {}", e.getMessage());
+            throw e;
+        }
+    }
+
+
+    /**
+     * Gets the total of 'Risk Based Compliances'.
+     **/
+
+    public int getRiskBasedCompliancesCount() {
+        return getCountByXPath("Risk Based Compliances", "//p[contains(text(),'Risk Based Compliances')]/following-sibling::p");
+    }
+
+    /**
+     * Clicks on the 'View all' button in the Compliance section to navigate
+     * to the full Compliance page.
+     */
+
+    public void clickViewAllCompliance() {
+        try {
+            By viewAllBtnLocator = By.xpath("//p[normalize-space()='View all']");
+
+            WebElement viewAllBtn = wait.waitForElementToBeClickable(viewAllBtnLocator);
+
+            if (viewAllBtn == null || !viewAllBtn.isDisplayed() || !viewAllBtn.isEnabled()) {
+                throw new IllegalStateException("❌ 'View all' <p> tag is not visible or enabled.");
+            }
+
+            viewAllBtn.click();
+            logger.info("✅ Clicked 'View all' to navigate to Compliance Page");
+
+            // Optional: wait for page load or next expected element
+            wait.waitForInvisibility(By.cssSelector(".loading-indicator"));
+
+        } catch (Exception e) {
+            logger.error("❌ Failed to click 'View all': {}", e.getMessage());
+            throw new RuntimeException("Unable to click 'View all'.", e);
+        }
+    }
+
+
+    /**
+     * Selects a Due Date filter option from the dropdown on the Compliance page.
+     * Performs a two-step dropdown reset and selection using JavaScript.
+     *
+     * @param valueToSelect the exact visible text of the Due Date filter to select
+     */
+
+    public void selectDueDateDropdownFromCompliancePage(String valueToSelect) {
+        try {
+            logger.info("🕒 Selecting Due Date filter: '{}'", valueToSelect);
+
+            By dropdownTriggerLocator = By.xpath("//label[normalize-space()='Due Date']/following-sibling::div[1]");
+            By dropdownTextLocator = By.xpath("//label[normalize-space()='Due Date']/following-sibling::div[1]//p");
+
+            // Step 1: Click to open dropdown
+            WebElement dropdownTrigger = wait.waitForElementToBeClickable(dropdownTriggerLocator);
+            dropdownTrigger.click();
+
+            // Step 2: Wait for it to reset to "Select"
+            wait.waitForTextToBePresent(dropdownTextLocator, "Select");
+
+            // Step 3: Click again to re-open dropdown
+            dropdownTrigger = wait.waitForElementToBeClickable(dropdownTriggerLocator);
+            dropdownTrigger.click();
+
+            // Step 4: Wait until dropdown container is visible
+            By dropdownContainerLocator = By.xpath("//div[contains(@class,'z-30') and contains(@class,'pointer-events-auto')]");
+            wait.waitForVisibility(dropdownContainerLocator);
+
+            // Step 5: Locate the desired option
+            By optionLocator = By.xpath(String.format("//div[contains(@class,'z-30')]//p[normalize-space()='%s']", valueToSelect));
+            wait.waitForPresence(optionLocator);
+            WebElement option = driver.findElement(optionLocator);
+
+            // Step 6: Perform JS click
+            ((JavascriptExecutor) driver).executeScript("arguments[0].click();", option);
+
+            // Step 7: Wait for the loading spinner to disappear
+            wait.waitForInvisibility(By.cssSelector(".loading-indicator"));
+
+            logger.info("✅ Successfully selected Due Date option: '{}'", valueToSelect);
+
+        } catch (Exception e) {
+            logger.error("❌ Failed to select Due Date '{}': {}", valueToSelect, e.getMessage());
+            throw e;
+        }
+    }
+
+
+    /**
+     * Extracts the numerical count displayed in the 'All()' tab on the Compliance page.
+     *
+     * @return the integer count shown next to the 'All' tab
+     */
+
+    public int getAllTabComplianceCountFromCompliancePage() {
+        try {
+            logger.info("📊 Extracting count from 'All()' tab on Compliance Page");
+
+            By allTabCountLocator = By.xpath("//p[normalize-space()='All']/following-sibling::span");
+
+            WebElement countElement = wait.waitForVisibility(allTabCountLocator);
+            String countText = countElement.getText().replaceAll("[^0-9]", "");
+
+            int count = Integer.parseInt(countText);
+            logger.info("✅ Extracted count from 'All' tab: {}", count);
+            return count;
+
+        } catch (Exception e) {
+            logger.error("❌ Failed to extract 'All' tab count: {}", e.getMessage());
+            throw e;
+        }
+    }
+
+
 }
+

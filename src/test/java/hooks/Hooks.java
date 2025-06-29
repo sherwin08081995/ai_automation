@@ -53,12 +53,21 @@ public class Hooks {
     public static WebDriver driver;
     private static final Logger logger = LogManager.getLogger(Hooks.class);
 
+    static {
+        // Create Allure environment.properties once before all tests
+        AllureEnvironmentWriter.createEnvironmentFile();
+    }
+
     @Before
     public void setup(Scenario scenario) {
-        if (System.getProperty("screenshots.cleared") == null) {
-            ScreenshotUtils.clearScreenshotFolder();
-            System.setProperty("screenshots.cleared", "true");
-            logger.info("✅ Screenshot folder cleaned.");
+        // Run once per test execution
+        if (System.getProperty("init.once") == null) {
+            ScreenshotUtils.clearScreenshotFolder();                         // ✅ Clean screenshots
+            AllureTrendUtils.preserveTrendHistory();                          // ✅ Preserve trend data
+            AllureEnvironmentWriter.createEnvironmentFile();                  // ✅ Create env file
+
+            System.setProperty("init.once", "true");                          // Prevent re-running this block
+            logger.info("✅ One-time setup done: screenshots, trend, environment file created.");
         }
 
         WebDriverManager.chromedriver().setup();
@@ -73,41 +82,31 @@ public class Hooks {
             logger.info("🖥️ Running in visible (headed) mode.");
         }
 
-        // 🔒 Force headless in CI environments for consistent rendering
-        //options.addArguments("--headless=chrome"); // ✅ Stable headless rendering
         options.addArguments("--disable-gpu");
         options.addArguments("--no-sandbox");
         options.addArguments("--disable-dev-shm-usage");
-        options.addArguments("--window-size=1920,1080"); // ✅ Critical for full DOM
-        options.addArguments("--force-device-scale-factor=1"); // ✅ Optional: clean render
+        options.addArguments("--window-size=1920,1080");
+        options.addArguments("--force-device-scale-factor=1");
         options.addArguments("--hide-scrollbars");
         options.addArguments("--remote-allow-origins=*");
 
-        logger.info("🔧 Running in forced headless mode with resolution 1920x1080");
+        logger.info("🔧 ChromeOptions set for 1920x1080 headless/visual run");
 
         driver = new ChromeDriver(options);
-
-        // ✅ Ensure Chrome respects the correct viewport size
         driver.manage().window().setSize(new Dimension(1920, 1080));
-
         driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(Long.parseLong(ConfigReader.get("pageLoadTimeout"))));
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(Long.parseLong(ConfigReader.get("implicitWait"))));
 
-        ExtentReports extent = ExtentReportManager.getInstance();
-        ExtentTest test = extent.createTest(scenario.getName());
-        ExtentTestManager.setTest(test);
-
-        test.log(Status.INFO, "🚀 Browser launched for scenario: " + scenario.getName());
         logger.info("🚀 WebDriver setup complete for scenario: {}", scenario.getName());
 
-        // Auto-login
+        // Auto-login for non-login scenarios
         if (!scenario.getName().toLowerCase().contains("login")) {
             performLogin();
         } else {
-            test.log(Status.INFO, "🔍 Skipping login for login-related scenario");
             logger.info("🔍 Skipping login for login-related scenario.");
         }
     }
+
 
 
     @After
@@ -119,18 +118,15 @@ public class Hooks {
             ScreenshotUtils.takeScreenshot(driver, screenshotName);
 
             String base64 = ScreenshotUtils.getBase64Screenshot(driver);
-            ExtentTestManager.getTest().fail("❌ Scenario failed: " + scenario.getName(), MediaEntityBuilder.createScreenCaptureFromBase64String(base64, "Failure Screenshot").build());
 
             ScreenshotUtils.attachScreenshotToAllure(driver, screenshotName);
         }
 
         if (driver != null) {
             driver.quit();
-            ExtentTestManager.getTest().log(Status.INFO, "🪚 Browser closed after scenario: " + scenario.getName());
             logger.info("🪚 Browser closed after scenario: {}", scenario.getName());
         }
 
-        ExtentTestManager.removeTest();
     }
 
 
@@ -162,7 +158,6 @@ public class Hooks {
             throw new IllegalStateException("Login failed during setup");
         }
 
-        ExtentTestManager.getTest().log(Status.INFO, "🔐 User logged in successfully before test begins");
         logger.info("🔐 Login successful.");
     }
 }
