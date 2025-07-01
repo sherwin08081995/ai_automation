@@ -9506,3 +9506,642 @@ Session ID: d6fdc956c541f2f95243dd5f8413d2eb
 2025-06-29 15:06:26 [main] INFO  hooks.Hooks - 🪚 Browser closed after scenario: Login with valid user credentials and OTP
 2025-06-29 15:06:26 [main] INFO  listeners.TestListener - Skipping onTestSuccess for Cucumber scenario.
 2025-06-29 15:06:26 [main] INFO  listeners.TestListener - >>> Test Suite Finished: Zolvit Tests
+2025-06-30 11:28:21 [main] INFO  hooks.Hooks - ✅ One-time setup done: screenshots, trend, environment file created.
+2025-06-30 11:28:44 [main] INFO  listeners.TestListener - >>> Test Suite Started: Zolvit Tests
+2025-06-30 11:28:44 [main] WARN  listeners.TestListener - Skipping test start logic for Cucumber scenario.
+2025-06-30 11:28:44 [main] INFO  hooks.Hooks - ✅ One-time setup done: screenshots, trend, environment file created.
+2025-06-30 11:28:45 [main] INFO  hooks.Hooks - 🖥️ Running in visible (headed) mode.
+2025-06-30 11:28:45 [main] INFO  hooks.Hooks - 🔧 ChromeOptions set for 1920x1080 headless/visual run
+2025-06-30 11:28:47 [main] INFO  hooks.Hooks - 🚀 WebDriver setup complete for scenario: Login with valid user credentials and OTP
+2025-06-30 11:28:47 [main] INFO  hooks.Hooks - 🔍 Skipping login for login-related scenario.
+2025-06-30 11:28:48 [main] INFO  stepDefinitions.LoginPageValidationSteps - Navigated to URL: https://qe-grc.vakilsearch.com/grc/login
+2025-06-30 11:28:50 [main] INFO  stepDefinitions.LoginPageValidationSteps - Login subtitle status: true
+2025-06-30 11:28:50 [main] INFO  stepDefinitions.LoginPageValidationSteps - Email input field ready: true
+2025-06-30 11:28:50 [main] INFO  stepDefinitions.LoginPageValidationSteps - Entered email: demo3434343@gmail.com
+2025-06-30 11:28:51 [main] INFO  stepDefinitions.LoginPageValidationSteps - Send OTP button ready: true
+2025-06-30 11:28:51 [main] INFO  stepDefinitions.LoginPageValidationSteps - Clicked Login with OTP button
+2025-06-30 11:28:51 [main] INFO  stepDefinitions.LoginPageValidationSteps - Clicked Get OTP button
+2025-06-30 11:28:55 [main] INFO  stepDefinitions.LoginPageValidationSteps - OTP input field ready: true
+2025-06-30 11:28:56 [main] INFO  stepDefinitions.LoginPageValidationSteps - OTP entered (masked)
+2025-06-30 11:28:56 [main] INFO  stepDefinitions.LoginPageValidationSteps - Validating OTP digit at index 0: expected=0, actual=0
+2025-06-30 11:28:56 [main] INFO  stepDefinitions.LoginPageValidationSteps - Validating OTP digit at index 1: expected=0, actual=0
+2025-06-30 11:28:57 [main] INFO  stepDefinitions.LoginPageValidationSteps - Validating OTP digit at index 2: expected=0, actual=0
+2025-06-30 11:28:57 [main] INFO  stepDefinitions.LoginPageValidationSteps - Validating OTP digit at index 3: expected=0, actual=0
+2025-06-30 11:28:57 [main] INFO  stepDefinitions.LoginPageValidationSteps - Validating OTP digit at index 4: expected=0, actual=0
+2025-06-30 11:28:57 [main] INFO  stepDefinitions.LoginPageValidationSteps - Validating OTP digit at index 5: expected=0, actual=0
+2025-06-30 11:28:57 [main] INFO  stepDefinitions.LoginPageValidationSteps - Waiting for homepage with alt text: Vakilsearch
+2025-06-30 11:28:58 [main] INFO  stepDefinitions.LoginPageValidationSteps - Homepage redirection status: true
+2025-06-30 11:28:59 [main] INFO  hooks.Hooks - 🪚 Browser closed after scenario: Login with valid user credentials and OTP
+2025-06-30 11:28:59 [main] INFO  listeners.TestListener - Skipping onTestSuccess for Cucumber scenario.
+2025-06-30 11:28:59 [main] INFO  listeners.TestListener - >>> Test Suite Finished: Zolvit Tests
+2025-06-30 14:34:21 [main] INFO  listeners.TestListener - >>> Test Suite Started: Zolvit Tests
+2025-06-30 14:34:22 [main] WARN  listeners.TestListener - Skipping test start logic for Cucumber scenario.
+2025-06-30 14:34:22 [main] INFO  hooks.Hooks - ✅ One-time setup done: screenshots, trend, environment file created.
+2025-06-30 14:34:23 [main] INFO  hooks.Hooks - 🖥️ Running in visible (headed) mode.
+2025-06-30 14:34:23 [main] INFO  hooks.Hooks - 🔧 ChromeOptions set for 1920x1080 headless/visual run
+2025-06-30 14:34:25 [main] INFO  hooks.Hooks - 🚀 WebDriver setup complete for scenario: Login with valid user credentials and OTP
+2025-06-30 14:34:25 [main] INFO  hooks.Hooks - 🔍 Skipping login for login-related scenario.
+2025-06-30 14:34:27 [main] INFO  stepDefinitions.LoginPageValidationSteps - Navigated to URL: https://qe-grc.vakilsearch.com/grc/login
+2025-06-30 14:34:29 [main] INFO  stepDefinitions.LoginPageValidationSteps - Login subtitle status: true
+2025-06-30 14:34:30 [main] INFO  stepDefinitions.LoginPageValidationSteps - Email input field ready: true
+2025-06-30 14:34:30 [main] INFO  stepDefinitions.LoginPageValidationSteps - Entered email: demo3434343@gmail.com
+2025-06-30 14:34:31 [main] INFO  stepDefinitions.LoginPageValidationSteps - Send OTP button ready: true
+2025-06-30 14:34:32 [main] INFO  stepDefinitions.LoginPageValidationSteps - Clicked Login with OTP button
+2025-06-30 14:34:32 [main] INFO  stepDefinitions.LoginPageValidationSteps - Clicked Get OTP button
+2025-06-30 14:34:36 [main] INFO  stepDefinitions.LoginPageValidationSteps - OTP input field ready: true
+2025-06-30 14:34:38 [main] INFO  stepDefinitions.LoginPageValidationSteps - OTP entered (masked)
+2025-06-30 14:34:39 [main] INFO  stepDefinitions.LoginPageValidationSteps - Validating OTP digit at index 0: expected=0, actual=0
+2025-06-30 14:34:39 [main] INFO  stepDefinitions.LoginPageValidationSteps - Validating OTP digit at index 1: expected=0, actual=0
+2025-06-30 14:34:39 [main] INFO  stepDefinitions.LoginPageValidationSteps - Validating OTP digit at index 2: expected=0, actual=0
+2025-06-30 14:34:39 [main] INFO  stepDefinitions.LoginPageValidationSteps - Validating OTP digit at index 3: expected=0, actual=0
+2025-06-30 14:34:39 [main] INFO  stepDefinitions.LoginPageValidationSteps - Validating OTP digit at index 4: expected=0, actual=0
+2025-06-30 14:34:39 [main] INFO  stepDefinitions.LoginPageValidationSteps - Validating OTP digit at index 5: expected=0, actual=0
+2025-06-30 14:34:39 [main] INFO  stepDefinitions.LoginPageValidationSteps - Waiting for homepage with alt text: Vakilsearch
+2025-06-30 14:34:41 [main] INFO  stepDefinitions.LoginPageValidationSteps - Homepage redirection status: true
+2025-06-30 14:34:42 [main] INFO  hooks.Hooks - 🪚 Browser closed after scenario: Login with valid user credentials and OTP
+2025-06-30 14:34:42 [main] INFO  listeners.TestListener - Skipping onTestSuccess for Cucumber scenario.
+2025-06-30 14:34:43 [main] INFO  listeners.TestListener - >>> Test Suite Finished: Zolvit Tests
+2025-06-30 15:12:43 [main] INFO  listeners.TestListener - >>> Test Suite Started: Zolvit Tests
+2025-06-30 15:12:44 [main] WARN  listeners.TestListener - Skipping test start logic for Cucumber scenario.
+2025-06-30 15:12:45 [main] INFO  hooks.Hooks - ✅ One-time setup done: screenshots, trend, environment file created.
+2025-06-30 15:12:45 [main] INFO  hooks.Hooks - 🖥️ Running in visible (headed) mode.
+2025-06-30 15:12:45 [main] INFO  hooks.Hooks - 🔧 ChromeOptions set for 1920x1080 headless/visual run
+2025-06-30 15:12:47 [main] INFO  hooks.Hooks - 🚀 WebDriver setup complete for scenario: Login with valid user credentials and OTP
+2025-06-30 15:12:47 [main] INFO  hooks.Hooks - 🔍 Skipping login for login-related scenario.
+2025-06-30 15:12:49 [main] INFO  stepDefinitions.LoginPageValidationSteps - Navigated to URL: https://qe-grc.vakilsearch.com/grc/login
+2025-06-30 15:12:51 [main] INFO  stepDefinitions.LoginPageValidationSteps - Login subtitle status: true
+2025-06-30 15:12:51 [main] INFO  stepDefinitions.LoginPageValidationSteps - Email input field ready: true
+2025-06-30 15:12:52 [main] INFO  stepDefinitions.LoginPageValidationSteps - Entered email: demo3434343@gmail.com
+2025-06-30 15:12:52 [main] INFO  stepDefinitions.LoginPageValidationSteps - Send OTP button ready: true
+2025-06-30 15:12:52 [main] INFO  stepDefinitions.LoginPageValidationSteps - Clicked Login with OTP button
+2025-06-30 15:12:53 [main] INFO  stepDefinitions.LoginPageValidationSteps - Clicked Get OTP button
+2025-06-30 15:12:56 [main] INFO  stepDefinitions.LoginPageValidationSteps - OTP input field ready: true
+2025-06-30 15:12:58 [main] INFO  stepDefinitions.LoginPageValidationSteps - OTP entered (masked)
+2025-06-30 15:12:59 [main] INFO  stepDefinitions.LoginPageValidationSteps - Validating OTP digit at index 0: expected=0, actual=0
+2025-06-30 15:12:59 [main] INFO  stepDefinitions.LoginPageValidationSteps - Validating OTP digit at index 1: expected=0, actual=0
+2025-06-30 15:12:59 [main] INFO  stepDefinitions.LoginPageValidationSteps - Validating OTP digit at index 2: expected=0, actual=0
+2025-06-30 15:12:59 [main] INFO  stepDefinitions.LoginPageValidationSteps - Validating OTP digit at index 3: expected=0, actual=0
+2025-06-30 15:12:59 [main] INFO  stepDefinitions.LoginPageValidationSteps - Validating OTP digit at index 4: expected=0, actual=0
+2025-06-30 15:12:59 [main] INFO  stepDefinitions.LoginPageValidationSteps - Validating OTP digit at index 5: expected=0, actual=0
+2025-06-30 15:12:59 [main] INFO  stepDefinitions.LoginPageValidationSteps - Waiting for homepage with alt text: Vakilsearch
+2025-06-30 15:13:01 [main] INFO  stepDefinitions.LoginPageValidationSteps - Homepage redirection status: true
+2025-06-30 15:13:01 [main] INFO  hooks.Hooks - 🪚 Browser closed after scenario: Login with valid user credentials and OTP
+2025-06-30 15:13:02 [main] INFO  listeners.TestListener - Skipping onTestSuccess for Cucumber scenario.
+2025-06-30 15:13:02 [main] INFO  listeners.TestListener - >>> Test Suite Finished: Zolvit Tests
+2025-06-30 18:22:58 [main] INFO  listeners.TestListener - >>> Test Suite Started: Zolvit Tests
+2025-06-30 18:22:58 [main] WARN  listeners.TestListener - Skipping test start logic for Cucumber scenario.
+2025-06-30 18:22:58 [main] INFO  hooks.Hooks - ✅ One-time setup done: screenshots, trend, environment file created.
+2025-06-30 18:22:59 [main] INFO  hooks.Hooks - 🖥️ Running in visible (headed) mode.
+2025-06-30 18:22:59 [main] INFO  hooks.Hooks - 🔧 ChromeOptions set for 1920x1080 headless/visual run
+2025-06-30 18:23:00 [main] INFO  hooks.Hooks - 🚀 WebDriver setup complete for scenario: Login with valid user credentials and OTP
+2025-06-30 18:23:00 [main] INFO  hooks.Hooks - 🔍 Skipping login for login-related scenario.
+2025-06-30 18:23:02 [main] INFO  stepDefinitions.LoginPageValidationSteps - Navigated to URL: https://qe-grc.vakilsearch.com/grc/login
+2025-06-30 18:23:04 [main] INFO  stepDefinitions.LoginPageValidationSteps - Login subtitle status: true
+2025-06-30 18:23:04 [main] INFO  stepDefinitions.LoginPageValidationSteps - Email input field ready: true
+2025-06-30 18:23:04 [main] INFO  stepDefinitions.LoginPageValidationSteps - Entered email: demo3434343@gmail.com
+2025-06-30 18:23:05 [main] INFO  stepDefinitions.LoginPageValidationSteps - Send OTP button ready: true
+2025-06-30 18:23:05 [main] INFO  stepDefinitions.LoginPageValidationSteps - Clicked Login with OTP button
+2025-06-30 18:23:05 [main] INFO  stepDefinitions.LoginPageValidationSteps - Clicked Get OTP button
+2025-06-30 18:23:09 [main] INFO  stepDefinitions.LoginPageValidationSteps - OTP input field ready: true
+2025-06-30 18:23:10 [main] INFO  stepDefinitions.LoginPageValidationSteps - OTP entered (masked)
+2025-06-30 18:23:10 [main] INFO  stepDefinitions.LoginPageValidationSteps - Validating OTP digit at index 0: expected=0, actual=0
+2025-06-30 18:23:10 [main] INFO  stepDefinitions.LoginPageValidationSteps - Validating OTP digit at index 1: expected=0, actual=0
+2025-06-30 18:23:10 [main] INFO  stepDefinitions.LoginPageValidationSteps - Validating OTP digit at index 2: expected=0, actual=0
+2025-06-30 18:23:10 [main] INFO  stepDefinitions.LoginPageValidationSteps - Validating OTP digit at index 3: expected=0, actual=0
+2025-06-30 18:23:10 [main] INFO  stepDefinitions.LoginPageValidationSteps - Validating OTP digit at index 4: expected=0, actual=0
+2025-06-30 18:23:10 [main] INFO  stepDefinitions.LoginPageValidationSteps - Validating OTP digit at index 5: expected=0, actual=0
+2025-06-30 18:23:10 [main] INFO  stepDefinitions.LoginPageValidationSteps - Waiting for homepage with alt text: Vakilsearch
+2025-06-30 18:23:12 [main] INFO  stepDefinitions.LoginPageValidationSteps - Homepage redirection status: true
+2025-06-30 18:23:13 [main] INFO  hooks.Hooks - 🪚 Browser closed after scenario: Login with valid user credentials and OTP
+2025-06-30 18:23:13 [main] INFO  listeners.TestListener - Skipping onTestSuccess for Cucumber scenario.
+2025-06-30 18:23:13 [main] INFO  listeners.TestListener - >>> Test Suite Finished: Zolvit Tests
+2025-06-30 18:23:14 [main] INFO  listeners.TestListener - ✅ Allure report zipped successfully.
+2025-06-30 19:06:55 [main] INFO  listeners.TestListener - >>> Test Suite Started: Zolvit Tests
+2025-06-30 19:06:56 [main] WARN  listeners.TestListener - Skipping test start logic for Cucumber scenario.
+2025-06-30 19:06:56 [main] INFO  hooks.Hooks - ✅ One-time setup done: screenshots, trend, environment file created.
+2025-06-30 19:06:56 [main] INFO  hooks.Hooks - 🖥️ Running in visible (headed) mode.
+2025-06-30 19:06:56 [main] INFO  hooks.Hooks - 🔧 ChromeOptions set for 1920x1080 headless/visual run
+2025-06-30 19:06:57 [main] INFO  hooks.Hooks - 🚀 WebDriver setup complete for scenario: Login with valid user credentials and OTP
+2025-06-30 19:06:57 [main] INFO  hooks.Hooks - 🔍 Skipping login for login-related scenario.
+2025-06-30 19:06:58 [main] INFO  stepDefinitions.LoginPageValidationSteps - Navigated to URL: https://qe-grc.vakilsearch.com/grc/login
+2025-06-30 19:07:00 [main] INFO  stepDefinitions.LoginPageValidationSteps - Login subtitle status: true
+2025-06-30 19:07:01 [main] INFO  stepDefinitions.LoginPageValidationSteps - Email input field ready: true
+2025-06-30 19:07:01 [main] INFO  stepDefinitions.LoginPageValidationSteps - Entered email: demo3434343@gmail.com
+2025-06-30 19:07:01 [main] INFO  stepDefinitions.LoginPageValidationSteps - Send OTP button ready: true
+2025-06-30 19:07:01 [main] INFO  stepDefinitions.LoginPageValidationSteps - Clicked Login with OTP button
+2025-06-30 19:07:02 [main] INFO  stepDefinitions.LoginPageValidationSteps - Clicked Get OTP button
+2025-06-30 19:07:05 [main] INFO  stepDefinitions.LoginPageValidationSteps - OTP input field ready: true
+2025-06-30 19:07:06 [main] INFO  stepDefinitions.LoginPageValidationSteps - OTP entered (masked)
+2025-06-30 19:07:06 [main] INFO  stepDefinitions.LoginPageValidationSteps - Validating OTP digit at index 0: expected=0, actual=0
+2025-06-30 19:07:06 [main] INFO  stepDefinitions.LoginPageValidationSteps - Validating OTP digit at index 1: expected=0, actual=0
+2025-06-30 19:07:06 [main] INFO  stepDefinitions.LoginPageValidationSteps - Validating OTP digit at index 2: expected=0, actual=0
+2025-06-30 19:07:06 [main] INFO  stepDefinitions.LoginPageValidationSteps - Validating OTP digit at index 3: expected=0, actual=0
+2025-06-30 19:07:07 [main] INFO  stepDefinitions.LoginPageValidationSteps - Validating OTP digit at index 4: expected=0, actual=0
+2025-06-30 19:07:07 [main] INFO  stepDefinitions.LoginPageValidationSteps - Validating OTP digit at index 5: expected=0, actual=0
+2025-06-30 19:07:07 [main] INFO  stepDefinitions.LoginPageValidationSteps - Waiting for homepage with alt text: Vakilsearch
+2025-06-30 19:07:08 [main] INFO  stepDefinitions.LoginPageValidationSteps - Homepage redirection status: true
+2025-06-30 19:07:09 [main] INFO  hooks.Hooks - 🪚 Browser closed after scenario: Login with valid user credentials and OTP
+2025-06-30 19:07:09 [main] INFO  listeners.TestListener - Skipping onTestSuccess for Cucumber scenario.
+2025-06-30 19:07:09 [main] INFO  listeners.TestListener - >>> Test Suite Finished: Zolvit Tests
+2025-06-30 19:07:09 [main] INFO  listeners.TestListener - ✅ Allure report zipped successfully.
+2025-06-30 19:10:43 [main] INFO  listeners.TestListener - >>> Test Suite Started: Zolvit Tests
+2025-06-30 19:10:44 [main] WARN  listeners.TestListener - Skipping test start logic for Cucumber scenario.
+2025-06-30 19:10:44 [main] INFO  hooks.Hooks - ✅ One-time setup done: screenshots, trend, environment file created.
+2025-06-30 19:10:44 [main] INFO  hooks.Hooks - 🖥️ Running in visible (headed) mode.
+2025-06-30 19:10:44 [main] INFO  hooks.Hooks - 🔧 ChromeOptions set for 1920x1080 headless/visual run
+2025-06-30 19:10:46 [main] INFO  hooks.Hooks - 🚀 WebDriver setup complete for scenario: Login with valid user credentials and OTP
+2025-06-30 19:10:46 [main] INFO  hooks.Hooks - 🔍 Skipping login for login-related scenario.
+2025-06-30 19:10:47 [main] INFO  stepDefinitions.LoginPageValidationSteps - Navigated to URL: https://qe-grc.vakilsearch.com/grc/login
+2025-06-30 19:10:49 [main] INFO  stepDefinitions.LoginPageValidationSteps - Login subtitle status: true
+2025-06-30 19:10:50 [main] INFO  stepDefinitions.LoginPageValidationSteps - Email input field ready: true
+2025-06-30 19:10:50 [main] INFO  stepDefinitions.LoginPageValidationSteps - Entered email: demo3434343@gmail.com
+2025-06-30 19:10:50 [main] INFO  stepDefinitions.LoginPageValidationSteps - Send OTP button ready: true
+2025-06-30 19:10:50 [main] INFO  stepDefinitions.LoginPageValidationSteps - Clicked Login with OTP button
+2025-06-30 19:10:51 [main] INFO  stepDefinitions.LoginPageValidationSteps - Clicked Get OTP button
+2025-06-30 19:10:54 [main] INFO  stepDefinitions.LoginPageValidationSteps - OTP input field ready: true
+2025-06-30 19:10:55 [main] INFO  stepDefinitions.LoginPageValidationSteps - OTP entered (masked)
+2025-06-30 19:10:55 [main] INFO  stepDefinitions.LoginPageValidationSteps - Validating OTP digit at index 0: expected=0, actual=0
+2025-06-30 19:10:55 [main] INFO  stepDefinitions.LoginPageValidationSteps - Validating OTP digit at index 1: expected=0, actual=0
+2025-06-30 19:10:55 [main] INFO  stepDefinitions.LoginPageValidationSteps - Validating OTP digit at index 2: expected=0, actual=0
+2025-06-30 19:10:55 [main] INFO  stepDefinitions.LoginPageValidationSteps - Validating OTP digit at index 3: expected=0, actual=0
+2025-06-30 19:10:55 [main] INFO  stepDefinitions.LoginPageValidationSteps - Validating OTP digit at index 4: expected=0, actual=0
+2025-06-30 19:10:55 [main] INFO  stepDefinitions.LoginPageValidationSteps - Validating OTP digit at index 5: expected=0, actual=0
+2025-06-30 19:10:55 [main] INFO  stepDefinitions.LoginPageValidationSteps - Waiting for homepage with alt text: Vakilsearch
+2025-06-30 19:10:57 [main] INFO  stepDefinitions.LoginPageValidationSteps - Homepage redirection status: true
+2025-06-30 19:10:58 [main] INFO  hooks.Hooks - 🪚 Browser closed after scenario: Login with valid user credentials and OTP
+2025-06-30 19:10:58 [main] INFO  listeners.TestListener - Skipping onTestSuccess for Cucumber scenario.
+2025-06-30 19:10:58 [main] INFO  listeners.TestListener - >>> Test Suite Finished: Zolvit Tests
+2025-06-30 19:10:58 [main] INFO  listeners.TestListener - ✅ Allure report zipped successfully.
+2025-06-30 19:14:03 [main] INFO  listeners.TestListener - >>> Test Suite Started: Zolvit Tests
+2025-06-30 19:14:04 [main] WARN  listeners.TestListener - Skipping test start logic for Cucumber scenario.
+2025-06-30 19:14:04 [main] INFO  hooks.Hooks - ✅ One-time setup done: screenshots, trend, environment file created.
+2025-06-30 19:14:04 [main] INFO  hooks.Hooks - 🖥️ Running in visible (headed) mode.
+2025-06-30 19:14:04 [main] INFO  hooks.Hooks - 🔧 ChromeOptions set for 1920x1080 headless/visual run
+2025-06-30 19:14:05 [main] INFO  hooks.Hooks - 🚀 WebDriver setup complete for scenario: Login with valid user credentials and OTP
+2025-06-30 19:14:05 [main] INFO  hooks.Hooks - 🔍 Skipping login for login-related scenario.
+2025-06-30 19:14:07 [main] INFO  stepDefinitions.LoginPageValidationSteps - Navigated to URL: https://qe-grc.vakilsearch.com/grc/login
+2025-06-30 19:14:09 [main] INFO  stepDefinitions.LoginPageValidationSteps - Login subtitle status: true
+2025-06-30 19:14:09 [main] INFO  stepDefinitions.LoginPageValidationSteps - Email input field ready: true
+2025-06-30 19:14:09 [main] INFO  stepDefinitions.LoginPageValidationSteps - Entered email: demo3434343@gmail.com
+2025-06-30 19:14:10 [main] INFO  stepDefinitions.LoginPageValidationSteps - Send OTP button ready: true
+2025-06-30 19:14:10 [main] INFO  stepDefinitions.LoginPageValidationSteps - Clicked Login with OTP button
+2025-06-30 19:14:11 [main] INFO  stepDefinitions.LoginPageValidationSteps - Clicked Get OTP button
+2025-06-30 19:14:14 [main] INFO  stepDefinitions.LoginPageValidationSteps - OTP input field ready: true
+2025-06-30 19:14:14 [main] INFO  stepDefinitions.LoginPageValidationSteps - OTP entered (masked)
+2025-06-30 19:14:15 [main] INFO  stepDefinitions.LoginPageValidationSteps - Validating OTP digit at index 0: expected=0, actual=0
+2025-06-30 19:14:15 [main] INFO  stepDefinitions.LoginPageValidationSteps - Validating OTP digit at index 1: expected=0, actual=0
+2025-06-30 19:14:15 [main] INFO  stepDefinitions.LoginPageValidationSteps - Validating OTP digit at index 2: expected=0, actual=0
+2025-06-30 19:14:15 [main] INFO  stepDefinitions.LoginPageValidationSteps - Validating OTP digit at index 3: expected=0, actual=0
+2025-06-30 19:14:15 [main] INFO  stepDefinitions.LoginPageValidationSteps - Validating OTP digit at index 4: expected=0, actual=0
+2025-06-30 19:14:15 [main] INFO  stepDefinitions.LoginPageValidationSteps - Validating OTP digit at index 5: expected=0, actual=0
+2025-06-30 19:14:15 [main] INFO  stepDefinitions.LoginPageValidationSteps - Waiting for homepage with alt text: Vakilsearch
+2025-06-30 19:14:17 [main] INFO  stepDefinitions.LoginPageValidationSteps - Homepage redirection status: true
+2025-06-30 19:14:17 [main] INFO  hooks.Hooks - 🪚 Browser closed after scenario: Login with valid user credentials and OTP
+2025-06-30 19:14:17 [main] INFO  listeners.TestListener - Skipping onTestSuccess for Cucumber scenario.
+2025-06-30 19:14:17 [main] INFO  listeners.TestListener - >>> Test Suite Finished: Zolvit Tests
+2025-06-30 19:14:18 [main] INFO  listeners.TestListener - ✅ Allure report zipped successfully.
+2025-06-30 19:16:22 [main] INFO  listeners.TestListener - >>> Test Suite Started: Zolvit Tests
+2025-06-30 19:16:22 [main] WARN  listeners.TestListener - Skipping test start logic for Cucumber scenario.
+2025-06-30 19:16:23 [main] INFO  hooks.Hooks - ✅ One-time setup done: screenshots, trend, environment file created.
+2025-06-30 19:16:23 [main] INFO  hooks.Hooks - 🖥️ Running in visible (headed) mode.
+2025-06-30 19:16:23 [main] INFO  hooks.Hooks - 🔧 ChromeOptions set for 1920x1080 headless/visual run
+2025-06-30 19:16:24 [main] INFO  hooks.Hooks - 🚀 WebDriver setup complete for scenario: Login with valid user credentials and OTP
+2025-06-30 19:16:24 [main] INFO  hooks.Hooks - 🔍 Skipping login for login-related scenario.
+2025-06-30 19:16:26 [main] INFO  stepDefinitions.LoginPageValidationSteps - Navigated to URL: https://qe-grc.vakilsearch.com/grc/login
+2025-06-30 19:16:28 [main] INFO  stepDefinitions.LoginPageValidationSteps - Login subtitle status: true
+2025-06-30 19:16:29 [main] INFO  stepDefinitions.LoginPageValidationSteps - Email input field ready: true
+2025-06-30 19:16:29 [main] INFO  stepDefinitions.LoginPageValidationSteps - Entered email: demo3434343@gmail.com
+2025-06-30 19:16:29 [main] INFO  stepDefinitions.LoginPageValidationSteps - Send OTP button ready: true
+2025-06-30 19:16:29 [main] INFO  stepDefinitions.LoginPageValidationSteps - Clicked Login with OTP button
+2025-06-30 19:16:30 [main] INFO  stepDefinitions.LoginPageValidationSteps - Clicked Get OTP button
+2025-06-30 19:16:33 [main] INFO  stepDefinitions.LoginPageValidationSteps - OTP input field ready: true
+2025-06-30 19:16:34 [main] INFO  stepDefinitions.LoginPageValidationSteps - OTP entered (masked)
+2025-06-30 19:16:34 [main] INFO  stepDefinitions.LoginPageValidationSteps - Validating OTP digit at index 0: expected=0, actual=0
+2025-06-30 19:16:34 [main] INFO  stepDefinitions.LoginPageValidationSteps - Validating OTP digit at index 1: expected=0, actual=0
+2025-06-30 19:16:34 [main] INFO  stepDefinitions.LoginPageValidationSteps - Validating OTP digit at index 2: expected=0, actual=0
+2025-06-30 19:16:34 [main] INFO  stepDefinitions.LoginPageValidationSteps - Validating OTP digit at index 3: expected=0, actual=0
+2025-06-30 19:16:34 [main] INFO  stepDefinitions.LoginPageValidationSteps - Validating OTP digit at index 4: expected=0, actual=0
+2025-06-30 19:16:34 [main] INFO  stepDefinitions.LoginPageValidationSteps - Validating OTP digit at index 5: expected=0, actual=0
+2025-06-30 19:16:34 [main] INFO  stepDefinitions.LoginPageValidationSteps - Waiting for homepage with alt text: Vakilsearch
+2025-06-30 19:16:37 [main] INFO  stepDefinitions.LoginPageValidationSteps - Homepage redirection status: true
+2025-06-30 19:16:38 [main] INFO  hooks.Hooks - 🪚 Browser closed after scenario: Login with valid user credentials and OTP
+2025-06-30 19:16:38 [main] INFO  listeners.TestListener - Skipping onTestSuccess for Cucumber scenario.
+2025-06-30 19:16:38 [main] INFO  listeners.TestListener - >>> Test Suite Finished: Zolvit Tests
+2025-06-30 19:16:38 [main] INFO  listeners.TestListener - ✅ Allure report zipped successfully.
+2025-06-30 19:19:53 [main] INFO  listeners.TestListener - >>> Test Suite Started: Zolvit Tests
+2025-06-30 19:19:54 [main] WARN  listeners.TestListener - Skipping test start logic for Cucumber scenario.
+2025-06-30 19:19:54 [main] INFO  hooks.Hooks - ✅ One-time setup done: screenshots, trend, environment file created.
+2025-06-30 19:19:54 [main] INFO  hooks.Hooks - 🖥️ Running in visible (headed) mode.
+2025-06-30 19:19:54 [main] INFO  hooks.Hooks - 🔧 ChromeOptions set for 1920x1080 headless/visual run
+2025-06-30 19:19:55 [main] INFO  hooks.Hooks - 🚀 WebDriver setup complete for scenario: Login with valid user credentials and OTP
+2025-06-30 19:19:55 [main] INFO  hooks.Hooks - 🔍 Skipping login for login-related scenario.
+2025-06-30 19:19:57 [main] INFO  stepDefinitions.LoginPageValidationSteps - Navigated to URL: https://qe-grc.vakilsearch.com/grc/login
+2025-06-30 19:19:59 [main] INFO  stepDefinitions.LoginPageValidationSteps - Login subtitle status: true
+2025-06-30 19:19:59 [main] INFO  stepDefinitions.LoginPageValidationSteps - Email input field ready: true
+2025-06-30 19:19:59 [main] INFO  stepDefinitions.LoginPageValidationSteps - Entered email: demo3434343@gmail.com
+2025-06-30 19:20:00 [main] INFO  stepDefinitions.LoginPageValidationSteps - Send OTP button ready: true
+2025-06-30 19:20:00 [main] INFO  stepDefinitions.LoginPageValidationSteps - Clicked Login with OTP button
+2025-06-30 19:20:00 [main] INFO  stepDefinitions.LoginPageValidationSteps - Clicked Get OTP button
+2025-06-30 19:20:04 [main] INFO  stepDefinitions.LoginPageValidationSteps - OTP input field ready: true
+2025-06-30 19:20:05 [main] INFO  stepDefinitions.LoginPageValidationSteps - OTP entered (masked)
+2025-06-30 19:20:05 [main] INFO  stepDefinitions.LoginPageValidationSteps - Validating OTP digit at index 0: expected=0, actual=0
+2025-06-30 19:20:05 [main] INFO  stepDefinitions.LoginPageValidationSteps - Validating OTP digit at index 1: expected=0, actual=0
+2025-06-30 19:20:05 [main] INFO  stepDefinitions.LoginPageValidationSteps - Validating OTP digit at index 2: expected=0, actual=0
+2025-06-30 19:20:05 [main] INFO  stepDefinitions.LoginPageValidationSteps - Validating OTP digit at index 3: expected=0, actual=0
+2025-06-30 19:20:05 [main] INFO  stepDefinitions.LoginPageValidationSteps - Validating OTP digit at index 4: expected=0, actual=0
+2025-06-30 19:20:05 [main] INFO  stepDefinitions.LoginPageValidationSteps - Validating OTP digit at index 5: expected=0, actual=0
+2025-06-30 19:20:05 [main] INFO  stepDefinitions.LoginPageValidationSteps - Waiting for homepage with alt text: Vakilsearch
+2025-06-30 19:20:07 [main] INFO  stepDefinitions.LoginPageValidationSteps - Homepage redirection status: true
+2025-06-30 19:20:08 [main] INFO  hooks.Hooks - 🪚 Browser closed after scenario: Login with valid user credentials and OTP
+2025-06-30 19:20:08 [main] INFO  listeners.TestListener - Skipping onTestSuccess for Cucumber scenario.
+2025-06-30 19:20:08 [main] INFO  listeners.TestListener - >>> Test Suite Finished: Zolvit Tests
+2025-06-30 19:20:08 [main] INFO  listeners.TestListener - ✅ Allure report zipped successfully.
+2025-06-30 19:24:59 [main] INFO  listeners.TestListener - >>> Test Suite Started: Zolvit Tests
+2025-06-30 19:24:59 [main] WARN  listeners.TestListener - Skipping test start logic for Cucumber scenario.
+2025-06-30 19:24:59 [main] INFO  hooks.Hooks - ✅ One-time setup done: screenshots, trend, environment file created.
+2025-06-30 19:25:00 [main] INFO  hooks.Hooks - 🖥️ Running in visible (headed) mode.
+2025-06-30 19:25:00 [main] INFO  hooks.Hooks - 🔧 ChromeOptions set for 1920x1080 headless/visual run
+2025-06-30 19:25:01 [main] INFO  hooks.Hooks - 🚀 WebDriver setup complete for scenario: Login with valid user credentials and OTP
+2025-06-30 19:25:01 [main] INFO  hooks.Hooks - 🔍 Skipping login for login-related scenario.
+2025-06-30 19:25:04 [main] INFO  stepDefinitions.LoginPageValidationSteps - Navigated to URL: https://qe-grc.vakilsearch.com/grc/login
+2025-06-30 19:25:06 [main] INFO  stepDefinitions.LoginPageValidationSteps - Login subtitle status: true
+2025-06-30 19:25:07 [main] INFO  stepDefinitions.LoginPageValidationSteps - Email input field ready: true
+2025-06-30 19:25:07 [main] INFO  stepDefinitions.LoginPageValidationSteps - Entered email: demo3434343@gmail.com
+2025-06-30 19:25:07 [main] INFO  stepDefinitions.LoginPageValidationSteps - Send OTP button ready: true
+2025-06-30 19:25:07 [main] INFO  stepDefinitions.LoginPageValidationSteps - Clicked Login with OTP button
+2025-06-30 19:25:08 [main] INFO  stepDefinitions.LoginPageValidationSteps - Clicked Get OTP button
+2025-06-30 19:25:12 [main] INFO  stepDefinitions.LoginPageValidationSteps - OTP input field ready: true
+2025-06-30 19:25:13 [main] INFO  stepDefinitions.LoginPageValidationSteps - OTP entered (masked)
+2025-06-30 19:25:13 [main] INFO  stepDefinitions.LoginPageValidationSteps - Validating OTP digit at index 0: expected=0, actual=0
+2025-06-30 19:25:13 [main] INFO  stepDefinitions.LoginPageValidationSteps - Validating OTP digit at index 1: expected=0, actual=0
+2025-06-30 19:25:13 [main] INFO  stepDefinitions.LoginPageValidationSteps - Validating OTP digit at index 2: expected=0, actual=0
+2025-06-30 19:25:13 [main] INFO  stepDefinitions.LoginPageValidationSteps - Validating OTP digit at index 3: expected=0, actual=0
+2025-06-30 19:25:13 [main] INFO  stepDefinitions.LoginPageValidationSteps - Validating OTP digit at index 4: expected=0, actual=0
+2025-06-30 19:25:13 [main] INFO  stepDefinitions.LoginPageValidationSteps - Validating OTP digit at index 5: expected=0, actual=0
+2025-06-30 19:25:13 [main] INFO  stepDefinitions.LoginPageValidationSteps - Waiting for homepage with alt text: Vakilsearch
+2025-06-30 19:25:15 [main] INFO  stepDefinitions.LoginPageValidationSteps - Homepage redirection status: true
+2025-06-30 19:25:16 [main] INFO  hooks.Hooks - 🪚 Browser closed after scenario: Login with valid user credentials and OTP
+2025-06-30 19:25:16 [main] INFO  listeners.TestListener - Skipping onTestSuccess for Cucumber scenario.
+2025-06-30 19:26:19 [main] INFO  listeners.TestListener - >>> Test Suite Started: Zolvit Tests
+2025-06-30 19:26:20 [main] WARN  listeners.TestListener - Skipping test start logic for Cucumber scenario.
+2025-06-30 19:26:20 [main] INFO  hooks.Hooks - ✅ One-time setup done: screenshots, trend, environment file created.
+2025-06-30 19:26:20 [main] INFO  hooks.Hooks - 🖥️ Running in visible (headed) mode.
+2025-06-30 19:26:20 [main] INFO  hooks.Hooks - 🔧 ChromeOptions set for 1920x1080 headless/visual run
+2025-06-30 19:26:21 [main] INFO  hooks.Hooks - 🚀 WebDriver setup complete for scenario: Login with valid user credentials and OTP
+2025-06-30 19:26:21 [main] INFO  hooks.Hooks - 🔍 Skipping login for login-related scenario.
+2025-06-30 19:26:24 [main] INFO  stepDefinitions.LoginPageValidationSteps - Navigated to URL: https://qe-grc.vakilsearch.com/grc/login
+2025-06-30 19:26:26 [main] INFO  stepDefinitions.LoginPageValidationSteps - Login subtitle status: true
+2025-06-30 19:26:27 [main] INFO  stepDefinitions.LoginPageValidationSteps - Email input field ready: true
+2025-06-30 19:26:27 [main] INFO  stepDefinitions.LoginPageValidationSteps - Entered email: demo3434343@gmail.com
+2025-06-30 19:26:27 [main] INFO  stepDefinitions.LoginPageValidationSteps - Send OTP button ready: true
+2025-06-30 19:26:27 [main] INFO  stepDefinitions.LoginPageValidationSteps - Clicked Login with OTP button
+2025-06-30 19:26:28 [main] INFO  stepDefinitions.LoginPageValidationSteps - Clicked Get OTP button
+2025-06-30 19:26:31 [main] INFO  stepDefinitions.LoginPageValidationSteps - OTP input field ready: true
+2025-06-30 19:26:32 [main] INFO  stepDefinitions.LoginPageValidationSteps - OTP entered (masked)
+2025-06-30 19:26:32 [main] INFO  stepDefinitions.LoginPageValidationSteps - Validating OTP digit at index 0: expected=0, actual=0
+2025-06-30 19:26:32 [main] INFO  stepDefinitions.LoginPageValidationSteps - Validating OTP digit at index 1: expected=0, actual=0
+2025-06-30 19:26:32 [main] INFO  stepDefinitions.LoginPageValidationSteps - Validating OTP digit at index 2: expected=0, actual=0
+2025-06-30 19:26:32 [main] INFO  stepDefinitions.LoginPageValidationSteps - Validating OTP digit at index 3: expected=0, actual=0
+2025-06-30 19:26:32 [main] INFO  stepDefinitions.LoginPageValidationSteps - Validating OTP digit at index 4: expected=0, actual=0
+2025-06-30 19:26:32 [main] INFO  stepDefinitions.LoginPageValidationSteps - Validating OTP digit at index 5: expected=0, actual=0
+2025-06-30 19:26:32 [main] INFO  stepDefinitions.LoginPageValidationSteps - Waiting for homepage with alt text: Vakilsearch
+2025-06-30 19:26:34 [main] INFO  stepDefinitions.LoginPageValidationSteps - Homepage redirection status: true
+2025-06-30 19:26:35 [main] INFO  hooks.Hooks - 🪚 Browser closed after scenario: Login with valid user credentials and OTP
+2025-06-30 19:26:35 [main] INFO  listeners.TestListener - Skipping onTestSuccess for Cucumber scenario.
+2025-06-30 21:42:43 [main] INFO  listeners.TestListener - >>> Test Suite Started: Zolvit Tests
+2025-06-30 21:42:44 [main] WARN  listeners.TestListener - Skipping test start logic for Cucumber scenario.
+2025-06-30 21:42:45 [main] INFO  hooks.Hooks - ✅ One-time setup done: screenshots, trend, environment file created.
+2025-06-30 21:42:46 [main] INFO  hooks.Hooks - 🖥️ Running in visible (headed) mode.
+2025-06-30 21:42:46 [main] INFO  hooks.Hooks - 🔧 ChromeOptions set for 1920x1080 headless/visual run
+2025-06-30 21:42:48 [main] INFO  hooks.Hooks - 🚀 WebDriver setup complete for scenario: Login with valid user credentials and OTP
+2025-06-30 21:42:48 [main] INFO  hooks.Hooks - 🔍 Skipping login for login-related scenario.
+2025-06-30 21:42:50 [main] INFO  stepDefinitions.LoginPageValidationSteps - Navigated to URL: https://qe-grc.vakilsearch.com/grc/login
+2025-06-30 21:42:53 [main] INFO  stepDefinitions.LoginPageValidationSteps - Login subtitle status: true
+2025-06-30 21:42:53 [main] INFO  stepDefinitions.LoginPageValidationSteps - Email input field ready: true
+2025-06-30 21:42:54 [main] INFO  stepDefinitions.LoginPageValidationSteps - Entered email: demo3434343@gmail.com
+2025-06-30 21:42:54 [main] INFO  stepDefinitions.LoginPageValidationSteps - Send OTP button ready: true
+2025-06-30 21:42:54 [main] INFO  stepDefinitions.LoginPageValidationSteps - Clicked Login with OTP button
+2025-06-30 21:42:55 [main] INFO  stepDefinitions.LoginPageValidationSteps - Clicked Get OTP button
+2025-06-30 21:42:59 [main] INFO  stepDefinitions.LoginPageValidationSteps - OTP input field ready: true
+2025-06-30 21:43:00 [main] INFO  stepDefinitions.LoginPageValidationSteps - OTP entered (masked)
+2025-06-30 21:43:01 [main] INFO  stepDefinitions.LoginPageValidationSteps - Validating OTP digit at index 0: expected=0, actual=0
+2025-06-30 21:43:01 [main] INFO  stepDefinitions.LoginPageValidationSteps - Validating OTP digit at index 1: expected=0, actual=0
+2025-06-30 21:43:01 [main] INFO  stepDefinitions.LoginPageValidationSteps - Validating OTP digit at index 2: expected=0, actual=0
+2025-06-30 21:43:01 [main] INFO  stepDefinitions.LoginPageValidationSteps - Validating OTP digit at index 3: expected=0, actual=0
+2025-06-30 21:43:01 [main] INFO  stepDefinitions.LoginPageValidationSteps - Validating OTP digit at index 4: expected=0, actual=0
+2025-06-30 21:43:01 [main] INFO  stepDefinitions.LoginPageValidationSteps - Validating OTP digit at index 5: expected=0, actual=0
+2025-06-30 21:43:01 [main] INFO  stepDefinitions.LoginPageValidationSteps - Waiting for homepage with alt text: Vakilsearch
+2025-06-30 21:43:03 [main] INFO  stepDefinitions.LoginPageValidationSteps - Homepage redirection status: true
+2025-06-30 21:43:04 [main] INFO  hooks.Hooks - 🪚 Browser closed after scenario: Login with valid user credentials and OTP
+2025-06-30 21:43:04 [main] INFO  listeners.TestListener - Skipping onTestSuccess for Cucumber scenario.
+2025-06-30 21:48:49 [main] INFO  listeners.TestListener - >>> Test Suite Started: Zolvit Tests
+2025-06-30 21:48:50 [main] WARN  listeners.TestListener - Skipping test start logic for Cucumber scenario.
+2025-06-30 21:48:50 [main] INFO  hooks.Hooks - ✅ One-time setup done: screenshots, trend, environment file created.
+2025-06-30 21:48:50 [main] INFO  hooks.Hooks - 🖥️ Running in visible (headed) mode.
+2025-06-30 21:48:50 [main] INFO  hooks.Hooks - 🔧 ChromeOptions set for 1920x1080 headless/visual run
+2025-06-30 21:48:52 [main] INFO  hooks.Hooks - 🚀 WebDriver setup complete for scenario: Login with valid user credentials and OTP
+2025-06-30 21:48:52 [main] INFO  hooks.Hooks - 🔍 Skipping login for login-related scenario.
+2025-06-30 21:48:55 [main] INFO  stepDefinitions.LoginPageValidationSteps - Navigated to URL: https://qe-grc.vakilsearch.com/grc/login
+2025-06-30 21:48:57 [main] INFO  stepDefinitions.LoginPageValidationSteps - Login subtitle status: true
+2025-06-30 21:48:58 [main] INFO  stepDefinitions.LoginPageValidationSteps - Email input field ready: true
+2025-06-30 21:48:58 [main] INFO  stepDefinitions.LoginPageValidationSteps - Entered email: demo3434343@gmail.com
+2025-06-30 21:48:58 [main] INFO  stepDefinitions.LoginPageValidationSteps - Send OTP button ready: true
+2025-06-30 21:48:59 [main] INFO  stepDefinitions.LoginPageValidationSteps - Clicked Login with OTP button
+2025-06-30 21:48:59 [main] INFO  stepDefinitions.LoginPageValidationSteps - Clicked Get OTP button
+2025-06-30 21:49:03 [main] INFO  stepDefinitions.LoginPageValidationSteps - OTP input field ready: true
+2025-06-30 21:49:05 [main] INFO  stepDefinitions.LoginPageValidationSteps - OTP entered (masked)
+2025-06-30 21:49:05 [main] INFO  stepDefinitions.LoginPageValidationSteps - Validating OTP digit at index 0: expected=0, actual=0
+2025-06-30 21:49:05 [main] INFO  stepDefinitions.LoginPageValidationSteps - Validating OTP digit at index 1: expected=0, actual=0
+2025-06-30 21:49:05 [main] INFO  stepDefinitions.LoginPageValidationSteps - Validating OTP digit at index 2: expected=0, actual=0
+2025-06-30 21:49:05 [main] INFO  stepDefinitions.LoginPageValidationSteps - Validating OTP digit at index 3: expected=0, actual=0
+2025-06-30 21:49:05 [main] INFO  stepDefinitions.LoginPageValidationSteps - Validating OTP digit at index 4: expected=0, actual=0
+2025-06-30 21:49:05 [main] INFO  stepDefinitions.LoginPageValidationSteps - Validating OTP digit at index 5: expected=0, actual=0
+2025-06-30 21:49:05 [main] INFO  stepDefinitions.LoginPageValidationSteps - Waiting for homepage with alt text: Vakilsearch
+2025-06-30 21:49:07 [main] INFO  stepDefinitions.LoginPageValidationSteps - Homepage redirection status: true
+2025-06-30 21:49:08 [main] INFO  hooks.Hooks - 🪚 Browser closed after scenario: Login with valid user credentials and OTP
+2025-06-30 21:49:08 [main] INFO  listeners.TestListener - Skipping onTestSuccess for Cucumber scenario.
+2025-06-30 23:27:50 [main] INFO  listeners.TestListener - >>> Test Suite Started: Zolvit Tests
+2025-06-30 23:27:51 [main] WARN  listeners.TestListener - Skipping test start logic for Cucumber scenario.
+2025-06-30 23:27:51 [main] INFO  hooks.Hooks - ✅ One-time setup done: screenshots, trend, environment file created.
+2025-06-30 23:27:53 [main] INFO  hooks.Hooks - 🖥️ Running in visible (headed) mode.
+2025-06-30 23:27:53 [main] INFO  hooks.Hooks - 🔧 ChromeOptions set for 1920x1080 headless/visual run
+2025-06-30 23:27:54 [main] INFO  hooks.Hooks - 🚀 WebDriver setup complete for scenario: Login with valid user credentials and OTP
+2025-06-30 23:27:54 [main] INFO  hooks.Hooks - 🔍 Skipping login for login-related scenario.
+2025-06-30 23:27:57 [main] INFO  stepDefinitions.LoginPageValidationSteps - Navigated to URL: https://qe-grc.vakilsearch.com/grc/login
+2025-06-30 23:27:59 [main] INFO  stepDefinitions.LoginPageValidationSteps - Login subtitle status: true
+2025-06-30 23:27:59 [main] INFO  stepDefinitions.LoginPageValidationSteps - Email input field ready: true
+2025-06-30 23:28:00 [main] INFO  stepDefinitions.LoginPageValidationSteps - Entered email: demo3434343@gmail.com
+2025-06-30 23:28:31 [main] INFO  stepDefinitions.LoginPageValidationSteps - Send OTP button ready: false
+2025-06-30 23:28:31 [main] ERROR stepDefinitions.LoginPageValidationSteps - ❌ Assertion Failed: OTP button is not visible/enabled expected [true] but found [false]
+2025-06-30 23:28:33 [main] INFO  hooks.Hooks - 🪚 Browser closed after scenario: Login with valid user credentials and OTP
+2025-06-30 23:28:33 [main] INFO  listeners.TestListener - Skipping onTestFailure for Cucumber scenario.
+2025-06-30 23:29:01 [main] INFO  listeners.TestListener - >>> Test Suite Started: Zolvit Tests
+2025-06-30 23:29:02 [main] WARN  listeners.TestListener - Skipping test start logic for Cucumber scenario.
+2025-06-30 23:29:02 [main] INFO  hooks.Hooks - ✅ One-time setup done: screenshots, trend, environment file created.
+2025-06-30 23:29:03 [main] INFO  hooks.Hooks - 🖥️ Running in visible (headed) mode.
+2025-06-30 23:29:03 [main] INFO  hooks.Hooks - 🔧 ChromeOptions set for 1920x1080 headless/visual run
+2025-06-30 23:29:04 [main] INFO  hooks.Hooks - 🚀 WebDriver setup complete for scenario: Login with valid user credentials and OTP
+2025-06-30 23:29:04 [main] INFO  hooks.Hooks - 🔍 Skipping login for login-related scenario.
+2025-06-30 23:29:06 [main] INFO  stepDefinitions.LoginPageValidationSteps - Navigated to URL: https://qe-grc.vakilsearch.com/grc/login
+2025-06-30 23:29:08 [main] INFO  stepDefinitions.LoginPageValidationSteps - Login subtitle status: true
+2025-06-30 23:29:09 [main] INFO  stepDefinitions.LoginPageValidationSteps - Email input field ready: true
+2025-06-30 23:29:09 [main] INFO  stepDefinitions.LoginPageValidationSteps - Entered email: demo3434343@gmail.com
+2025-06-30 23:29:40 [main] INFO  stepDefinitions.LoginPageValidationSteps - Send OTP button ready: false
+2025-06-30 23:29:40 [main] ERROR stepDefinitions.LoginPageValidationSteps - ❌ Assertion Failed: OTP button is not visible/enabled expected [true] but found [false]
+2025-06-30 23:29:42 [main] INFO  hooks.Hooks - 🪚 Browser closed after scenario: Login with valid user credentials and OTP
+2025-06-30 23:29:42 [main] INFO  listeners.TestListener - Skipping onTestFailure for Cucumber scenario.
+2025-06-30 23:32:50 [main] INFO  listeners.TestListener - >>> Test Suite Started: Zolvit Tests
+2025-06-30 23:32:51 [main] WARN  listeners.TestListener - Skipping test start logic for Cucumber scenario.
+2025-06-30 23:32:51 [main] INFO  hooks.Hooks - ✅ One-time setup done: screenshots, trend, environment file created.
+2025-06-30 23:32:52 [main] INFO  hooks.Hooks - 🖥️ Running in visible (headed) mode.
+2025-06-30 23:32:52 [main] INFO  hooks.Hooks - 🔧 ChromeOptions set for 1920x1080 headless/visual run
+2025-06-30 23:32:53 [main] INFO  hooks.Hooks - 🚀 WebDriver setup complete for scenario: Login with valid user credentials and OTP
+2025-06-30 23:32:53 [main] INFO  hooks.Hooks - 🔍 Skipping login for login-related scenario.
+2025-06-30 23:32:56 [main] INFO  stepDefinitions.LoginPageValidationSteps - Navigated to URL: https://qe-grc.vakilsearch.com/grc/login
+2025-06-30 23:32:58 [main] INFO  stepDefinitions.LoginPageValidationSteps - Login subtitle status: true
+2025-06-30 23:32:59 [main] INFO  stepDefinitions.LoginPageValidationSteps - Email input field ready: true
+2025-06-30 23:32:59 [main] INFO  stepDefinitions.LoginPageValidationSteps - Entered email: demo3434343@gmail.com
+2025-06-30 23:33:30 [main] INFO  stepDefinitions.LoginPageValidationSteps - Send OTP button ready: false
+2025-06-30 23:33:30 [main] ERROR stepDefinitions.LoginPageValidationSteps - ❌ Assertion Failed: OTP button is not visible/enabled expected [true] but found [false]
+2025-06-30 23:33:32 [main] INFO  hooks.Hooks - 🪚 Browser closed after scenario: Login with valid user credentials and OTP
+2025-06-30 23:33:33 [main] INFO  listeners.TestListener - Skipping onTestFailure for Cucumber scenario.
+2025-06-30 23:37:11 [main] INFO  listeners.TestListener - >>> Test Suite Started: Zolvit Tests
+2025-06-30 23:37:12 [main] WARN  listeners.TestListener - Skipping test start logic for Cucumber scenario.
+2025-06-30 23:37:12 [main] INFO  hooks.Hooks - ✅ One-time setup done: screenshots, trend, environment file created.
+2025-06-30 23:37:12 [main] INFO  hooks.Hooks - 🖥️ Running in visible (headed) mode.
+2025-06-30 23:37:12 [main] INFO  hooks.Hooks - 🔧 ChromeOptions set for 1920x1080 headless/visual run
+2025-06-30 23:37:14 [main] INFO  hooks.Hooks - 🚀 WebDriver setup complete for scenario: Login with valid user credentials and OTP
+2025-06-30 23:37:14 [main] INFO  hooks.Hooks - 🔍 Skipping login for login-related scenario.
+2025-06-30 23:37:16 [main] INFO  stepDefinitions.LoginPageValidationSteps - Navigated to URL: https://qe-grc.vakilsearch.com/grc/login
+2025-06-30 23:37:18 [main] INFO  stepDefinitions.LoginPageValidationSteps - Login subtitle status: true
+2025-06-30 23:37:19 [main] INFO  stepDefinitions.LoginPageValidationSteps - Email input field ready: true
+2025-06-30 23:37:19 [main] INFO  stepDefinitions.LoginPageValidationSteps - Entered email: demo3434343@gmail.com
+2025-06-30 23:37:20 [main] INFO  stepDefinitions.LoginPageValidationSteps - Clicked Get OTP button
+2025-06-30 23:37:24 [main] INFO  stepDefinitions.LoginPageValidationSteps - OTP input field ready: true
+2025-06-30 23:37:26 [main] INFO  stepDefinitions.LoginPageValidationSteps - OTP entered (masked)
+2025-06-30 23:37:26 [main] INFO  stepDefinitions.LoginPageValidationSteps - Validating OTP digit at index 0: expected=0, actual=0
+2025-06-30 23:37:26 [main] INFO  stepDefinitions.LoginPageValidationSteps - Validating OTP digit at index 1: expected=0, actual=0
+2025-06-30 23:37:26 [main] INFO  stepDefinitions.LoginPageValidationSteps - Validating OTP digit at index 2: expected=0, actual=0
+2025-06-30 23:37:26 [main] INFO  stepDefinitions.LoginPageValidationSteps - Validating OTP digit at index 3: expected=0, actual=0
+2025-06-30 23:37:26 [main] INFO  stepDefinitions.LoginPageValidationSteps - Validating OTP digit at index 4: expected=0, actual=0
+2025-06-30 23:37:26 [main] INFO  stepDefinitions.LoginPageValidationSteps - Validating OTP digit at index 5: expected=0, actual=0
+2025-06-30 23:37:27 [main] INFO  stepDefinitions.LoginPageValidationSteps - Waiting for homepage with alt text: Vakilsearch
+2025-06-30 23:37:29 [main] INFO  stepDefinitions.LoginPageValidationSteps - Homepage redirection status: true
+2025-06-30 23:37:30 [main] INFO  hooks.Hooks - 🪚 Browser closed after scenario: Login with valid user credentials and OTP
+2025-06-30 23:37:30 [main] INFO  listeners.TestListener - Skipping onTestSuccess for Cucumber scenario.
+2025-06-30 23:41:32 [main] INFO  listeners.TestListener - >>> Test Suite Started: Zolvit Tests
+2025-06-30 23:41:33 [main] WARN  listeners.TestListener - Skipping test start logic for Cucumber scenario.
+2025-06-30 23:41:33 [main] INFO  hooks.Hooks - ✅ One-time setup done: screenshots, trend, environment file created.
+2025-06-30 23:41:34 [main] INFO  hooks.Hooks - 🖥️ Running in visible (headed) mode.
+2025-06-30 23:41:34 [main] INFO  hooks.Hooks - 🔧 ChromeOptions set for 1920x1080 headless/visual run
+2025-06-30 23:41:36 [main] INFO  hooks.Hooks - 🚀 WebDriver setup complete for scenario: Login with valid user credentials and OTP
+2025-06-30 23:41:36 [main] INFO  hooks.Hooks - 🔍 Skipping login for login-related scenario.
+2025-06-30 23:41:39 [main] INFO  stepDefinitions.LoginPageValidationSteps - Navigated to URL: https://qe-grc.vakilsearch.com/grc/login
+2025-06-30 23:41:41 [main] INFO  stepDefinitions.LoginPageValidationSteps - Login subtitle status: true
+2025-06-30 23:41:41 [main] INFO  stepDefinitions.LoginPageValidationSteps - Email input field ready: true
+2025-06-30 23:41:42 [main] INFO  stepDefinitions.LoginPageValidationSteps - Entered email: demo3434343@gmail.com
+2025-06-30 23:41:42 [main] INFO  stepDefinitions.LoginPageValidationSteps - Clicked Get OTP button
+2025-06-30 23:41:46 [main] INFO  stepDefinitions.LoginPageValidationSteps - OTP input field ready: true
+2025-06-30 23:41:48 [main] INFO  stepDefinitions.LoginPageValidationSteps - OTP entered (masked)
+2025-06-30 23:41:48 [main] INFO  stepDefinitions.LoginPageValidationSteps - Validating OTP digit at index 0: expected=0, actual=0
+2025-06-30 23:41:48 [main] INFO  stepDefinitions.LoginPageValidationSteps - Validating OTP digit at index 1: expected=0, actual=0
+2025-06-30 23:41:48 [main] INFO  stepDefinitions.LoginPageValidationSteps - Validating OTP digit at index 2: expected=0, actual=0
+2025-06-30 23:41:48 [main] INFO  stepDefinitions.LoginPageValidationSteps - Validating OTP digit at index 3: expected=0, actual=0
+2025-06-30 23:41:48 [main] INFO  stepDefinitions.LoginPageValidationSteps - Validating OTP digit at index 4: expected=0, actual=0
+2025-06-30 23:41:48 [main] INFO  stepDefinitions.LoginPageValidationSteps - Validating OTP digit at index 5: expected=0, actual=0
+2025-06-30 23:41:48 [main] INFO  stepDefinitions.LoginPageValidationSteps - Waiting for homepage with alt text: Vakilsearch
+2025-06-30 23:41:51 [main] INFO  stepDefinitions.LoginPageValidationSteps - Homepage redirection status: true
+2025-06-30 23:41:52 [main] INFO  hooks.Hooks - 🪚 Browser closed after scenario: Login with valid user credentials and OTP
+2025-06-30 23:41:52 [main] INFO  listeners.TestListener - Skipping onTestSuccess for Cucumber scenario.
+2025-06-30 23:45:03 [main] INFO  listeners.TestListener - >>> Test Suite Started: Zolvit Tests
+2025-06-30 23:45:04 [main] WARN  listeners.TestListener - Skipping test start logic for Cucumber scenario.
+2025-06-30 23:45:04 [main] INFO  hooks.Hooks - ✅ One-time setup done: screenshots, trend, environment file created.
+2025-06-30 23:45:05 [main] INFO  hooks.Hooks - 🖥️ Running in visible (headed) mode.
+2025-06-30 23:45:05 [main] INFO  hooks.Hooks - 🔧 ChromeOptions set for 1920x1080 headless/visual run
+2025-06-30 23:45:06 [main] INFO  hooks.Hooks - 🚀 WebDriver setup complete for scenario: Login with valid user credentials and OTP
+2025-06-30 23:45:06 [main] INFO  hooks.Hooks - 🔍 Skipping login for login-related scenario.
+2025-06-30 23:45:09 [main] INFO  stepDefinitions.LoginPageValidationSteps - Navigated to URL: https://qe-grc.vakilsearch.com/grc/login
+2025-06-30 23:45:11 [main] INFO  stepDefinitions.LoginPageValidationSteps - Login subtitle status: true
+2025-06-30 23:45:12 [main] INFO  stepDefinitions.LoginPageValidationSteps - Email input field ready: true
+2025-06-30 23:45:12 [main] INFO  stepDefinitions.LoginPageValidationSteps - Entered email: demo3434343@gmail.com
+2025-06-30 23:45:13 [main] INFO  stepDefinitions.LoginPageValidationSteps - Clicked Get OTP button
+2025-06-30 23:45:16 [main] INFO  stepDefinitions.LoginPageValidationSteps - OTP input field ready: true
+2025-06-30 23:45:18 [main] INFO  stepDefinitions.LoginPageValidationSteps - OTP entered (masked)
+2025-06-30 23:45:18 [main] INFO  stepDefinitions.LoginPageValidationSteps - Validating OTP digit at index 0: expected=0, actual=0
+2025-06-30 23:45:18 [main] INFO  stepDefinitions.LoginPageValidationSteps - Validating OTP digit at index 1: expected=0, actual=0
+2025-06-30 23:45:18 [main] INFO  stepDefinitions.LoginPageValidationSteps - Validating OTP digit at index 2: expected=0, actual=0
+2025-06-30 23:45:18 [main] INFO  stepDefinitions.LoginPageValidationSteps - Validating OTP digit at index 3: expected=0, actual=0
+2025-06-30 23:45:18 [main] INFO  stepDefinitions.LoginPageValidationSteps - Validating OTP digit at index 4: expected=0, actual=0
+2025-06-30 23:45:18 [main] INFO  stepDefinitions.LoginPageValidationSteps - Validating OTP digit at index 5: expected=0, actual=0
+2025-06-30 23:45:18 [main] INFO  stepDefinitions.LoginPageValidationSteps - Waiting for homepage with alt text: Vakilsearch
+2025-06-30 23:45:21 [main] INFO  stepDefinitions.LoginPageValidationSteps - Homepage redirection status: true
+2025-06-30 23:45:22 [main] INFO  hooks.Hooks - 🪚 Browser closed after scenario: Login with valid user credentials and OTP
+2025-06-30 23:45:22 [main] INFO  listeners.TestListener - Skipping onTestSuccess for Cucumber scenario.
+2025-06-30 23:58:08 [main] INFO  listeners.TestListener - >>> Test Suite Started: Zolvit Tests
+2025-06-30 23:58:09 [main] WARN  listeners.TestListener - Skipping test start logic for Cucumber scenario.
+2025-06-30 23:58:09 [main] INFO  hooks.Hooks - ✅ One-time setup done: screenshots, trend, environment file created.
+2025-06-30 23:58:10 [main] INFO  hooks.Hooks - 🖥️ Running in visible (headed) mode.
+2025-06-30 23:58:10 [main] INFO  hooks.Hooks - 🔧 ChromeOptions set for 1920x1080 headless/visual run
+2025-06-30 23:58:11 [main] INFO  hooks.Hooks - 🚀 WebDriver setup complete for scenario: Login with valid user credentials and OTP
+2025-06-30 23:58:11 [main] INFO  hooks.Hooks - 🔍 Skipping login for login-related scenario.
+2025-06-30 23:58:13 [main] INFO  stepDefinitions.LoginPageValidationSteps - Navigated to URL: https://qe-grc.vakilsearch.com/grc/login
+2025-06-30 23:58:15 [main] INFO  stepDefinitions.LoginPageValidationSteps - Login subtitle status: true
+2025-06-30 23:58:16 [main] INFO  stepDefinitions.LoginPageValidationSteps - Email input field ready: true
+2025-06-30 23:58:16 [main] INFO  stepDefinitions.LoginPageValidationSteps - Entered email: demo3434343@gmail.com
+2025-06-30 23:58:17 [main] INFO  stepDefinitions.LoginPageValidationSteps - Clicked Get OTP button
+2025-06-30 23:58:21 [main] INFO  stepDefinitions.LoginPageValidationSteps - OTP input field ready: true
+2025-06-30 23:58:22 [main] INFO  stepDefinitions.LoginPageValidationSteps - OTP entered (masked)
+2025-06-30 23:58:23 [main] INFO  stepDefinitions.LoginPageValidationSteps - Validating OTP digit at index 0: expected=0, actual=0
+2025-06-30 23:58:23 [main] INFO  stepDefinitions.LoginPageValidationSteps - Validating OTP digit at index 1: expected=0, actual=0
+2025-06-30 23:58:23 [main] INFO  stepDefinitions.LoginPageValidationSteps - Validating OTP digit at index 2: expected=0, actual=0
+2025-06-30 23:58:23 [main] INFO  stepDefinitions.LoginPageValidationSteps - Validating OTP digit at index 3: expected=0, actual=0
+2025-06-30 23:58:23 [main] INFO  stepDefinitions.LoginPageValidationSteps - Validating OTP digit at index 4: expected=0, actual=0
+2025-06-30 23:58:23 [main] INFO  stepDefinitions.LoginPageValidationSteps - Validating OTP digit at index 5: expected=0, actual=0
+2025-06-30 23:58:23 [main] INFO  stepDefinitions.LoginPageValidationSteps - Waiting for homepage with alt text: Vakilsearch
+2025-06-30 23:58:25 [main] INFO  stepDefinitions.LoginPageValidationSteps - Homepage redirection status: true
+2025-06-30 23:58:27 [main] INFO  hooks.Hooks - 🪚 Browser closed after scenario: Login with valid user credentials and OTP
+2025-06-30 23:58:27 [main] INFO  listeners.TestListener - Skipping onTestSuccess for Cucumber scenario.
+2025-06-30 23:59:32 [main] INFO  listeners.TestListener - >>> Test Suite Started: Zolvit Tests
+2025-06-30 23:59:33 [main] WARN  listeners.TestListener - Skipping test start logic for Cucumber scenario.
+2025-06-30 23:59:34 [main] INFO  hooks.Hooks - ✅ One-time setup done: screenshots, trend, environment file created.
+2025-06-30 23:59:34 [main] INFO  hooks.Hooks - 🖥️ Running in visible (headed) mode.
+2025-06-30 23:59:34 [main] INFO  hooks.Hooks - 🔧 ChromeOptions set for 1920x1080 headless/visual run
+2025-06-30 23:59:36 [main] INFO  hooks.Hooks - 🚀 WebDriver setup complete for scenario: Login with valid user credentials and OTP
+2025-06-30 23:59:36 [main] INFO  hooks.Hooks - 🔍 Skipping login for login-related scenario.
+2025-06-30 23:59:38 [main] INFO  stepDefinitions.LoginPageValidationSteps - Navigated to URL: https://qe-grc.vakilsearch.com/grc/login
+2025-06-30 23:59:41 [main] INFO  stepDefinitions.LoginPageValidationSteps - Login subtitle status: true
+2025-06-30 23:59:41 [main] INFO  stepDefinitions.LoginPageValidationSteps - Email input field ready: true
+2025-06-30 23:59:42 [main] INFO  stepDefinitions.LoginPageValidationSteps - Entered email: demo3434343@gmail.com
+2025-06-30 23:59:42 [main] INFO  stepDefinitions.LoginPageValidationSteps - Clicked Get OTP button
+2025-06-30 23:59:46 [main] INFO  stepDefinitions.LoginPageValidationSteps - OTP input field ready: true
+2025-06-30 23:59:47 [main] INFO  stepDefinitions.LoginPageValidationSteps - OTP entered (masked)
+2025-06-30 23:59:48 [main] INFO  stepDefinitions.LoginPageValidationSteps - Validating OTP digit at index 0: expected=0, actual=0
+2025-06-30 23:59:48 [main] INFO  stepDefinitions.LoginPageValidationSteps - Validating OTP digit at index 1: expected=0, actual=0
+2025-06-30 23:59:48 [main] INFO  stepDefinitions.LoginPageValidationSteps - Validating OTP digit at index 2: expected=0, actual=0
+2025-06-30 23:59:48 [main] INFO  stepDefinitions.LoginPageValidationSteps - Validating OTP digit at index 3: expected=0, actual=0
+2025-06-30 23:59:48 [main] INFO  stepDefinitions.LoginPageValidationSteps - Validating OTP digit at index 4: expected=0, actual=0
+2025-06-30 23:59:48 [main] INFO  stepDefinitions.LoginPageValidationSteps - Validating OTP digit at index 5: expected=0, actual=0
+2025-06-30 23:59:48 [main] INFO  stepDefinitions.LoginPageValidationSteps - Waiting for homepage with alt text: Vakilsearch
+2025-06-30 23:59:50 [main] INFO  stepDefinitions.LoginPageValidationSteps - Homepage redirection status: true
+2025-06-30 23:59:51 [main] INFO  hooks.Hooks - 🪚 Browser closed after scenario: Login with valid user credentials and OTP
+2025-06-30 23:59:51 [main] INFO  listeners.TestListener - Skipping onTestSuccess for Cucumber scenario.
+2025-07-01 00:02:07 [main] INFO  listeners.TestListener - >>> Test Suite Started: Zolvit Tests
+2025-07-01 00:02:07 [main] WARN  listeners.TestListener - Skipping test start logic for Cucumber scenario.
+2025-07-01 00:02:08 [main] INFO  hooks.Hooks - ✅ One-time setup done: screenshots, trend, environment file created.
+2025-07-01 00:02:08 [main] INFO  hooks.Hooks - 🖥️ Running in visible (headed) mode.
+2025-07-01 00:02:08 [main] INFO  hooks.Hooks - 🔧 ChromeOptions set for 1920x1080 headless/visual run
+2025-07-01 00:02:10 [main] INFO  hooks.Hooks - 🚀 WebDriver setup complete for scenario: Login with valid user credentials and OTP
+2025-07-01 00:02:10 [main] INFO  hooks.Hooks - 🔍 Skipping login for login-related scenario.
+2025-07-01 00:02:12 [main] INFO  stepDefinitions.LoginPageValidationSteps - Navigated to URL: https://qe-grc.vakilsearch.com/grc/login
+2025-07-01 00:02:14 [main] INFO  stepDefinitions.LoginPageValidationSteps - Login subtitle status: true
+2025-07-01 00:02:15 [main] INFO  stepDefinitions.LoginPageValidationSteps - Email input field ready: true
+2025-07-01 00:02:15 [main] INFO  stepDefinitions.LoginPageValidationSteps - Entered email: demo3434343@gmail.com
+2025-07-01 00:02:16 [main] INFO  stepDefinitions.LoginPageValidationSteps - Clicked Get OTP button
+2025-07-01 00:02:20 [main] INFO  stepDefinitions.LoginPageValidationSteps - OTP input field ready: true
+2025-07-01 00:02:21 [main] INFO  stepDefinitions.LoginPageValidationSteps - OTP entered (masked)
+2025-07-01 00:02:22 [main] INFO  stepDefinitions.LoginPageValidationSteps - Validating OTP digit at index 0: expected=0, actual=0
+2025-07-01 00:02:22 [main] INFO  stepDefinitions.LoginPageValidationSteps - Validating OTP digit at index 1: expected=0, actual=0
+2025-07-01 00:02:22 [main] INFO  stepDefinitions.LoginPageValidationSteps - Validating OTP digit at index 2: expected=0, actual=0
+2025-07-01 00:02:22 [main] INFO  stepDefinitions.LoginPageValidationSteps - Validating OTP digit at index 3: expected=0, actual=0
+2025-07-01 00:02:22 [main] INFO  stepDefinitions.LoginPageValidationSteps - Validating OTP digit at index 4: expected=0, actual=0
+2025-07-01 00:02:22 [main] INFO  stepDefinitions.LoginPageValidationSteps - Validating OTP digit at index 5: expected=0, actual=0
+2025-07-01 00:02:22 [main] INFO  stepDefinitions.LoginPageValidationSteps - Waiting for homepage with alt text: Vakilsearch
+2025-07-01 00:02:26 [main] INFO  stepDefinitions.LoginPageValidationSteps - Homepage redirection status: true
+2025-07-01 00:02:27 [main] INFO  hooks.Hooks - 🪚 Browser closed after scenario: Login with valid user credentials and OTP
+2025-07-01 00:02:27 [main] INFO  listeners.TestListener - Skipping onTestSuccess for Cucumber scenario.
+2025-07-01 00:06:18 [main] INFO  listeners.TestListener - >>> Test Suite Started: Zolvit Tests
+2025-07-01 00:06:19 [main] WARN  listeners.TestListener - Skipping test start logic for Cucumber scenario.
+2025-07-01 00:06:19 [main] INFO  hooks.Hooks - ✅ One-time setup done: screenshots, trend, environment file created.
+2025-07-01 00:06:20 [main] INFO  hooks.Hooks - 🖥️ Running in visible (headed) mode.
+2025-07-01 00:06:20 [main] INFO  hooks.Hooks - 🔧 ChromeOptions set for 1920x1080 headless/visual run
+2025-07-01 00:06:22 [main] INFO  hooks.Hooks - 🚀 WebDriver setup complete for scenario: Login with valid user credentials and OTP
+2025-07-01 00:06:22 [main] INFO  hooks.Hooks - 🔍 Skipping login for login-related scenario.
+2025-07-01 00:06:24 [main] INFO  stepDefinitions.LoginPageValidationSteps - Navigated to URL: https://qe-grc.vakilsearch.com/grc/login
+2025-07-01 00:06:26 [main] INFO  stepDefinitions.LoginPageValidationSteps - Login subtitle status: true
+2025-07-01 00:06:27 [main] INFO  stepDefinitions.LoginPageValidationSteps - Email input field ready: true
+2025-07-01 00:06:27 [main] INFO  stepDefinitions.LoginPageValidationSteps - Entered email: demo3434343@gmail.com
+2025-07-01 00:06:28 [main] INFO  stepDefinitions.LoginPageValidationSteps - Clicked Get OTP button
+2025-07-01 00:06:31 [main] INFO  stepDefinitions.LoginPageValidationSteps - OTP input field ready: true
+2025-07-01 00:06:33 [main] INFO  stepDefinitions.LoginPageValidationSteps - OTP entered (masked)
+2025-07-01 00:06:33 [main] INFO  stepDefinitions.LoginPageValidationSteps - Validating OTP digit at index 0: expected=0, actual=0
+2025-07-01 00:06:33 [main] INFO  stepDefinitions.LoginPageValidationSteps - Validating OTP digit at index 1: expected=0, actual=0
+2025-07-01 00:06:33 [main] INFO  stepDefinitions.LoginPageValidationSteps - Validating OTP digit at index 2: expected=0, actual=0
+2025-07-01 00:06:33 [main] INFO  stepDefinitions.LoginPageValidationSteps - Validating OTP digit at index 3: expected=0, actual=0
+2025-07-01 00:06:33 [main] INFO  stepDefinitions.LoginPageValidationSteps - Validating OTP digit at index 4: expected=0, actual=0
+2025-07-01 00:06:33 [main] INFO  stepDefinitions.LoginPageValidationSteps - Validating OTP digit at index 5: expected=0, actual=0
+2025-07-01 00:06:33 [main] INFO  stepDefinitions.LoginPageValidationSteps - Waiting for homepage with alt text: Vakilsearch
+2025-07-01 00:06:36 [main] INFO  stepDefinitions.LoginPageValidationSteps - Homepage redirection status: true
+2025-07-01 00:06:36 [main] INFO  hooks.Hooks - 🪚 Browser closed after scenario: Login with valid user credentials and OTP
+2025-07-01 00:06:36 [main] INFO  listeners.TestListener - Skipping onTestSuccess for Cucumber scenario.
+2025-07-01 00:10:06 [main] INFO  listeners.TestListener - >>> Test Suite Started: Zolvit Tests
+2025-07-01 00:10:07 [main] WARN  listeners.TestListener - Skipping test start logic for Cucumber scenario.
+2025-07-01 00:10:07 [main] INFO  hooks.Hooks - ✅ One-time setup done: screenshots, trend, environment file created.
+2025-07-01 00:10:08 [main] INFO  hooks.Hooks - 🖥️ Running in visible (headed) mode.
+2025-07-01 00:10:08 [main] INFO  hooks.Hooks - 🔧 ChromeOptions set for 1920x1080 headless/visual run
+2025-07-01 00:10:09 [main] INFO  hooks.Hooks - 🚀 WebDriver setup complete for scenario: Login with valid user credentials and OTP
+2025-07-01 00:10:09 [main] INFO  hooks.Hooks - 🔍 Skipping login for login-related scenario.
+2025-07-01 00:10:11 [main] INFO  stepDefinitions.LoginPageValidationSteps - Navigated to URL: https://qe-grc.vakilsearch.com/grc/login
+2025-07-01 00:10:14 [main] INFO  stepDefinitions.LoginPageValidationSteps - Login subtitle status: true
+2025-07-01 00:10:14 [main] INFO  stepDefinitions.LoginPageValidationSteps - Email input field ready: true
+2025-07-01 00:10:15 [main] INFO  stepDefinitions.LoginPageValidationSteps - Entered email: demo3434343@gmail.com
+2025-07-01 00:10:15 [main] INFO  stepDefinitions.LoginPageValidationSteps - Clicked Get OTP button
+2025-07-01 00:10:19 [main] INFO  stepDefinitions.LoginPageValidationSteps - OTP input field ready: true
+2025-07-01 00:10:20 [main] INFO  stepDefinitions.LoginPageValidationSteps - OTP entered (masked)
+2025-07-01 00:10:21 [main] INFO  stepDefinitions.LoginPageValidationSteps - Validating OTP digit at index 0: expected=0, actual=0
+2025-07-01 00:10:21 [main] INFO  stepDefinitions.LoginPageValidationSteps - Validating OTP digit at index 1: expected=0, actual=0
+2025-07-01 00:10:21 [main] INFO  stepDefinitions.LoginPageValidationSteps - Validating OTP digit at index 2: expected=0, actual=0
+2025-07-01 00:10:21 [main] INFO  stepDefinitions.LoginPageValidationSteps - Validating OTP digit at index 3: expected=0, actual=0
+2025-07-01 00:10:21 [main] INFO  stepDefinitions.LoginPageValidationSteps - Validating OTP digit at index 4: expected=0, actual=0
+2025-07-01 00:10:21 [main] INFO  stepDefinitions.LoginPageValidationSteps - Validating OTP digit at index 5: expected=0, actual=0
+2025-07-01 00:10:21 [main] INFO  stepDefinitions.LoginPageValidationSteps - Waiting for homepage with alt text: Vakilsearch
+2025-07-01 00:10:23 [main] INFO  stepDefinitions.LoginPageValidationSteps - Homepage redirection status: true
+2025-07-01 00:10:24 [main] INFO  hooks.Hooks - 🪚 Browser closed after scenario: Login with valid user credentials and OTP
+2025-07-01 00:10:24 [main] INFO  listeners.TestListener - Skipping onTestSuccess for Cucumber scenario.
+2025-07-01 00:25:28 [main] INFO  listeners.TestListener - >>> Test Suite Started: Zolvit Tests
+2025-07-01 00:25:29 [main] WARN  listeners.TestListener - Skipping test start logic for Cucumber scenario.
+2025-07-01 00:25:29 [main] INFO  hooks.Hooks - ✅ One-time setup done: screenshots, trend, environment file created.
+2025-07-01 00:25:30 [main] INFO  hooks.Hooks - 🖥️ Running in visible (headed) mode.
+2025-07-01 00:25:30 [main] INFO  hooks.Hooks - 🔧 ChromeOptions set for 1920x1080 headless/visual run
+2025-07-01 00:25:32 [main] INFO  hooks.Hooks - 🚀 WebDriver setup complete for scenario: Login with valid user credentials and OTP
+2025-07-01 00:25:32 [main] INFO  hooks.Hooks - 🔍 Skipping login for login-related scenario.
+2025-07-01 00:25:34 [main] INFO  stepDefinitions.LoginPageValidationSteps - Navigated to URL: https://qe-grc.vakilsearch.com/grc/login
+2025-07-01 00:25:37 [main] INFO  stepDefinitions.LoginPageValidationSteps - Login subtitle status: true
+2025-07-01 00:25:37 [main] INFO  stepDefinitions.LoginPageValidationSteps - Email input field ready: true
+2025-07-01 00:25:38 [main] INFO  stepDefinitions.LoginPageValidationSteps - Entered email: demo3434343@gmail.com
+2025-07-01 00:25:38 [main] INFO  stepDefinitions.LoginPageValidationSteps - Clicked Get OTP button
+2025-07-01 00:25:42 [main] INFO  stepDefinitions.LoginPageValidationSteps - OTP input field ready: true
+2025-07-01 00:25:44 [main] INFO  stepDefinitions.LoginPageValidationSteps - OTP entered (masked)
+2025-07-01 00:25:44 [main] INFO  stepDefinitions.LoginPageValidationSteps - Validating OTP digit at index 0: expected=0, actual=0
+2025-07-01 00:25:44 [main] INFO  stepDefinitions.LoginPageValidationSteps - Validating OTP digit at index 1: expected=0, actual=0
+2025-07-01 00:25:44 [main] INFO  stepDefinitions.LoginPageValidationSteps - Validating OTP digit at index 2: expected=0, actual=0
+2025-07-01 00:25:44 [main] INFO  stepDefinitions.LoginPageValidationSteps - Validating OTP digit at index 3: expected=0, actual=0
+2025-07-01 00:25:44 [main] INFO  stepDefinitions.LoginPageValidationSteps - Validating OTP digit at index 4: expected=0, actual=0
+2025-07-01 00:25:44 [main] INFO  stepDefinitions.LoginPageValidationSteps - Validating OTP digit at index 5: expected=0, actual=0
+2025-07-01 00:25:44 [main] INFO  stepDefinitions.LoginPageValidationSteps - Waiting for homepage with alt text: Vakilsearch
+2025-07-01 00:25:47 [main] INFO  stepDefinitions.LoginPageValidationSteps - Homepage redirection status: true
+2025-07-01 00:25:48 [main] INFO  hooks.Hooks - 🪚 Browser closed after scenario: Login with valid user credentials and OTP
+2025-07-01 00:25:48 [main] INFO  listeners.TestListener - Skipping onTestSuccess for Cucumber scenario.
+2025-07-01 15:51:31 [main] INFO  listeners.TestListener - >>> Test Suite Started: Zolvit Tests
+2025-07-01 15:51:31 [main] WARN  listeners.TestListener - Skipping test start logic for Cucumber scenario.
+2025-07-01 15:51:31 [main] INFO  hooks.Hooks - ✅ One-time setup done: screenshots, trend, environment file created.
+2025-07-01 15:51:32 [main] INFO  hooks.Hooks - 🖥️ Running in visible (headed) mode.
+2025-07-01 15:51:32 [main] INFO  hooks.Hooks - 🔧 ChromeOptions set for 1920x1080 headless/visual run
+2025-07-01 15:51:34 [main] INFO  hooks.Hooks - 🚀 WebDriver setup complete for scenario: Login with valid user credentials and OTP
+2025-07-01 15:51:34 [main] INFO  hooks.Hooks - 🔍 Skipping login for login-related scenario.
+2025-07-01 15:51:35 [main] INFO  stepDefinitions.LoginPageValidationSteps - Navigated to URL: https://qe-grc.vakilsearch.com/grc/login
+2025-07-01 15:51:37 [main] INFO  stepDefinitions.LoginPageValidationSteps - Login subtitle status: true
+2025-07-01 15:51:38 [main] INFO  stepDefinitions.LoginPageValidationSteps - Email input field ready: true
+2025-07-01 15:51:38 [main] INFO  stepDefinitions.LoginPageValidationSteps - Entered email: demo3434343@gmail.com
+2025-07-01 15:51:38 [main] INFO  stepDefinitions.LoginPageValidationSteps - Clicked Get OTP button
+2025-07-01 15:51:42 [main] INFO  stepDefinitions.LoginPageValidationSteps - OTP input field ready: true
+2025-07-01 15:51:43 [main] INFO  stepDefinitions.LoginPageValidationSteps - OTP entered (masked)
+2025-07-01 15:51:43 [main] INFO  stepDefinitions.LoginPageValidationSteps - Validating OTP digit at index 0: expected=0, actual=0
+2025-07-01 15:51:43 [main] INFO  stepDefinitions.LoginPageValidationSteps - Validating OTP digit at index 1: expected=0, actual=0
+2025-07-01 15:51:43 [main] INFO  stepDefinitions.LoginPageValidationSteps - Validating OTP digit at index 2: expected=0, actual=0
+2025-07-01 15:51:43 [main] INFO  stepDefinitions.LoginPageValidationSteps - Validating OTP digit at index 3: expected=0, actual=0
+2025-07-01 15:51:43 [main] INFO  stepDefinitions.LoginPageValidationSteps - Validating OTP digit at index 4: expected=0, actual=0
+2025-07-01 15:51:43 [main] INFO  stepDefinitions.LoginPageValidationSteps - Validating OTP digit at index 5: expected=0, actual=0
+2025-07-01 15:51:43 [main] INFO  stepDefinitions.LoginPageValidationSteps - Waiting for homepage with alt text: Vakilsearch
+2025-07-01 15:51:45 [main] INFO  stepDefinitions.LoginPageValidationSteps - Homepage redirection status: true
+2025-07-01 15:51:46 [main] INFO  hooks.Hooks - 🪚 Browser closed after scenario: Login with valid user credentials and OTP
+2025-07-01 15:51:46 [main] INFO  listeners.TestListener - Skipping onTestSuccess for Cucumber scenario.

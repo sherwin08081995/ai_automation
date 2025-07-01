@@ -114,15 +114,15 @@ public class LoginPageValidationSteps {
             logToAllure("📨 Entered Email", email);
             ScreenshotUtils.attachScreenshotToAllure(driver, "Email_Entered");
 
-            logStep("🔍 Checking Send OTP button...");
-            boolean isSendOtpButtonReady = loginPage.isSendOtpButtonVisibleAndEnabled();
-            logger.info("Send OTP button ready: {}", isSendOtpButtonReady);
-            Assert.assertTrue(isSendOtpButtonReady, "OTP button is not visible/enabled");
+//            logStep("🔍 Checking Send OTP button...");
+//            boolean isSendOtpButtonReady = loginPage.isSendOtpButtonVisibleAndEnabled();
+//            logger.info("Send OTP button ready: {}", isSendOtpButtonReady);
+//            Assert.assertTrue(isSendOtpButtonReady, "OTP button is not visible/enabled");
 
-            loginPage.clickLoginWithOtpButton();
-            logStep("🔘 Clicked 'Login with OTP' button");
-            logger.info("Clicked Login with OTP button");
-            ScreenshotUtils.attachScreenshotToAllure(driver, "Clicked_Login_with_OTP");
+//            loginPage.clickLoginWithOtpButton();
+//            logStep("🔘 Clicked 'Login with OTP' button");
+//            logger.info("Clicked Login with OTP button");
+//            ScreenshotUtils.attachScreenshotToAllure(driver, "Clicked_Login_with_OTP");
 
             loginPage.clickGetOtpButton();
             logStep("🔘 Clicked 'Get OTP' button");

@@ -1,0 +1,1 @@
+Homepage loaded with expected logo alt text: Vakilsearch

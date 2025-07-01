@@ -1,17 +1,13 @@
 package listeners;
 
-import annotations.Author;
-import com.aventstack.extentreports.ExtentReports;
-import com.aventstack.extentreports.ExtentTest;
-import com.aventstack.extentreports.MediaEntityBuilder;
-import com.aventstack.extentreports.Status;
 import org.openqa.selenium.WebDriver;
 import org.testng.ITestContext;
 import org.testng.ITestListener;
 import org.testng.ITestResult;
-import org.testng.annotations.Listeners;
 import utils.*;
 import org.apache.logging.log4j.Logger;
+
+import java.io.IOException;
 
 public class TestListener implements ITestListener {
 
@@ -68,8 +64,23 @@ public class TestListener implements ITestListener {
 
     @Override
     public void onFinish(ITestContext context) {
-        LOGGER.info(">>> Test Suite Finished: {}", context.getName());
+        String buildStatus = context.getFailedTests().size() > 0 ? "FAILURE" : "SUCCESS";
+
+        // Customize these based on your Jenkins setup
+        String jenkinsBaseUrl = "http://192.168.5.202:8080"; // or use System.getenv("JENKINS_URL")
+        String jobName = "Zolvit-QE-Tests"; // Or get from context if dynamic
+        String allureReportUrl = jenkinsBaseUrl + "/job/" + jobName + "/allure/";
+
+        try {
+            GoogleChatNotifier.sendNotification(context.getName(), // or build number if you have it
+                    jobName, buildStatus, allureReportUrl);
+            System.out.println("✅ Google Chat notification sent.");
+        } catch (Throwable t) {
+            System.err.println("❌ Failed to send Google Chat notification.");
+            t.printStackTrace();
+        }
     }
+
 
     private void takeAndAttachScreenshot(ITestResult result, String suffix) {
         WebDriver driver = getDriverFromTestInstance(result.getInstance());
