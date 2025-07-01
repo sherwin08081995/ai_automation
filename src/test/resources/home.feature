@@ -69,6 +69,3 @@ Feature: Home Page Functionality
     And each Due Date selection should show matching count on Compliance page after View All navigation
 
 
-
-
-
