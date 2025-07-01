@@ -3,6 +3,7 @@ package pages;
 import base.BasePage;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -117,7 +118,8 @@ public class HomePage extends BasePage {
     private WebElement dueDateDropdown;
 
     @FindBy(xpath = "//p[contains(normalize-space(),'Overall Compliances')]/span")
-    private WebElement toGetOverallComplianceCount;
+    private WebElement overallCompliancesSection;
+
 
     /**
      * Verifies if login is successful by checking the presence of a confirmation logo.
@@ -275,6 +277,15 @@ public class HomePage extends BasePage {
     public int getOverallCompliancesCount() {
         return getCountByXPath("Overall Compliances", "//p[contains(normalize-space(),'Overall Compliances')]/span");
     }
+
+    public boolean isOverallCompliancesSectionVisible() {
+        try {
+            return overallCompliancesSection.isDisplayed();
+        } catch (NoSuchElementException e) {
+            return false;
+        }
+    }
+
 
     /**
      * Gets the count displayed for the "Needs Action" compliance tab.

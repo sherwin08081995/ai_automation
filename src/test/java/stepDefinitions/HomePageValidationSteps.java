@@ -178,7 +178,8 @@ public class HomePageValidationSteps {
     @When("the user views the Overall Compliances section")
     public void the_user_views_the_Overall_Compliances_section() {
         try {
-            boolean isVisible = driver.findElement(By.xpath("//p[contains(normalize-space(),'Overall Compliances')]/span")).isDisplayed();
+            HomePage homePage = new HomePage(driver);
+            boolean isVisible = homePage.isOverallCompliancesSectionVisible();
 
             String stepMsg = "Overall Compliance section visible: " + isVisible;
             logStep(stepMsg);

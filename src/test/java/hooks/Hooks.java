@@ -62,11 +62,11 @@ public class Hooks {
     public void setup(Scenario scenario) {
         // Run once per test execution
         if (System.getProperty("init.once") == null) {
-            ScreenshotUtils.clearScreenshotFolder();                         // ✅ Clean screenshots
-            AllureTrendUtils.preserveTrendHistory();                          // ✅ Preserve trend data
-            AllureEnvironmentWriter.createEnvironmentFile();                  // ✅ Create env file
+            ScreenshotUtils.clearScreenshotFolder();
+            AllureTrendUtils.preserveTrendHistory();
+            AllureEnvironmentWriter.createEnvironmentFile();
 
-            System.setProperty("init.once", "true");                          // Prevent re-running this block
+            System.setProperty("init.once", "true");
             logger.info("✅ One-time setup done: screenshots, trend, environment file created.");
         }
 
@@ -146,7 +146,7 @@ public class Hooks {
 
         LoginPage loginPage = new LoginPage(driver);
         loginPage.enterEmail(ConfigReader.get("email"));
-        loginPage.clickLoginWithOtpButton();
+//        loginPage.clickLoginWithOtpButton();
         loginPage.clickGetOtpButton();
         loginPage.enterOtp(ConfigReader.get("otp"));
 
