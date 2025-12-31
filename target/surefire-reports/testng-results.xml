@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testng-results ignored="0" total="1" passed="1" failed="0" skipped="0">
+  <reporter-output>
+  </reporter-output>
+  <suite started-at="2025-12-28T15:44:12 IST" name="AI Automation Suite" finished-at="2025-12-28T15:52:36 IST" duration-ms="504007">
+    <groups>
+    </groups>
+    <test started-at="2025-12-28T15:44:12 IST" name="Demo Tests" finished-at="2025-12-28T15:52:36 IST" duration-ms="504007">
+      <class name="demo.NaukriJobSearchTest">
+        <test-method is-config="true" signature="setUp()[pri:0, instance:demo.NaukriJobSearchTest@49ec71f8]" started-at="2025-12-28T15:44:12 IST" name="setUp" finished-at="2025-12-28T15:44:16 IST" duration-ms="4553" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setUp -->
+        <test-method signature="scrapeAllLegalRoles()[pri:0, instance:demo.NaukriJobSearchTest@49ec71f8]" started-at="2025-12-28T15:44:16 IST" name="scrapeAllLegalRoles" finished-at="2025-12-28T15:52:35 IST" duration-ms="498475" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- scrapeAllLegalRoles -->
+        <test-method is-config="true" signature="tearDown()[pri:0, instance:demo.NaukriJobSearchTest@49ec71f8]" started-at="2025-12-28T15:52:35 IST" name="tearDown" finished-at="2025-12-28T15:52:36 IST" duration-ms="888" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tearDown -->
+      </class> <!-- demo.NaukriJobSearchTest -->
+    </test> <!-- Demo Tests -->
+  </suite> <!-- AI Automation Suite -->
+</testng-results>

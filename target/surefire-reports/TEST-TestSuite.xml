@@ -1,0 +1,430 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="TestSuite" time="505.234" tests="1" errors="0" skipped="0" failures="0">
+  <properties>
+    <property name="java.specification.version" value="21"/>
+    <property name="webdriver.chrome.driver" value="C:\Users\Vakilsearch\.cache\selenium\chromedriver\win64\143.0.7499.169\chromedriver.exe"/>
+    <property name="sun.cpu.isalist" value="amd64"/>
+    <property name="sun.jnu.encoding" value="Cp1252"/>
+    <property name="java.class.path" value="C:\Users\Vakilsearch\Ai Automation\ai_automation\target\test-classes;C:\Users\Vakilsearch\Ai Automation\ai_automation\target\classes;C:\Users\Vakilsearch\.m2\repository\org\seleniumhq\selenium\selenium-java\4.20.0\selenium-java-4.20.0.jar;C:\Users\Vakilsearch\.m2\repository\org\seleniumhq\selenium\selenium-api\4.20.0\selenium-api-4.20.0.jar;C:\Users\Vakilsearch\.m2\repository\org\seleniumhq\selenium\selenium-chrome-driver\4.20.0\selenium-chrome-driver-4.20.0.jar;C:\Users\Vakilsearch\.m2\repository\com\google\auto\service\auto-service-annotations\1.1.1\auto-service-annotations-1.1.1.jar;C:\Users\Vakilsearch\.m2\repository\org\seleniumhq\selenium\selenium-chromium-driver\4.20.0\selenium-chromium-driver-4.20.0.jar;C:\Users\Vakilsearch\.m2\repository\org\seleniumhq\selenium\selenium-json\4.20.0\selenium-json-4.20.0.jar;C:\Users\Vakilsearch\.m2\repository\org\seleniumhq\selenium\selenium-manager\4.20.0\selenium-manager-4.20.0.jar;C:\Users\Vakilsearch\.m2\repository\org\seleniumhq\selenium\selenium-devtools-v122\4.20.0\selenium-devtools-v122-4.20.0.jar;C:\Users\Vakilsearch\.m2\repository\org\seleniumhq\selenium\selenium-devtools-v123\4.20.0\selenium-devtools-v123-4.20.0.jar;C:\Users\Vakilsearch\.m2\repository\org\seleniumhq\selenium\selenium-devtools-v124\4.20.0\selenium-devtools-v124-4.20.0.jar;C:\Users\Vakilsearch\.m2\repository\org\seleniumhq\selenium\selenium-devtools-v85\4.20.0\selenium-devtools-v85-4.20.0.jar;C:\Users\Vakilsearch\.m2\repository\org\seleniumhq\selenium\selenium-edge-driver\4.20.0\selenium-edge-driver-4.20.0.jar;C:\Users\Vakilsearch\.m2\repository\org\seleniumhq\selenium\selenium-firefox-driver\4.20.0\selenium-firefox-driver-4.20.0.jar;C:\Users\Vakilsearch\.m2\repository\org\seleniumhq\selenium\selenium-http\4.20.0\selenium-http-4.20.0.jar;C:\Users\Vakilsearch\.m2\repository\dev\failsafe\failsafe\3.3.2\failsafe-3.3.2.jar;C:\Users\Vakilsearch\.m2\repository\org\seleniumhq\selenium\selenium-ie-driver\4.20.0\selenium-ie-driver-4.20.0.jar;C:\Users\Vakilsearch\.m2\repository\org\seleniumhq\selenium\selenium-remote-driver\4.20.0\selenium-remote-driver-4.20.0.jar;C:\Users\Vakilsearch\.m2\repository\com\google\guava\guava\33.1.0-jre\guava-33.1.0-jre.jar;C:\Users\Vakilsearch\.m2\repository\com\google\guava\failureaccess\1.0.2\failureaccess-1.0.2.jar;C:\Users\Vakilsearch\.m2\repository\com\google\guava\listenablefuture\9999.0-empty-to-avoid-conflict-with-guava\listenablefuture-9999.0-empty-to-avoid-conflict-with-guava.jar;C:\Users\Vakilsearch\.m2\repository\com\google\code\findbugs\jsr305\3.0.2\jsr305-3.0.2.jar;C:\Users\Vakilsearch\.m2\repository\org\checkerframework\checker-qual\3.42.0\checker-qual-3.42.0.jar;C:\Users\Vakilsearch\.m2\repository\com\google\errorprone\error_prone_annotations\2.26.1\error_prone_annotations-2.26.1.jar;C:\Users\Vakilsearch\.m2\repository\com\google\j2objc\j2objc-annotations\3.0.0\j2objc-annotations-3.0.0.jar;C:\Users\Vakilsearch\.m2\repository\io\opentelemetry\semconv\opentelemetry-semconv\1.25.0-alpha\opentelemetry-semconv-1.25.0-alpha.jar;C:\Users\Vakilsearch\.m2\repository\io\opentelemetry\opentelemetry-api\1.37.0\opentelemetry-api-1.37.0.jar;C:\Users\Vakilsearch\.m2\repository\io\opentelemetry\opentelemetry-context\1.37.0\opentelemetry-context-1.37.0.jar;C:\Users\Vakilsearch\.m2\repository\io\opentelemetry\opentelemetry-exporter-logging\1.37.0\opentelemetry-exporter-logging-1.37.0.jar;C:\Users\Vakilsearch\.m2\repository\io\opentelemetry\opentelemetry-sdk-common\1.37.0\opentelemetry-sdk-common-1.37.0.jar;C:\Users\Vakilsearch\.m2\repository\io\opentelemetry\opentelemetry-sdk-extension-autoconfigure-spi\1.37.0\opentelemetry-sdk-extension-autoconfigure-spi-1.37.0.jar;C:\Users\Vakilsearch\.m2\repository\io\opentelemetry\opentelemetry-sdk-extension-autoconfigure\1.37.0\opentelemetry-sdk-extension-autoconfigure-1.37.0.jar;C:\Users\Vakilsearch\.m2\repository\io\opentelemetry\opentelemetry-api-incubator\1.37.0-alpha\opentelemetry-api-incubator-1.37.0-alpha.jar;C:\Users\Vakilsearch\.m2\repository\io\opentelemetry\opentelemetry-sdk-trace\1.37.0\opentelemetry-sdk-trace-1.37.0.jar;C:\Users\Vakilsearch\.m2\repository\io\opentelemetry\opentelemetry-sdk\1.37.0\opentelemetry-sdk-1.37.0.jar;C:\Users\Vakilsearch\.m2\repository\io\opentelemetry\opentelemetry-sdk-metrics\1.37.0\opentelemetry-sdk-metrics-1.37.0.jar;C:\Users\Vakilsearch\.m2\repository\io\opentelemetry\opentelemetry-sdk-logs\1.37.0\opentelemetry-sdk-logs-1.37.0.jar;C:\Users\Vakilsearch\.m2\repository\net\bytebuddy\byte-buddy\1.14.14\byte-buddy-1.14.14.jar;C:\Users\Vakilsearch\.m2\repository\org\seleniumhq\selenium\selenium-os\4.20.0\selenium-os-4.20.0.jar;C:\Users\Vakilsearch\.m2\repository\org\apache\commons\commons-exec\1.4.0\commons-exec-1.4.0.jar;C:\Users\Vakilsearch\.m2\repository\org\seleniumhq\selenium\selenium-safari-driver\4.20.0\selenium-safari-driver-4.20.0.jar;C:\Users\Vakilsearch\.m2\repository\org\seleniumhq\selenium\selenium-support\4.20.0\selenium-support-4.20.0.jar;C:\Users\Vakilsearch\.m2\repository\org\testng\testng\7.10.2\testng-7.10.2.jar;C:\Users\Vakilsearch\.m2\repository\org\slf4j\slf4j-api\1.7.36\slf4j-api-1.7.36.jar;C:\Users\Vakilsearch\.m2\repository\com\beust\jcommander\1.82\jcommander-1.82.jar;C:\Users\Vakilsearch\.m2\repository\org\webjars\jquery\3.7.1\jquery-3.7.1.jar;C:\Users\Vakilsearch\.m2\repository\io\github\bonigarcia\webdrivermanager\5.8.0\webdrivermanager-5.8.0.jar;C:\Users\Vakilsearch\.m2\repository\com\google\code\gson\gson\2.10.1\gson-2.10.1.jar;C:\Users\Vakilsearch\.m2\repository\com\github\docker-java\docker-java\3.3.6\docker-java-3.3.6.jar;C:\Users\Vakilsearch\.m2\repository\com\github\docker-java\docker-java-core\3.3.6\docker-java-core-3.3.6.jar;C:\Users\Vakilsearch\.m2\repository\com\github\docker-java\docker-java-api\3.3.6\docker-java-api-3.3.6.jar;C:\Users\Vakilsearch\.m2\repository\com\fasterxml\jackson\core\jackson-annotations\2.10.3\jackson-annotations-2.10.3.jar;C:\Users\Vakilsearch\.m2\repository\com\fasterxml\jackson\core\jackson-databind\2.10.3\jackson-databind-2.10.3.jar;C:\Users\Vakilsearch\.m2\repository\com\fasterxml\jackson\core\jackson-core\2.10.3\jackson-core-2.10.3.jar;C:\Users\Vakilsearch\.m2\repository\org\bouncycastle\bcpkix-jdk18on\1.76\bcpkix-jdk18on-1.76.jar;C:\Users\Vakilsearch\.m2\repository\org\bouncycastle\bcprov-jdk18on\1.76\bcprov-jdk18on-1.76.jar;C:\Users\Vakilsearch\.m2\repository\org\bouncycastle\bcutil-jdk18on\1.76\bcutil-jdk18on-1.76.jar;C:\Users\Vakilsearch\.m2\repository\org\slf4j\jcl-over-slf4j\1.7.30\jcl-over-slf4j-1.7.30.jar;C:\Users\Vakilsearch\.m2\repository\com\github\docker-java\docker-java-transport-httpclient5\3.3.6\docker-java-transport-httpclient5-3.3.6.jar;C:\Users\Vakilsearch\.m2\repository\com\github\docker-java\docker-java-transport\3.3.6\docker-java-transport-3.3.6.jar;C:\Users\Vakilsearch\.m2\repository\net\java\dev\jna\jna\5.13.0\jna-5.13.0.jar;C:\Users\Vakilsearch\.m2\repository\org\brotli\dec\0.1.2\dec-0.1.2.jar;C:\Users\Vakilsearch\.m2\repository\org\apache\commons\commons-lang3\3.14.0\commons-lang3-3.14.0.jar;C:\Users\Vakilsearch\.m2\repository\org\apache\commons\commons-compress\1.26.1\commons-compress-1.26.1.jar;C:\Users\Vakilsearch\.m2\repository\org\apache\httpcomponents\client5\httpclient5\5.2.1\httpclient5-5.2.1.jar;C:\Users\Vakilsearch\.m2\repository\org\apache\httpcomponents\core5\httpcore5\5.2\httpcore5-5.2.jar;C:\Users\Vakilsearch\.m2\repository\org\apache\httpcomponents\core5\httpcore5-h2\5.2\httpcore5-h2-5.2.jar;C:\Users\Vakilsearch\.m2\repository\org\slf4j\slf4j-simple\2.0.13\slf4j-simple-2.0.13.jar;C:\Users\Vakilsearch\.m2\repository\org\apache\poi\poi\5.2.3\poi-5.2.3.jar;C:\Users\Vakilsearch\.m2\repository\commons-codec\commons-codec\1.15\commons-codec-1.15.jar;C:\Users\Vakilsearch\.m2\repository\org\apache\commons\commons-collections4\4.4\commons-collections4-4.4.jar;C:\Users\Vakilsearch\.m2\repository\org\apache\commons\commons-math3\3.6.1\commons-math3-3.6.1.jar;C:\Users\Vakilsearch\.m2\repository\commons-io\commons-io\2.11.0\commons-io-2.11.0.jar;C:\Users\Vakilsearch\.m2\repository\com\zaxxer\SparseBitSet\1.2\SparseBitSet-1.2.jar;C:\Users\Vakilsearch\.m2\repository\org\apache\logging\log4j\log4j-api\2.18.0\log4j-api-2.18.0.jar;C:\Users\Vakilsearch\.m2\repository\org\apache\poi\poi-ooxml\5.2.3\poi-ooxml-5.2.3.jar;C:\Users\Vakilsearch\.m2\repository\org\apache\poi\poi-ooxml-lite\5.2.3\poi-ooxml-lite-5.2.3.jar;C:\Users\Vakilsearch\.m2\repository\org\apache\xmlbeans\xmlbeans\5.1.1\xmlbeans-5.1.1.jar;C:\Users\Vakilsearch\.m2\repository\com\github\virtuald\curvesapi\1.07\curvesapi-1.07.jar;"/>
+    <property name="java.vm.vendor" value="Oracle Corporation"/>
+    <property name="sun.arch.data.model" value="64"/>
+    <property name="user.variant" value=""/>
+    <property name="java.vendor.url" value="https://java.oracle.com/"/>
+    <property name="user.timezone" value="Asia/Calcutta"/>
+    <property name="os.name" value="Windows 11"/>
+    <property name="java.vm.specification.version" value="21"/>
+    <property name="sun.java.launcher" value="SUN_STANDARD"/>
+    <property name="user.country" value="IN"/>
+    <property name="sun.boot.library.path" value="C:\Program Files\Java\jdk-21\bin"/>
+    <property name="sun.java.command" value="C:\Users\Vakilsearch\AppData\Local\Temp\surefire1872693601564653848\surefirebooter-20251228154410487_3.jar C:\Users\Vakilsearch\AppData\Local\Temp\surefire1872693601564653848 2025-12-28T15-44-10_116-jvmRun1 surefire-20251228154410487_1tmp surefire_0-20251228154410487_2tmp"/>
+    <property name="jdk.debug" value="release"/>
+    <property name="surefire.test.class.path" value="C:\Users\Vakilsearch\Ai Automation\ai_automation\target\test-classes;C:\Users\Vakilsearch\Ai Automation\ai_automation\target\classes;C:\Users\Vakilsearch\.m2\repository\org\seleniumhq\selenium\selenium-java\4.20.0\selenium-java-4.20.0.jar;C:\Users\Vakilsearch\.m2\repository\org\seleniumhq\selenium\selenium-api\4.20.0\selenium-api-4.20.0.jar;C:\Users\Vakilsearch\.m2\repository\org\seleniumhq\selenium\selenium-chrome-driver\4.20.0\selenium-chrome-driver-4.20.0.jar;C:\Users\Vakilsearch\.m2\repository\com\google\auto\service\auto-service-annotations\1.1.1\auto-service-annotations-1.1.1.jar;C:\Users\Vakilsearch\.m2\repository\org\seleniumhq\selenium\selenium-chromium-driver\4.20.0\selenium-chromium-driver-4.20.0.jar;C:\Users\Vakilsearch\.m2\repository\org\seleniumhq\selenium\selenium-json\4.20.0\selenium-json-4.20.0.jar;C:\Users\Vakilsearch\.m2\repository\org\seleniumhq\selenium\selenium-manager\4.20.0\selenium-manager-4.20.0.jar;C:\Users\Vakilsearch\.m2\repository\org\seleniumhq\selenium\selenium-devtools-v122\4.20.0\selenium-devtools-v122-4.20.0.jar;C:\Users\Vakilsearch\.m2\repository\org\seleniumhq\selenium\selenium-devtools-v123\4.20.0\selenium-devtools-v123-4.20.0.jar;C:\Users\Vakilsearch\.m2\repository\org\seleniumhq\selenium\selenium-devtools-v124\4.20.0\selenium-devtools-v124-4.20.0.jar;C:\Users\Vakilsearch\.m2\repository\org\seleniumhq\selenium\selenium-devtools-v85\4.20.0\selenium-devtools-v85-4.20.0.jar;C:\Users\Vakilsearch\.m2\repository\org\seleniumhq\selenium\selenium-edge-driver\4.20.0\selenium-edge-driver-4.20.0.jar;C:\Users\Vakilsearch\.m2\repository\org\seleniumhq\selenium\selenium-firefox-driver\4.20.0\selenium-firefox-driver-4.20.0.jar;C:\Users\Vakilsearch\.m2\repository\org\seleniumhq\selenium\selenium-http\4.20.0\selenium-http-4.20.0.jar;C:\Users\Vakilsearch\.m2\repository\dev\failsafe\failsafe\3.3.2\failsafe-3.3.2.jar;C:\Users\Vakilsearch\.m2\repository\org\seleniumhq\selenium\selenium-ie-driver\4.20.0\selenium-ie-driver-4.20.0.jar;C:\Users\Vakilsearch\.m2\repository\org\seleniumhq\selenium\selenium-remote-driver\4.20.0\selenium-remote-driver-4.20.0.jar;C:\Users\Vakilsearch\.m2\repository\com\google\guava\guava\33.1.0-jre\guava-33.1.0-jre.jar;C:\Users\Vakilsearch\.m2\repository\com\google\guava\failureaccess\1.0.2\failureaccess-1.0.2.jar;C:\Users\Vakilsearch\.m2\repository\com\google\guava\listenablefuture\9999.0-empty-to-avoid-conflict-with-guava\listenablefuture-9999.0-empty-to-avoid-conflict-with-guava.jar;C:\Users\Vakilsearch\.m2\repository\com\google\code\findbugs\jsr305\3.0.2\jsr305-3.0.2.jar;C:\Users\Vakilsearch\.m2\repository\org\checkerframework\checker-qual\3.42.0\checker-qual-3.42.0.jar;C:\Users\Vakilsearch\.m2\repository\com\google\errorprone\error_prone_annotations\2.26.1\error_prone_annotations-2.26.1.jar;C:\Users\Vakilsearch\.m2\repository\com\google\j2objc\j2objc-annotations\3.0.0\j2objc-annotations-3.0.0.jar;C:\Users\Vakilsearch\.m2\repository\io\opentelemetry\semconv\opentelemetry-semconv\1.25.0-alpha\opentelemetry-semconv-1.25.0-alpha.jar;C:\Users\Vakilsearch\.m2\repository\io\opentelemetry\opentelemetry-api\1.37.0\opentelemetry-api-1.37.0.jar;C:\Users\Vakilsearch\.m2\repository\io\opentelemetry\opentelemetry-context\1.37.0\opentelemetry-context-1.37.0.jar;C:\Users\Vakilsearch\.m2\repository\io\opentelemetry\opentelemetry-exporter-logging\1.37.0\opentelemetry-exporter-logging-1.37.0.jar;C:\Users\Vakilsearch\.m2\repository\io\opentelemetry\opentelemetry-sdk-common\1.37.0\opentelemetry-sdk-common-1.37.0.jar;C:\Users\Vakilsearch\.m2\repository\io\opentelemetry\opentelemetry-sdk-extension-autoconfigure-spi\1.37.0\opentelemetry-sdk-extension-autoconfigure-spi-1.37.0.jar;C:\Users\Vakilsearch\.m2\repository\io\opentelemetry\opentelemetry-sdk-extension-autoconfigure\1.37.0\opentelemetry-sdk-extension-autoconfigure-1.37.0.jar;C:\Users\Vakilsearch\.m2\repository\io\opentelemetry\opentelemetry-api-incubator\1.37.0-alpha\opentelemetry-api-incubator-1.37.0-alpha.jar;C:\Users\Vakilsearch\.m2\repository\io\opentelemetry\opentelemetry-sdk-trace\1.37.0\opentelemetry-sdk-trace-1.37.0.jar;C:\Users\Vakilsearch\.m2\repository\io\opentelemetry\opentelemetry-sdk\1.37.0\opentelemetry-sdk-1.37.0.jar;C:\Users\Vakilsearch\.m2\repository\io\opentelemetry\opentelemetry-sdk-metrics\1.37.0\opentelemetry-sdk-metrics-1.37.0.jar;C:\Users\Vakilsearch\.m2\repository\io\opentelemetry\opentelemetry-sdk-logs\1.37.0\opentelemetry-sdk-logs-1.37.0.jar;C:\Users\Vakilsearch\.m2\repository\net\bytebuddy\byte-buddy\1.14.14\byte-buddy-1.14.14.jar;C:\Users\Vakilsearch\.m2\repository\org\seleniumhq\selenium\selenium-os\4.20.0\selenium-os-4.20.0.jar;C:\Users\Vakilsearch\.m2\repository\org\apache\commons\commons-exec\1.4.0\commons-exec-1.4.0.jar;C:\Users\Vakilsearch\.m2\repository\org\seleniumhq\selenium\selenium-safari-driver\4.20.0\selenium-safari-driver-4.20.0.jar;C:\Users\Vakilsearch\.m2\repository\org\seleniumhq\selenium\selenium-support\4.20.0\selenium-support-4.20.0.jar;C:\Users\Vakilsearch\.m2\repository\org\testng\testng\7.10.2\testng-7.10.2.jar;C:\Users\Vakilsearch\.m2\repository\org\slf4j\slf4j-api\1.7.36\slf4j-api-1.7.36.jar;C:\Users\Vakilsearch\.m2\repository\com\beust\jcommander\1.82\jcommander-1.82.jar;C:\Users\Vakilsearch\.m2\repository\org\webjars\jquery\3.7.1\jquery-3.7.1.jar;C:\Users\Vakilsearch\.m2\repository\io\github\bonigarcia\webdrivermanager\5.8.0\webdrivermanager-5.8.0.jar;C:\Users\Vakilsearch\.m2\repository\com\google\code\gson\gson\2.10.1\gson-2.10.1.jar;C:\Users\Vakilsearch\.m2\repository\com\github\docker-java\docker-java\3.3.6\docker-java-3.3.6.jar;C:\Users\Vakilsearch\.m2\repository\com\github\docker-java\docker-java-core\3.3.6\docker-java-core-3.3.6.jar;C:\Users\Vakilsearch\.m2\repository\com\github\docker-java\docker-java-api\3.3.6\docker-java-api-3.3.6.jar;C:\Users\Vakilsearch\.m2\repository\com\fasterxml\jackson\core\jackson-annotations\2.10.3\jackson-annotations-2.10.3.jar;C:\Users\Vakilsearch\.m2\repository\com\fasterxml\jackson\core\jackson-databind\2.10.3\jackson-databind-2.10.3.jar;C:\Users\Vakilsearch\.m2\repository\com\fasterxml\jackson\core\jackson-core\2.10.3\jackson-core-2.10.3.jar;C:\Users\Vakilsearch\.m2\repository\org\bouncycastle\bcpkix-jdk18on\1.76\bcpkix-jdk18on-1.76.jar;C:\Users\Vakilsearch\.m2\repository\org\bouncycastle\bcprov-jdk18on\1.76\bcprov-jdk18on-1.76.jar;C:\Users\Vakilsearch\.m2\repository\org\bouncycastle\bcutil-jdk18on\1.76\bcutil-jdk18on-1.76.jar;C:\Users\Vakilsearch\.m2\repository\org\slf4j\jcl-over-slf4j\1.7.30\jcl-over-slf4j-1.7.30.jar;C:\Users\Vakilsearch\.m2\repository\com\github\docker-java\docker-java-transport-httpclient5\3.3.6\docker-java-transport-httpclient5-3.3.6.jar;C:\Users\Vakilsearch\.m2\repository\com\github\docker-java\docker-java-transport\3.3.6\docker-java-transport-3.3.6.jar;C:\Users\Vakilsearch\.m2\repository\net\java\dev\jna\jna\5.13.0\jna-5.13.0.jar;C:\Users\Vakilsearch\.m2\repository\org\brotli\dec\0.1.2\dec-0.1.2.jar;C:\Users\Vakilsearch\.m2\repository\org\apache\commons\commons-lang3\3.14.0\commons-lang3-3.14.0.jar;C:\Users\Vakilsearch\.m2\repository\org\apache\commons\commons-compress\1.26.1\commons-compress-1.26.1.jar;C:\Users\Vakilsearch\.m2\repository\org\apache\httpcomponents\client5\httpclient5\5.2.1\httpclient5-5.2.1.jar;C:\Users\Vakilsearch\.m2\repository\org\apache\httpcomponents\core5\httpcore5\5.2\httpcore5-5.2.jar;C:\Users\Vakilsearch\.m2\repository\org\apache\httpcomponents\core5\httpcore5-h2\5.2\httpcore5-h2-5.2.jar;C:\Users\Vakilsearch\.m2\repository\org\slf4j\slf4j-simple\2.0.13\slf4j-simple-2.0.13.jar;C:\Users\Vakilsearch\.m2\repository\org\apache\poi\poi\5.2.3\poi-5.2.3.jar;C:\Users\Vakilsearch\.m2\repository\commons-codec\commons-codec\1.15\commons-codec-1.15.jar;C:\Users\Vakilsearch\.m2\repository\org\apache\commons\commons-collections4\4.4\commons-collections4-4.4.jar;C:\Users\Vakilsearch\.m2\repository\org\apache\commons\commons-math3\3.6.1\commons-math3-3.6.1.jar;C:\Users\Vakilsearch\.m2\repository\commons-io\commons-io\2.11.0\commons-io-2.11.0.jar;C:\Users\Vakilsearch\.m2\repository\com\zaxxer\SparseBitSet\1.2\SparseBitSet-1.2.jar;C:\Users\Vakilsearch\.m2\repository\org\apache\logging\log4j\log4j-api\2.18.0\log4j-api-2.18.0.jar;C:\Users\Vakilsearch\.m2\repository\org\apache\poi\poi-ooxml\5.2.3\poi-ooxml-5.2.3.jar;C:\Users\Vakilsearch\.m2\repository\org\apache\poi\poi-ooxml-lite\5.2.3\poi-ooxml-lite-5.2.3.jar;C:\Users\Vakilsearch\.m2\repository\org\apache\xmlbeans\xmlbeans\5.1.1\xmlbeans-5.1.1.jar;C:\Users\Vakilsearch\.m2\repository\com\github\virtuald\curvesapi\1.07\curvesapi-1.07.jar;"/>
+    <property name="sun.cpu.endian" value="little"/>
+    <property name="user.home" value="C:\Users\Vakilsearch"/>
+    <property name="user.language" value="en"/>
+    <property name="java.specification.vendor" value="Oracle Corporation"/>
+    <property name="java.version.date" value="2025-04-15"/>
+    <property name="java.home" value="C:\Program Files\Java\jdk-21"/>
+    <property name="file.separator" value="\"/>
+    <property name="basedir" value="C:\Users\Vakilsearch\Ai Automation\ai_automation"/>
+    <property name="java.vm.compressedOopsMode" value="Zero based"/>
+    <property name="line.separator" value="&#10;"/>
+    <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
+    <property name="java.specification.name" value="Java Platform API Specification"/>
+    <property name="surefire.real.class.path" value="C:\Users\Vakilsearch\AppData\Local\Temp\surefire1872693601564653848\surefirebooter-20251228154410487_3.jar"/>
+    <property name="user.script" value=""/>
+    <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
+    <property name="java.runtime.version" value="21.0.7+8-LTS-245"/>
+    <property name="user.name" value="Vakilsearch"/>
+    <property name="stdout.encoding" value="Cp1252"/>
+    <property name="path.separator" value=";"/>
+    <property name="os.version" value="10.0"/>
+    <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
+    <property name="file.encoding" value="UTF-8"/>
+    <property name="java.vm.name" value="Java HotSpot(TM) 64-Bit Server VM"/>
+    <property name="localRepository" value="C:\Users\Vakilsearch\.m2\repository"/>
+    <property name="java.vendor.url.bug" value="https://bugreport.java.com/bugreport/"/>
+    <property name="java.io.tmpdir" value="C:\Users\VAKILS~1\AppData\Local\Temp\"/>
+    <property name="java.version" value="21.0.7"/>
+    <property name="user.dir" value="C:\Users\Vakilsearch\Ai Automation\ai_automation"/>
+    <property name="os.arch" value="amd64"/>
+    <property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
+    <property name="sun.os.patch.level" value=""/>
+    <property name="native.encoding" value="Cp1252"/>
+    <property name="java.library.path" value="C:\Program Files\Java\jdk-21\bin;C:\WINDOWS\Sun\Java\bin;C:\WINDOWS\system32;C:\WINDOWS;C:\Program Files\Common Files\Oracle\Java\javapath;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files\Git\cmd;C:\apache-maven-3.9.10\apache-maven-3.9.10\bin;C:\Android\platform-tools;;C:\Program Files\Docker\Docker\resources\bin;C:\Program Files\nodejs\;C:\ProgramData\chocolatey\bin;C:\Users\Vakilsearch\AppData\Local\Programs\Python\Python314\Scripts\;C:\Users\Vakilsearch\AppData\Local\Programs\Python\Python314\;C:\Users\Vakilsearch\AppData\Local\Programs\Python\Launcher\;C:\Users\Vakilsearch\scoop\shims;C:\Users\Vakilsearch\AppData\Local\Microsoft\WindowsApps;C:\Program Files\JetBrains\IntelliJ IDEA Community Edition 2025.1.1.1\bin;;C:\Users\Vakilsearch\AppData\Local\GitHubDesktop\bin;C:\Program Files\JetBrains\PyCharm 2025.2.4\bin;C:\Users\Vakilsearch\AppData\Roaming\npm;."/>
+    <property name="java.vm.info" value="mixed mode, sharing"/>
+    <property name="stderr.encoding" value="Cp1252"/>
+    <property name="java.vendor" value="Oracle Corporation"/>
+    <property name="java.vm.version" value="21.0.7+8-LTS-245"/>
+    <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
+    <property name="java.class.version" value="65.0"/>
+  </properties>
+  <testcase name="scrapeAllLegalRoles" classname="demo.NaukriJobSearchTest" time="498.48">
+    <system-out><![CDATA[
+🔍 Searching: Senior Legal Officer
+✔ Saved: Manager - Legal | Adani Group
+✔ Saved: Senior Executive Legal | Modicare
+✔ Saved: Assistant Manager- Legal | Adani Group
+✔ Saved: Senior Officer - Retail Legal & Remedial - Housing | Tata Capital
+✔ Saved: Manager- Legal | Mahindra & Mahindra Limited.
+✔ Saved: Jr./Sr. Officer Legal | Mycitypune
+✔ Saved: Legal Manager | New Chennai Township Pvt Ltd
+✔ Saved: Sr. Executive - Legal | INGRAM MICRO PLATFORM TECHNOLOGY INDIA PVT LTD
+✔ Saved: Senior Executive - Legal | Axtria
+✔ Saved: Manager - Legal | Adani Group
+✔ Saved: Legal & Taxation Officer/Senior Officer | Shree Renuka Sugars
+✔ Saved: Job - Manager Legal at Navi Mumbai | IKS HEALTH
+✔ Saved: Senior Legal Executive | Drushti Realtors
+✔ Saved: Senior Legal Officer | Envolta
+✔ Saved: GM- Sr. Legal Officer | VGN Homes
+✔ Saved: Sr. Officer, Legal - India | Herbalife International
+✔ Saved: Senior Officer - Legal | Tecnimont
+✔ Saved: Legal Manager | Teleperformance (TP)
+✔ Saved: Legal Manager | Hexnode
+✔ Saved: Manager - Legal | Hexaware Technologies
+
+🔍 Searching: Sr. Legal Officer
+✔ Saved: Legal Manager | Doshi Housing
+✔ Saved: Legal Executive | Sky Homes
+✔ Saved: Legal Executive | B T Enterprises
+✔ Saved: Manager-Legal | Capri Global Capital (CGCL)
+✔ Saved: Legal Executive | G Square Housing
+✔ Saved: Legal Executive | Raunaq Foundations
+✔ Saved: Legal Advisor | Vakilsearch
+✔ Saved: Legal Executive | D.A.V. Chennai
+✔ Saved: Legal Associates | Pulastya Legal
+✔ Saved: Legal Manager | Leading Client
+✔ Saved: Banking/ARC Legal Executive - DRT & Banking Resolution | Cfm Asset Reconstruction
+✔ Saved: Legal Advisor | Magnitude Square Realty
+✔ Saved: Legal Manager | Fugro
+✔ Saved: Legal Officer | Manufacturing Industry
+✔ Saved: Legal Officer | Decorpot
+✔ Saved: IP Lawyer | Indiafilings
+
+🔍 Searching: GM – Legal
+✔ Saved: GM Legal | FRANKFINN AVIATION SERVICES PVT. LTD
+✔ Saved: General Manager Legal | Grand Housing Chennai
+✔ Saved: General Manager Legal | MS Garg Legal Consultancy Services
+✔ Saved: General Manager Legal | Mahendra Homes
+✔ Saved: Head of Legal | Sasvitha Home Finance
+✔ Saved: General Manager Legal | HomeKraft Infra
+✔ Saved: Legal Head | Leading Client
+✔ Saved: Legal Head | Careerdost Enterprise
+✔ Saved: Legal Head | Cheran Foundation Trust
+✔ Saved: Legal Executive | Rudr Consultancy Services
+✔ Saved: Legal Executive | Leading Client
+
+🔍 Searching: DGM – Legal
+✔ Saved: Associate/ Deputy Manager Acquisition - CA & SA | Dreams Solutions
+✔ Saved: Deputy General Manager - General Administration | Fortis
+✔ Saved: Senior Manager or Deputy General Manager - Legal | Shalina Healthcare
+✔ Saved: Legal Head - DGM - Noida - Manufacturing Company | Ascentle India
+✔ Saved: Sr. Mgr Company Secretary & legal (Unlisted Infrastructure Co.) | Hector & Streak Consulting
+✔ Saved: Deputy Manager - New Car Finance | Bajaj Finance
+✔ Saved: Deputy Manager | Not Applicable | | Assurance National Leadership | Deloitte Consulting
+✔ Saved: Deputy General Manager Finance & Asset Management | Apollo Hospitals
+✔ Saved: Deputy Manager - Human Resources | Mahindra & Mahindra Limited.
+✔ Saved: Deputy Manager-Unit Sales & Marketing | Fortis
+✔ Saved: Deputy Manager Branding | Fortis
+✔ Saved: Deputy Manager - Professional Loans | Bajaj Finance
+✔ Saved: Deputy Manager - Business Loans - Indirect | Bajaj Finance
+✔ Saved: Deputy Manager - GL Risk | Bajaj Finance
+✔ Saved: Deputy Manager - Used Car Finance | Bajaj Finance
+✔ Saved: Deputy Manager - SALPL - Prime | Bajaj Finance
+✔ Saved: Deputy Manager - Digital Product Finance - Prime | Bajaj Finance
+
+🔍 Searching: AGM – Legal
+✔ Saved: Sr. Manager /AGM- Legal | Tusthi Executive Access & Consultants
+✔ Saved: AGM / DGM - Legal | Alkem MedTech Pvt Ltd
+✔ Saved: Manager /AGM - (Techno-Legal) | Ahluwalia Contracts
+✔ Saved: Senior Manager/ AGM- Legal | Bridge Et Al
+✔ Saved: Senior Manager/ AGM-Legal | Smartworks
+✔ Saved: AGM Legal Role | Client of ETA
+✔ Saved: AGM / DGM - Legal | Ramsons Trendsquares Realty
+✔ Saved: Assistant General Manager Legal | Harman Finochem
+✔ Saved: Legal Head | Rajarajeshware Builddcon
+✔ Saved: Legal Head | IT Servicing Company
+✔ Saved: Head - Legal | Navin Housing Properties
+✔ Saved: Legal Head | Leading Client
+✔ Saved: Legal Consultant | Kumar Builders
+✔ Saved: Legal Consultant | Assotech Realty
+✔ Saved: Legal Consultant | Multinational Company
+✔ Saved: Legal Head | NKGSB Bank
+
+🔍 Searching: Manager – Legal
+✔ Saved: Manager - Legal | Bajaj Finance
+✔ Saved: Manager - Legal | HDB Financial Services
+✔ Saved: Manager - Legal - Housing | Tata Capital
+✔ Saved: Manager - Retail Legal & Remedial - Housing - Legal and Remedial | Tata Capital
+✔ Saved: Manager - Legal (Trusteeship) LLB / LLM | Tnm Sevices Consulting
+✔ Saved: Legal Manager | Sunteck Realty
+✔ Saved: Legal Manager | CAREERDOST ENTERPRISE
+✔ Saved: Legal Manager | SkillVentory
+✔ Saved: Legal Manager - Non litigation | Credit Saison India
+✔ Saved: Legal Manager | Leading Logistics Brand
+✔ Saved: Manager - Legal | Enrich Rd Infraprojects
+✔ Saved: Manager - Legal | Indifi Technologies
+✔ Saved: Legal Manager | Leaf Round
+
+🔍 Searching: Sr. Manager – Legal
+✔ Saved: Sr. Manager-Legal // Head Office Ahmedabad | LCC Projects
+✔ Saved: Corporate Lawyer | Prasad & Company
+
+🔍 Searching: Head – Legal
+✔ Saved: Head Legal | Job Boosts
+✔ Saved: Legal Head | Omniactive Health Technologies
+✔ Saved: Head - Legal | Ranawat Group
+✔ Saved: JOB | Officer (Legal) | Head Office | New Delhi | Ashiana Housing Ltd. | Ashiana Housing
+✔ Saved: Legal Head | TrueBlue
+✔ Saved: Legal Head | Leading Client
+✔ Saved: Legal Head | Leading Client
+✔ Saved: Legal Head | Leading Client
+✔ Saved: Legal Head | Leading Client
+✔ Saved: Legal Head | Leading Client
+✔ Saved: Legal Head | Leading Client
+✔ Saved: Legal Head | Pushan Placements
+✔ Saved: HEAD-LEGAL SERVICES | myG
+✔ Saved: Head - Legal | Turner Townsend
+
+🔍 Searching: AVP – Legal
+✔ Saved: AVP - Legal ( Litigation - BFSI Sector) | A client of ResSource Recruitment
+✔ Saved: AVP - Corporate Legal - Non Litigation | Abreast Global Consulting
+✔ Saved: AVP Corporate legal (Diversity Hiring) | NBFC
+✔ Saved: Senior Manager / AVP - Legal | Centrum
+✔ Saved: AVP Legal - Litigation ( A Large Financial Co, Mumbai) | Hector & Streak Consulting
+✔ Saved: Senior Manager/AVP-Legal (NBFC) | Attarix Talent Solutions
+✔ Saved: AVP- Legal | Liberty Mutual
+✔ Saved: AVP - Commercial Legal | Kotak Mahindra Bank
+✔ Saved: Senior Manager / AVP - Legal ( Banking & Finance ) | Recsource Recruitment
+✔ Saved: Assistant Vice President Legal | Bhive Workspace
+✔ Saved: Assistant Director - Legal | Access Healthcare
+
+🔍 Searching: VP – Legal
+✔ Saved: AVP/VP - Legal | A client of ResSource Recruitment
+✔ Saved: VP - Legal | Ndw Group
+✔ Saved: VP Legal- Employment Law | Leading Investment Management MNC
+✔ Saved: Vice President - Legal | Dristi
+✔ Saved: Collaborators & Partners at High Courts Practice Expansion | Lily Thomas Saju Jakob (Advocates Solicitors)
+✔ Saved: Legal Head | Alyf Proptech
+✔ Saved: Legal Consultant | advocate | Shree Venkatesh Buildcon
+✔ Saved: Legal Head | HYT Engineering
+
+🔍 Searching: Legal Manager – Corporate
+✔ Saved: Legal Manager | A Leading Education Group
+✔ Saved: Corporate Lawyers Needed - Leading Advisory Firm with Global Exposure | https://www.buddtree.com
+✔ Saved: Legal Manager in Manufacturing Industry | ISEO Systems looking for
+✔ Saved: Legal Associate (Fintech Ecosystem) | Finsire
+✔ Saved: Corporate lawyer | MBG Corporate Services
+✔ Saved: Trainee - Legal Advisor | Tecvesten Consulting
+✔ Saved: Corporate Advocate | Asbri Energy & Enviro Technologies Private Limited
+
+🔍 Searching: Corporate Advocate
+✔ Saved: Advocate-Labour law advisory | Corporate Professionals
+✔ Saved: Milaap Volunteering Program Advocate | Milaap
+✔ Saved: Associate | Incedo
+✔ Saved: Associate-Retainership | CORPORATE PROFESSIONALS SECRETARIAL SERVICES PRIVATE LIMITED
+✔ Saved: Advocate | Jurist &Jurist International
+
+🔍 Searching: Corporate Legal Counsel
+✔ Saved: Corporate Legal Counsel | Easemytrip
+✔ Saved: Legal - Corporate Counsel (EMEA) | KKR India Asset Finance
+✔ Saved: Corporate Legal Counsel | Irish Expert
+✔ Saved: Corporate Legal Counsel | Google
+✔ Saved: Corporate Counsel / Legal Associate | Fluenc
+✔ Saved: RSA Corporate Secretary & Legal Counsel | R S A
+✔ Saved: Corporate Legal Counsel | Easemytrip
+
+🔍 Searching: In-House Counsel
+✔ Saved: Sales Executive | GSN Enterprises
+✔ Saved: Counsellor | Learners Cortex
+✔ Saved: SALES EXECUTIVES - APARTMENTS & VILLAS | Greenway Group
+✔ Saved: Telecaller - Join Jobseeks4u ! Student Enrolment & Counseling !!! | Job Seeks 4u Consultancy Services
+✔ Saved: Sales Executive | A.K.B. Developers & Promoters
+✔ Saved: Telecaller | Kg Construction
+✔ Saved: Sales Executive | VGN Homes
+✔ Saved: Sales Executive | Hampton Consultants
+✔ Saved: Sales Executive | captalentHR
+✔ Saved: sales executive | RA Media & Infotainment
+✔ Saved: Sales Executive | Royal Keys Realty
+✔ Saved: Sales Executive | Ruby Builders & Promoters
+✔ Saved: Great opportunity For Sales Executive in top MNC!!! | Job Seeks 4u Consultancy Services
+✔ Saved: Sales Executive | IIFL Home Finance
+✔ Saved: Sales Executive (Female) | Kumar Lifespaces
+✔ Saved: Sales Executive | VAJRA TOWERS
+✔ Saved: Tele Caller | Nirman Developers
+✔ Saved: Sales Executive | Decorpot
+✔ Saved: Sales Executive | Decorpot
+✔ Saved: Urgent Opening For Tele-Caller Position!!! | Propshop
+
+🔍 Searching: Legal Executive
+✔ Saved: Legal Executive | Mahindra Finance
+✔ Saved: Legal Executive | Hinduja Leyland Finance
+✔ Saved: Legal Executive | HDFC Credila
+✔ Saved: Legal - Executive | Suguna Foods
+✔ Saved: Legal Executive | Xpressbees
+✔ Saved: Legal Executive | Jet Freight Logistics
+✔ Saved: Opportunity For Legal Executive (Male) | Sandu
+✔ Saved: Legal Executive | Grand Housing Chennai
+✔ Saved: Legal Executive | Rentomojo
+✔ Saved: Legal Executive- | Manika Plastech
+✔ Saved: Legal Executive (Expansion) | K12 Techno Services
+✔ Saved: Legal Executive | Aakash Polyfilms
+✔ Saved: Legal Executive | Shree Renuka Sugars Limited
+
+🔍 Searching: Compliance Officer
+✔ Saved: Hiring Onboarding & Compliance Officer / Non voice/ Day shift/ upt 30k | ..
+✔ Saved: Compliance Officer | 1 Finance
+✔ Saved: Compliance Manager / Compliance Officer | DMart
+✔ Saved: Compliance Officer - IFSC - Gandhinagar | Monarch Networth Capital
+✔ Saved: Intern- Company Secretary/ Compliance Officer | TMF Group
+✔ Saved: Compliance Officer | Sutherland
+✔ Saved: Compliance Officer | Client Company
+✔ Saved: Compliance Officer | Humb Global Healthtech India
+✔ Saved: Compliance Officer | Tokisud Mining Private Limited
+✔ Saved: Audit & Compliance Officer | Kokan Ngo
+✔ Saved: Compliance Officer | Sashr Consultants
+✔ Saved: Compliance Officer | Potentiam Offshore Services
+✔ Saved: Delivery compliance officer | HCLTech
+✔ Saved: Monitoring Compliance Officer | Groupe Credit Agricole
+✔ Saved: Company Secretary/Compliance Officer | RPP Infra Projects
+✔ Saved: Compliance Officer | Ahluwalia Contracts
+✔ Saved: Compliance Officer, Compliance | Clsa
+✔ Saved: Company Secretary / Compliance Officer | Acaipl Investment & Financial Services
+✔ Saved: Company Secretary cum Compliance Officer | Mudra
+✔ Saved: Company Secretary & Compliance Officer | Ppfas Asset Management
+
+🔍 Searching: Senior Compliance Officer
+✔ Saved: Senior Compliance Officer | Multiplier
+✔ Saved: Senior officer- Compliance | Zuventus Healthcare
+✔ Saved: Senior Compliance Officer | Russell Investments
+✔ Saved: Senior Compliance Officer | Dhani Loans and Services (DLSL)
+✔ Saved: Senior Compliance Officer | GRD Securities
+✔ Saved: Senior Compliance Officer | Leading Stock borking firm in Kolkata
+✔ Saved: Sr. Officer/Assistant Manager - Compliance - South | DMart
+✔ Saved: Sr. Officer/Officer - Compliance | BOBCARD
+✔ Saved: Assistant Manager | Sify
+✔ Saved: Associate - Landscaping | Sodexo Food Solutions India Pvt. Ltd.ces
+✔ Saved: Compliance Manager | TVS Credit Services Ltd
+✔ Saved: MANAGER/ ASSISTANT MANAGER | Rnd Infotech
+✔ Saved: Assistant Manager | EXL
+✔ Saved: Associate - Falcon | SBI Card
+✔ Saved: Assistant Manager - EDD | Guidehouse
+✔ Saved: Holography- Assistant Manager | Uflex
+✔ Saved: HFS - Assistant Manager | BNP Paribas
+✔ Saved: Associate | Delhivery
+✔ Saved: Asst Manager | AnnexMed
+
+🔍 Searching: Legal Counsel – Fintech / BFSI
+✔ Saved: Legal Counselor | ti Steps
+✔ Saved: PLC Legal Counsel G3C | NKT Project And Automation
+✔ Saved: Legal Counsel | Bridge Et Al
+✔ Saved: Legal Counsel Manager | Pharma & Biotech Industry | Biological E
+✔ Saved: Legal Counsel | Lincoln Electric Asia Pacific
+✔ Saved: Legal Associate | Growthify Jurisai
+✔ Saved: Legal Associate | Niyeahma Consultants
+
+🔍 Searching: Contract Manager – Legal
+✔ Saved: Contracts Manager | Quality Property Management
+✔ Saved: Manager - Contracts (B From Nicmar ) | Neev Financial Services
+✔ Saved: Senior Process Manager - Contract Management (VMO) | Thryve Digital
+✔ Saved: Contracts Manager | Refex Industries
+✔ Saved: Contracts Manager | Muthoot FinCorp (MFL)
+✔ Saved: Contracts Specialist | Lactalis India
+✔ Saved: Manager | Cadila Pharmaceuticals
+✔ Saved: Principal Contract Manager | Leading Client
+✔ Saved: Contract Manager | yde Savvy Chennai
+✔ Saved: Contract Executive | Youngstone Projects India
+✔ Saved: Principal Contract Manager | Leading Client
+✔ Saved: Manager | Flipkart
+✔ Saved: Contracts Manager | Budha Group Of Construction & Properties
+✔ Saved: Contract Specialist | Mott Macdonald
+✔ Saved: Contracts Manager | Larsen & Toubro (L&T)
+✔ Saved: Contract Manager | Srigang Legaltax Victorious
+✔ Saved: Contracts Manager | Bureau Veritas Consumer Products Services
+✔ Saved: Contracts Manager | Relevantz Technology Services
+✔ Saved: Associate - Contract Admin | Nexdigm (SKP)
+✔ Saved: Contract Booking Admin | Blackbox Analytics & Solutions Private Limited
+
+🔍 Searching: Legal Drafting Specialist
+✔ Saved: Manager -IDT | DS Group
+✔ Saved: Manager | EXL
+✔ Saved: IND_Sr Associate | Lowes Services India Private limited
+✔ Saved: SAAR Associates | Bar & Bench
+✔ Saved: Associates | Bar & Bench
+✔ Saved: Associate | Bar & Bench
+✔ Saved: Executive | Onsitego
+✔ Saved: Associate | Estalvis Advisors
+
+🔍 Searching: IT Legal Counsel
+✔ Saved: Business Development Officer (Immediate Joiner) WFH | KDK Software
+✔ Saved: Senior Java Software Engineer / Module Lead | Zuci Systems India
+✔ Saved: Field Installation Engineer | Airtel
+✔ Saved: Front Office Executive - Hindi Speaking | Zebronics
+✔ Saved: Accounts Executive | Engineering company
+✔ Saved: Electrical Technician | GSH Group
+✔ Saved: Outlet Manager | Theobroma Foods
+✔ Saved: CavinKare Group - CK Bakery - Retail Outlet Bakery & Pastry Chef | CavinKare Group - CKR Retail Private Limited
+✔ Saved: Business Associate | Smart HR IT Solutions Consultancy
+✔ Saved: HCLTech Walk-In Drive For OTC Collection(2-5 Years) | HCLTech
+✔ Saved: Urgent vacancy For Telecollection | Smart Hr It Solutions
+✔ Saved: HCLTech Walk-In Drive For OTC Dispute Managment (2-5 Years) | HCLTech
+✔ Saved: Service Desk Lead (F2F) | Rigved Technologies
+✔ Saved: Relationship Manager-Sales | Bajaj Capital
+✔ Saved: Junior HR Partner / Talent Acquisition Executive. | Hireworks Recruitment Consultants Private limited.
+✔ Saved: HR Recruiter | Jobixoindia
+✔ Saved: QA Tester | Male Candidates only | Soft Suave
+✔ Saved: Testing and Service Engineer | Kasa Anlagen
+
+🔍 Searching: Data Protection Officer
+✔ Saved: Data Protection Officer | Jehangir Hospital
+✔ Saved: Data Protection Officer - DPDP | Digit Insurance
+✔ Saved: Data Protection Officer | SRS Live Technologies
+✔ Saved: Data Protection Officer | OneXtel Limited
+✔ Saved: Data Protection Officer (DPO) | STL Digital
+✔ Saved: Data Protection Officer | NTT DATA Business Solutions
+✔ Saved: Data Protection Engineer / Data Protection Officer (DPDP Act) | SonipTech Net
+✔ Saved: Chief Executive Officer Passenger Cars based at Chennai | CLIENT OF AAR KAY MANAGEMENT CONSULTANTS
+✔ Saved: Axis Phones Officer (read details then Whatsapp cv) | Axis Bank
+✔ Saved: WHS Officer, WHS | Amazon
+✔ Saved: Fourth Officer | Seaspan
+✔ Saved: LPSQ Officer | Focas
+✔ Saved: Officers | We Shine Academy
+✔ Saved: Trainee / Officer | Caplin Steriles
+✔ Saved: Head Officer | Mg Web
+✔ Saved: Officer | We Shine Academy
+✔ Saved: Engineer / Officer | Spl Infrastructure
+✔ Saved: Data Privacy Analyst | Assa Abloy Entrance Systems
+✔ Saved: Busniess Officer | Repose Mattress
+✔ Saved: WHS Officer | Amazon
+
+🔍 Searching: Legal Counsel – Regulatory & Compliance
+✔ Saved: Risk Consulting - FS Risk - Regulatory Compliance - Manager | EY
+✔ Saved: Regulatory Business Compliance Advisor | ExxonMobil
+✔ Saved: Regulatory Compliance New Associate | Accenture
+✔ Saved: Streamlined Regulatory Compliance Professional | Metanova Tech
+✔ Saved: Hiring For AVP/DVP Regulatory Compliance- Bank- Navi Mumbai | A Leading Private Bank
+✔ Saved: Manager-Regulatory Affairs & USFDA Compliance(International Business) | Vadilal
+✔ Saved: Head Legal-Litigation, Compliance & Regulatory - FMCG/FMCD - 18+ Years | Crescendo Global
+✔ Saved: Associate Director - Regulatory Compliance | Flipkart
+✔ Saved: Manager, Regulatory & Compliance | Iq-eq
+✔ Saved: Manager - Risk Management, Compliances & Regulatory Affairs | BharatHire represents many of the top Banks, Asset Management co's, Insurance, and IT companies
+✔ Saved: Risk Consulting - FS Risk - Regulatory Compliance Review - Senior | EY
+✔ Saved: RC-REGULATORY COMPLIANCE-BA-Manager | EY
+✔ Saved: RC-REGULATORY COMPLIANCE-Veeva BA-Senior | EY
+✔ Saved: RC-REGULATORY COMPLIANCE-Veeva BA-Senior | EY
+✔ Saved: Regulatory Compliance Analyst | Accenture
+✔ Saved: Regulatory Compliance Associate | Accenture
+
+📁 Excel saved at: C:\Users\Vakilsearch\Ai Automation\ai_automation\target\naukri_multi_role_results_20251228_155234.xlsx
+]]></system-out>
+    <system-err><![CDATA[SLF4J: Failed to load class "org.slf4j.impl.StaticLoggerBinder".
+SLF4J: Defaulting to no-operation (NOP) logger implementation
+SLF4J: See http://www.slf4j.org/codes.html#StaticLoggerBinder for further details.
+Dec 28, 2025 3:44:15 PM org.openqa.selenium.devtools.CdpVersionFinder findNearestMatch
+WARNING: Unable to find CDP implementation matching 143
+Dec 28, 2025 3:44:15 PM org.openqa.selenium.chromium.ChromiumDriver lambda$new$5
+WARNING: Unable to find version of CDP to use for 143.0.7499.170. You may need to include a dependency on a specific version of the CDP using something similar to `org.seleniumhq.selenium:selenium-devtools-v86:4.20.0` where the version ("v86") matches the version of the chromium-based browser you're using and the version number of the artifact is the same as Selenium's.
+ERROR StatusLogger Log4j2 could not find a logging implementation. Please add log4j-core to the classpath. Using SimpleLogger to log to the console...
+]]></system-err>
+  </testcase>
+</testsuite>

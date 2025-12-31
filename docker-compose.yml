@@ -1,0 +1,23 @@
+services:
+  postgres:
+    image: postgres:11
+    container_name: healenium-postgres
+    environment:
+      POSTGRES_DB: healenium
+      POSTGRES_USER: healenium
+      POSTGRES_PASSWORD: healenium
+    ports:
+      - "5432:5432"
+
+  healenium:
+    image: healenium/hlm-backend:3.5.0
+    container_name: healenium-backend
+    depends_on:
+      - postgres
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/healenium?options=-c%20search_path=public
+      SPRING_DATASOURCE_USERNAME: healenium
+      SPRING_DATASOURCE_PASSWORD: healenium
+      SPRING_JPA_HIBERNATE_DDL_AUTO: update
+    ports:
+      - "7878:7878"
