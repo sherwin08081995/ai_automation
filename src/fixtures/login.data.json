@@ -1,0 +1,42 @@
+{
+  "validUser": {
+    "email": "user@example.com",
+    "password": "Password123"
+  },
+  "invalidPasswords": {
+    "wrongPassword": "WrongPassword123",
+    "shortPassword": "123",
+    "emptyPassword": ""
+  },
+  "invalidCredentials": [
+    {
+      "email": "invalid@example.com",
+      "password": "InvalidPass123",
+      "scenario": "non-existent user"
+    },
+    {
+      "email": "user@example.com",
+      "password": "WrongPassword",
+      "scenario": "valid email, invalid password"
+    },
+    {
+      "email": "wronguser@example.com",
+      "password": "Password123",
+      "scenario": "invalid email, valid password"
+    }
+  ],
+  "invalidEmails": [
+    "invalid-email",
+    "@example.com",
+    "user@",
+    "user.example.com",
+    "user @example.com",
+    ""
+  ],
+  "emptyFields": {
+    "emptyEmail": "",
+    "emptyPassword": "",
+    "validPassword": "Password123",
+    "validEmail": "user@example.com"
+  }
+}
