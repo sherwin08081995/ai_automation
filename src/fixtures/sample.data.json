@@ -1,0 +1,21 @@
+{
+  "baseUrl": "/",
+  "maxLoadTime": 5000,
+  "expectedPageTitle": "Sample Page",
+  "testEnvironment": {
+    "development": "http://localhost:3000",
+    "staging": "https://staging.example.com",
+    "production": "https://example.com"
+  },
+  "navigation": {
+    "expectedMenuItems": [
+      "Home",
+      "About",
+      "Contact"
+    ]
+  },
+  "performance": {
+    "maxLoadTime": 5000,
+    "maxResponseTime": 2000
+  }
+}
