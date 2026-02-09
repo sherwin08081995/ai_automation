@@ -1,0 +1,34 @@
+{
+  "testUrls": {
+    "valid": [
+      "https://example.com",
+      "https://httpbin.org/get",
+      "https://jsonplaceholder.typicode.com/posts/1"
+    ],
+    "invalid": [
+      "invalid-url",
+      "http://non-existent-domain-12345.com",
+      "ftp://invalid-protocol.com"
+    ]
+  },
+  "timeouts": {
+    "short": 1000,
+    "medium": 5000,
+    "long": 30000
+  },
+  "commonSelectors": {
+    "body": "body",
+    "html": "html",
+    "head": "head",
+    "title": "title"
+  },
+  "testData": {
+    "screenshots": {
+      "names": [
+        "page-load-test",
+        "navigation-test",
+        "error-handling-test"
+      ]
+    }
+  }
+}
