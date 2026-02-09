@@ -1,0 +1,28 @@
+{
+  "validUrls": [
+    "/",
+    "/index.html",
+    "/home"
+  ],
+  "testViewports": [
+    {
+      "name": "desktop",
+      "width": 1920,
+      "height": 1080
+    },
+    {
+      "name": "tablet",
+      "width": 768,
+      "height": 1024
+    },
+    {
+      "name": "mobile",
+      "width": 375,
+      "height": 667
+    }
+  ],
+  "performance": {
+    "maxLoadTime": 5000,
+    "expectedTitle": "Home Page"
+  }
+}
