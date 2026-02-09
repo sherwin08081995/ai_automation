@@ -1,0 +1,43 @@
+{
+  "pageInfo": {
+    "expectedTitle": "Home",
+    "expectedUrl": "/",
+    "loadTimeout": 10000
+  },
+  "commonTexts": [
+    "Welcome",
+    "Home",
+    "About",
+    "Contact",
+    "Login",
+    "Sign In",
+    "Get Started"
+  ],
+  "testScenarios": {
+    "positiveTests": [
+      {
+        "name": "Page Load Success",
+        "description": "Verify home page loads successfully"
+      },
+      {
+        "name": "Title Verification",
+        "description": "Verify page has valid title"
+      }
+    ],
+    "negativeTests": [
+      {
+        "name": "Invalid Navigation",
+        "description": "Test navigation to invalid URL"
+      },
+      {
+        "name": "Offline Scenario",
+        "description": "Test behavior when offline"
+      }
+    ]
+  },
+  "screenshots": {
+    "takeOnLoad": true,
+    "takeOnError": true,
+    "directory": "screenshots"
+  }
+}
