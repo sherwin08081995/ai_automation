@@ -1,0 +1,25 @@
+{
+  "validMobileNumbers": [
+    "8148438075",
+    "9876543210",
+    "8765432109"
+  ],
+  "validEmails": [
+    "test@example.com",
+    "user@vakilsearch.com",
+    "demo@test.org"
+  ],
+  "invalidInputs": [
+    "",
+    "invalid-email",
+    "123",
+    "@example.com",
+    "12345"
+  ],
+  "testScenarios": {
+    "primaryMobile": "8148438075",
+    "expectedErrorMessage": "Email or Mobile number is required",
+    "signupUrl": "/grc/auth/signup",
+    "loginUrl": "/grc/auth/signin"
+  }
+}
