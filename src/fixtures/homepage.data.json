@@ -1,0 +1,19 @@
+{
+  "baseUrl": "https://example.com",
+  "invalidUrl": "https://invalid-url-that-does-not-exist.com",
+  "expectedTitleKeyword": "Home",
+  "testScenarios": {
+    "validNavigation": {
+      "description": "Test valid navigation to home page",
+      "url": "https://example.com"
+    },
+    "invalidNavigation": {
+      "description": "Test invalid URL handling",
+      "url": "https://invalid-url-that-does-not-exist.com"
+    }
+  },
+  "expectedElements": {
+    "title": "Should contain page title",
+    "url": "Should match expected URL pattern"
+  }
+}
