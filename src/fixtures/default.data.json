@@ -1,0 +1,17 @@
+{
+  "baseUrl": "/",
+  "expectedTitle": "",
+  "testData": {
+    "validInputs": [],
+    "invalidInputs": [],
+    "expectedMessages": {
+      "success": "Operation completed successfully",
+      "error": "An error occurred"
+    }
+  },
+  "timeouts": {
+    "short": 2000,
+    "medium": 5000,
+    "long": 10000
+  }
+}
