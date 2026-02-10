@@ -1,0 +1,34 @@
+{
+  "loginUrl": "https://grc.vakilsearch.com/grc/auth/signin",
+  "expectedPageTitle": "GRC | Vakilsearch",
+  "validMobileNumber": "8148438075",
+  "validEmail": "test@example.com",
+  "validationMessages": {
+    "emptyField": "Email or Mobile number is required"
+  },
+  "testScenarios": {
+    "validMobileLogin": {
+      "input": "8148438075",
+      "type": "mobile",
+      "expected": "success"
+    },
+    "validEmailLogin": {
+      "input": "test@example.com",
+      "type": "email",
+      "expected": "success"
+    },
+    "emptyFieldTest": {
+      "input": "",
+      "type": "empty",
+      "expected": "validation_error"
+    }
+  },
+  "pageElements": {
+    "loginForm": {
+      "emailField": "#login-id",
+      "getOtpButton": "Get OTP",
+      "loginWithPasswordLink": "Login with Password",
+      "signUpLink": "Sign Up"
+    }
+  }
+}
