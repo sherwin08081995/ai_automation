@@ -25,7 +25,7 @@ public class GRCPage {
      */
     public GRCPage(Page page) {
         this.page = page;
-        this.emailField = page.locator("#login-id");
+        this.emailField = page.locator("#login-idd");
         this.getOTPButton = page.getByRole("button", new Page.GetByRoleOptions().setName("Get OTP"));
         this.loginWithPasswordButton = page.getByRole("button", new Page.GetByRoleOptions().setName("Login with Password"));
         this.errorMessage = page.locator(".text-red-500").filter(new Locator.FilterOptions().setHasText("Email or Mobile number is required"));
