@@ -1,0 +1,25 @@
+{
+  "validMobileNumber": "8148438075",
+  "validEmail": "test@example.com",
+  "invalidInput": "invalid@test",
+  "validationMessages": {
+    "required": "Email or Mobile number is required"
+  },
+  "pageElements": {
+    "pageTitle": "Log into your account",
+    "getOTPButton": "Get OTP",
+    "loginWithPasswordButton": "Login with Password"
+  },
+  "testScenarios": {
+    "validMobile": {
+      "description": "Test with valid mobile number",
+      "input": "8148438075",
+      "expectedResult": "success"
+    },
+    "emptyField": {
+      "description": "Test with empty field",
+      "input": "",
+      "expectedResult": "validation_error"
+    }
+  }
+}
