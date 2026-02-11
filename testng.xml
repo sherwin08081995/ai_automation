@@ -1,9 +1,8 @@
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
 <suite name="AI Automation Suite">
-    <test name="Demo Tests">
+    <test name="GRC Playwright Tests">
         <classes>
-            <class name="demo.NaukriJobSearchTest"/>
+            <class name="src.tests.GRCTest"/>
         </classes>
     </test>
 </suite>
-
