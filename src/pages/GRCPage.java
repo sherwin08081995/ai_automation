@@ -5,151 +5,131 @@ import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.options.WaitForSelectorState;
 
 /**
- * Page Object Model for GRC Login page
- * Handles login functionality with phone number, OTP, and validation
+ * Page Object Model class for GRC login page
+ * Handles all interactions with the GRC authentication page
  */
 public class GRCPage {
     private final Page page;
     
     // Locators
-    private final Locator emailOrPhoneInput;
-    private final Locator getOtpButton;
+    private final Locator emailField;
+    private final Locator getOTPButton;
     private final Locator loginWithPasswordButton;
-    private final Locator errorMessage;
+    private final Locator validationMessage;
     private final Locator signUpLink;
-    private final Locator loginForm;
     private final Locator pageTitle;
     
-    /**
-     * Constructor to initialize GRC page
-     * @param page Playwright page instance
-     */
     public GRCPage(Page page) {
         this.page = page;
-        this.emailOrPhoneInput = page.locator("#login-idd");
-        this.getOtpButton = page.getByRole("button", new Page.GetByRoleOptions().setName("Get OTP"));
+        this.emailField = page.locator("#login-id");
+        this.getOTPButton = page.getByRole("button", new Page.GetByRoleOptions().setName("Get OTP"));
         this.loginWithPasswordButton = page.getByRole("button", new Page.GetByRoleOptions().setName("Login with Password"));
-        this.errorMessage = page.locator(".text-red-500").filter(new Locator.FilterOptions().setHasText("Email or Mobile number is required"));
+        this.validationMessage = page.locator(".text-red-500.text-\\[1\\.2rem\\]");
         this.signUpLink = page.getByRole("link", new Page.GetByRoleOptions().setName("Sign Up"));
-        this.loginForm = page.locator("form");
-        this.pageTitle = page.locator("h1").filter(new Locator.FilterOptions().setHasText("Log into your account"));
+        this.pageTitle = page.locator("h1:has-text('Log into your account')");
     }
     
     /**
-     * Navigate to GRC login page
-     * @param url The URL to navigate to
+     * Navigate to the GRC login page
      */
-    public void navigateToLoginPage(String url) {
-        page.navigate(url);
+    public void navigateToLoginPage() {
+        page.navigate("/grc/auth/signin");
         pageTitle.waitFor(new Locator.WaitForOptions().setState(WaitForSelectorState.VISIBLE));
     }
     
     /**
-     * Enter phone number or email in the input field
-     * @param phoneOrEmail Phone number or email to enter
+     * Enter email or phone number in the login field
+     * @param emailOrPhone The email address or phone number to enter
      */
-    public void enterPhoneOrEmail(String phoneOrEmail) {
-        emailOrPhoneInput.waitFor(new Locator.WaitForOptions().setState(WaitForSelectorState.VISIBLE));
-        emailOrPhoneInput.clear();
-        emailOrPhoneInput.fill(phoneOrEmail);
+    public void enterEmailOrPhone(String emailOrPhone) {
+        emailField.waitFor(new Locator.WaitForOptions().setState(WaitForSelectorState.VISIBLE));
+        emailField.clear();
+        emailField.fill(emailOrPhone);
     }
     
     /**
      * Click the Get OTP button
      */
-    public void clickGetOtpButton() {
-        getOtpButton.waitFor(new Locator.WaitForOptions().setState(WaitForSelectorState.VISIBLE));
-        getOtpButton.click();
+    public void clickGetOTP() {
+        getOTPButton.waitFor(new Locator.WaitForOptions().setState(WaitForSelectorState.VISIBLE));
+        getOTPButton.click();
     }
     
     /**
      * Click the Login with Password button
      */
-    public void clickLoginWithPasswordButton() {
+    public void clickLoginWithPassword() {
         loginWithPasswordButton.waitFor(new Locator.WaitForOptions().setState(WaitForSelectorState.VISIBLE));
         loginWithPasswordButton.click();
     }
     
     /**
-     * Submit the login form without entering any data to trigger validation
+     * Click the Sign Up link
      */
-    public void submitEmptyForm() {
-        getOtpButton.click();
+    public void clickSignUp() {
+        signUpLink.waitFor(new Locator.WaitForOptions().setState(WaitForSelectorState.VISIBLE));
+        signUpLink.click();
     }
     
     /**
-     * Check if error message is visible
-     * @return true if error message is displayed
+     * Get the validation error message text
+     * @return The validation error message
      */
-    public boolean isErrorMessageVisible() {
+    public String getValidationMessage() {
+        validationMessage.waitFor(new Locator.WaitForOptions().setState(WaitForSelectorState.VISIBLE));
+        return validationMessage.textContent().trim();
+    }
+    
+    /**
+     * Check if validation message is visible
+     * @return true if validation message is visible, false otherwise
+     */
+    public boolean isValidationMessageVisible() {
         try {
-            errorMessage.waitFor(new Locator.WaitForOptions()
-                .setState(WaitForSelectorState.VISIBLE)
-                .setTimeout(3000));
-            return errorMessage.isVisible();
+            return validationMessage.isVisible();
         } catch (Exception e) {
             return false;
         }
     }
     
     /**
-     * Get the error message text
-     * @return Error message text
+     * Check if Get OTP button is enabled
+     * @return true if button is enabled, false otherwise
      */
-    public String getErrorMessage() {
-        if (isErrorMessageVisible()) {
-            return errorMessage.textContent();
-        }
-        return "";
-    }
-    
-    /**
-     * Check if Get OTP button is visible and enabled
-     * @return true if button is visible and enabled
-     */
-    public boolean isGetOtpButtonEnabled() {
-        return getOtpButton.isVisible() && getOtpButton.isEnabled();
+    public boolean isGetOTPButtonEnabled() {
+        return getOTPButton.isEnabled();
     }
     
     /**
      * Check if Login with Password button is visible
-     * @return true if button is visible
+     * @return true if button is visible, false otherwise
      */
     public boolean isLoginWithPasswordButtonVisible() {
         return loginWithPasswordButton.isVisible();
     }
     
     /**
-     * Get the placeholder text of the input field
-     * @return Placeholder text
+     * Get the current page title
+     * @return The page title text
      */
-    public String getInputPlaceholder() {
-        return emailOrPhoneInput.getAttribute("placeholder");
+    public String getPageTitle() {
+        return pageTitle.textContent().trim();
     }
     
     /**
-     * Get the current value of the input field
-     * @return Input field value
+     * Get the email field value
+     * @return The current value in the email field
      */
-    public String getInputValue() {
-        return emailOrPhoneInput.inputValue();
+    public String getEmailFieldValue() {
+        return emailField.inputValue();
     }
     
     /**
-     * Check if the input field has error styling (red border)
-     * @return true if input has error styling
+     * Check if email field has focus
+     * @return true if email field is focused, false otherwise
      */
-    public boolean hasInputErrorStyling() {
-        String classList = emailOrPhoneInput.getAttribute("class");
-        return classList != null && classList.contains("border-red-500");
-    }
-    
-    /**
-     * Check if Sign Up link is visible
-     * @return true if sign up link is visible
-     */
-    public boolean isSignUpLinkVisible() {
-        return signUpLink.isVisible();
+    public boolean isEmailFieldFocused() {
+        return emailField.evaluate("element => element === document.activeElement").toString().equals("true");
     }
     
     /**
@@ -157,6 +137,7 @@ public class GRCPage {
      */
     public void waitForPageLoad() {
         pageTitle.waitFor(new Locator.WaitForOptions().setState(WaitForSelectorState.VISIBLE));
-        loginForm.waitFor(new Locator.WaitForOptions().setState(WaitForSelectorState.VISIBLE));
+        emailField.waitFor(new Locator.WaitForOptions().setState(WaitForSelectorState.VISIBLE));
+        getOTPButton.waitFor(new Locator.WaitForOptions().setState(WaitForSelectorState.VISIBLE));
     }
 }
