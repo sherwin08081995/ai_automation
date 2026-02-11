@@ -1,32 +1,28 @@
 package pages;
 
-import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
+import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.options.WaitForSelectorState;
 
 /**
  * Page Object Model for GRC Login Page
- * Handles login functionality including OTP and password login
+ * Handles login functionality including OTP and password login options
  */
 public class GRCPage {
     private final Page page;
     
     // Locators
-    private final Locator emailField;
-    private final Locator getOTPButton;
+    private final Locator emailInput;
+    private final Locator getOtpButton;
     private final Locator loginWithPasswordButton;
     private final Locator errorMessage;
     private final Locator signUpLink;
     private final Locator pageTitle;
     
-    /**
-     * Constructor to initialize GRC page
-     * @param page Playwright page instance
-     */
     public GRCPage(Page page) {
         this.page = page;
-        this.emailField = page.locator("#login-idd");
-        this.getOTPButton = page.getByRole("button", new Page.GetByRoleOptions().setName("Get OTP"));
+        this.emailInput = page.locator("#login-id");
+        this.getOtpButton = page.getByRole("button", new Page.GetByRoleOptions().setName("Get OTP"));
         this.loginWithPasswordButton = page.getByRole("button", new Page.GetByRoleOptions().setName("Login with Password"));
         this.errorMessage = page.locator(".text-red-500").filter(new Locator.FilterOptions().setHasText("Email or Mobile number is required"));
         this.signUpLink = page.getByRole("link", new Page.GetByRoleOptions().setName("Sign Up"));
@@ -34,164 +30,123 @@ public class GRCPage {
     }
     
     /**
-     * Navigate to GRC login page
+     * Navigate to the GRC login page
      */
     public void navigateToLoginPage() {
         page.navigate("https://grc.vakilsearch.com/grc/auth/signin");
-        waitForPageLoad();
-    }
-    
-    /**
-     * Wait for the login page to fully load
-     */
-    public void waitForPageLoad() {
-        pageTitle.waitFor(new Locator.WaitForOptions().setState(WaitForSelectorState.VISIBLE));
-        emailField.waitFor(new Locator.WaitForOptions().setState(WaitForSelectorState.VISIBLE));
+        page.waitForLoadState();
     }
     
     /**
      * Enter email or mobile number in the login field
-     * @param emailOrMobile Email address or mobile number to enter
+     * @param emailOrMobile The email address or mobile number to enter
      */
     public void enterEmailOrMobile(String emailOrMobile) {
-        try {
-            emailField.waitFor(new Locator.WaitForOptions().setState(WaitForSelectorState.VISIBLE));
-            emailField.clear();
-            emailField.fill(emailOrMobile);
-        } catch (Exception e) {
-            throw new RuntimeException("Failed to enter email/mobile: " + e.getMessage());
-        }
+        emailInput.waitFor(new Locator.WaitForOptions().setState(WaitForSelectorState.VISIBLE));
+        emailInput.clear();
+        emailInput.fill(emailOrMobile);
     }
     
     /**
      * Click the Get OTP button
      */
-    public void clickGetOTP() {
-        try {
-            getOTPButton.waitFor(new Locator.WaitForOptions().setState(WaitForSelectorState.VISIBLE));
-            getOTPButton.click();
-        } catch (Exception e) {
-            throw new RuntimeException("Failed to click Get OTP button: " + e.getMessage());
-        }
+    public void clickGetOtpButton() {
+        getOtpButton.waitFor(new Locator.WaitForOptions().setState(WaitForSelectorState.VISIBLE));
+        getOtpButton.click();
     }
     
     /**
      * Click the Login with Password button
      */
-    public void clickLoginWithPassword() {
-        try {
-            loginWithPasswordButton.waitFor(new Locator.WaitForOptions().setState(WaitForSelectorState.VISIBLE));
-            loginWithPasswordButton.click();
-        } catch (Exception e) {
-            throw new RuntimeException("Failed to click Login with Password button: " + e.getMessage());
-        }
+    public void clickLoginWithPasswordButton() {
+        loginWithPasswordButton.waitFor(new Locator.WaitForOptions().setState(WaitForSelectorState.VISIBLE));
+        loginWithPasswordButton.click();
     }
     
     /**
-     * Check if validation error message is displayed
-     * @return true if error message is visible, false otherwise
+     * Clear the email/mobile input field
      */
-    public boolean isValidationErrorDisplayed() {
-        try {
-            return errorMessage.isVisible();
-        } catch (Exception e) {
-            return false;
-        }
+    public void clearEmailField() {
+        emailInput.clear();
     }
     
     /**
-     * Get the validation error message text
-     * @return Error message text
+     * Check if the page title is visible
+     * @return true if page title is visible
      */
-    public String getValidationErrorText() {
-        try {
-            errorMessage.waitFor(new Locator.WaitForOptions().setState(WaitForSelectorState.VISIBLE));
-            return errorMessage.textContent().trim();
-        } catch (Exception e) {
-            throw new RuntimeException("Failed to get validation error text: " + e.getMessage());
-        }
+    public boolean isPageTitleVisible() {
+        return pageTitle.isVisible();
     }
     
     /**
-     * Get the current value of the email field
-     * @return Current input value
+     * Check if error message is displayed
+     * @return true if error message is visible
      */
-    public String getEmailFieldValue() {
-        try {
-            return emailField.inputValue();
-        } catch (Exception e) {
-            throw new RuntimeException("Failed to get email field value: " + e.getMessage());
-        }
+    public boolean isErrorMessageVisible() {
+        return errorMessage.isVisible();
+    }
+    
+    /**
+     * Get the error message text
+     * @return error message text
+     */
+    public String getErrorMessageText() {
+        return errorMessage.textContent();
     }
     
     /**
      * Check if Get OTP button is enabled
-     * @return true if button is enabled, false otherwise
+     * @return true if button is enabled
      */
-    public boolean isGetOTPButtonEnabled() {
-        try {
-            return getOTPButton.isEnabled();
-        } catch (Exception e) {
-            return false;
-        }
+    public boolean isGetOtpButtonEnabled() {
+        return getOtpButton.isEnabled();
     }
     
     /**
-     * Check if Login with Password link is visible
-     * @return true if link is visible, false otherwise
+     * Check if Login with Password button is visible
+     * @return true if button is visible
      */
-    public boolean isLoginWithPasswordLinkVisible() {
-        try {
-            return loginWithPasswordButton.isVisible();
-        } catch (Exception e) {
-            return false;
-        }
-    }
-    
-    /**
-     * Check if page title is displayed correctly
-     * @return true if page title is visible, false otherwise
-     */
-    public boolean isPageTitleDisplayed() {
-        try {
-            return pageTitle.isVisible();
-        } catch (Exception e) {
-            return false;
-        }
-    }
-    
-    /**
-     * Get the page title text
-     * @return Page title text
-     */
-    public String getPageTitle() {
-        try {
-            return pageTitle.textContent().trim();
-        } catch (Exception e) {
-            throw new RuntimeException("Failed to get page title: " + e.getMessage());
-        }
-    }
-    
-    /**
-     * Clear the email field
-     */
-    public void clearEmailField() {
-        try {
-            emailField.clear();
-        } catch (Exception e) {
-            throw new RuntimeException("Failed to clear email field: " + e.getMessage());
-        }
+    public boolean isLoginWithPasswordButtonVisible() {
+        return loginWithPasswordButton.isVisible();
     }
     
     /**
      * Check if Sign Up link is visible
-     * @return true if Sign Up link is visible, false otherwise
+     * @return true if link is visible
      */
     public boolean isSignUpLinkVisible() {
-        try {
-            return signUpLink.isVisible();
-        } catch (Exception e) {
-            return false;
-        }
+        return signUpLink.isVisible();
+    }
+    
+    /**
+     * Get the placeholder text of email input field
+     * @return placeholder text
+     */
+    public String getEmailInputPlaceholder() {
+        return emailInput.getAttribute("placeholder");
+    }
+    
+    /**
+     * Get the current value in email input field
+     * @return current input value
+     */
+    public String getEmailInputValue() {
+        return emailInput.inputValue();
+    }
+    
+    /**
+     * Wait for page to be fully loaded
+     */
+    public void waitForPageLoad() {
+        pageTitle.waitFor(new Locator.WaitForOptions().setState(WaitForSelectorState.VISIBLE));
+    }
+    
+    /**
+     * Check if email field has error styling (red border)
+     * @return true if field has error styling
+     */
+    public boolean hasEmailFieldErrorStyling() {
+        String borderColor = emailInput.evaluate("el => getComputedStyle(el).borderColor").toString();
+        return borderColor.contains("rgb(239, 68, 68)") || emailInput.getAttribute("class").contains("border-red-500");
     }
 }
