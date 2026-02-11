@@ -1,25 +1,34 @@
 {
-  "validMobileNumber": "8148438075",
-  "validEmail": "test@example.com",
-  "invalidInput": "invalid@test",
-  "validationMessages": {
-    "required": "Email or Mobile number is required"
-  },
-  "pageElements": {
-    "pageTitle": "Log into your account",
-    "getOTPButton": "Get OTP",
-    "loginWithPasswordButton": "Login with Password"
-  },
-  "testScenarios": {
-    "validMobile": {
-      "description": "Test with valid mobile number",
-      "input": "8148438075",
-      "expectedResult": "success"
+  "testData": {
+    "validPhoneNumbers": [
+      "8148438075",
+      "9876543210",
+      "7890123456"
+    ],
+    "validEmails": [
+      "test@example.com",
+      "user@vakilsearch.com",
+      "demo@test.org"
+    ],
+    "invalidInputs": [
+      "",
+      " ",
+      "123",
+      "invalid-email",
+      "@example.com"
+    ],
+    "expectedMessages": {
+      "requiredFieldError": "Email or Mobile number is required",
+      "pageTitle": "Log into your account"
     },
-    "emptyField": {
-      "description": "Test with empty field",
-      "input": "",
-      "expectedResult": "validation_error"
+    "buttonTexts": {
+      "getOtp": "Get OTP",
+      "loginWithPassword": "Login with Password",
+      "signUp": "Sign Up"
+    },
+    "urls": {
+      "loginPage": "https://grc.vakilsearch.com/grc/auth/signin",
+      "signupPage": "/grc/auth/signup"
     }
   }
 }
