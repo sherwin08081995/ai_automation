@@ -1,34 +1,29 @@
 {
-  "testData": {
-    "validPhoneNumbers": [
-      "8148438075",
-      "9876543210",
-      "7890123456"
-    ],
-    "validEmails": [
-      "test@example.com",
-      "user@vakilsearch.com",
-      "demo@test.org"
-    ],
-    "invalidInputs": [
-      "",
-      " ",
-      "123",
-      "invalid-email",
-      "@example.com"
-    ],
-    "expectedMessages": {
-      "requiredFieldError": "Email or Mobile number is required",
-      "pageTitle": "Log into your account"
-    },
-    "buttonTexts": {
-      "getOtp": "Get OTP",
-      "loginWithPassword": "Login with Password",
-      "signUp": "Sign Up"
-    },
-    "urls": {
-      "loginPage": "https://grc.vakilsearch.com/grc/auth/signin",
-      "signupPage": "/grc/auth/signup"
-    }
+  "validPhoneNumbers": [
+    "8148438075",
+    "9876543210",
+    "7654321098"
+  ],
+  "validEmails": [
+    "test@example.com",
+    "user@domain.org",
+    "admin@company.co.in"
+  ],
+  "invalidEmails": [
+    "invalid-email",
+    "@domain.com",
+    "user@",
+    "user.domain.com"
+  ],
+  "testPhoneNumber": "8148438075",
+  "expectedValidationMessages": {
+    "emptyField": "Email or Mobile number is required",
+    "invalidFormat": "Please enter a valid email or mobile number"
+  },
+  "pageElements": {
+    "title": "Log into your account",
+    "emailFieldPlaceholder": "Email address or mobile number",
+    "getOTPButtonText": "Get OTP",
+    "loginWithPasswordText": "Login with Password"
   }
 }

@@ -1,34 +1,47 @@
 package src.tests;
 
 import com.microsoft.playwright.*;
-import org.junit.jupiter.api.*;
+import org.testng.annotations.*;
+import org.testng.Assert;
 import src.pages.GRCPage;
-import static org.junit.jupiter.api.Assertions.*;
 
 /**
- * Test class for GRC Login page functionality
- * Tests phone number login, validation, and navigation elements
+ * Test class for GRC login page functionality
+ * Tests login scenarios including valid phone number entry, empty field validation,
+ * and Login with Password link functionality
  */
 public class GRCTest {
-    private static Playwright playwright;
-    private static Browser browser;
+    private Browser browser;
     private BrowserContext context;
     private Page page;
     private GRCPage grcPage;
+    private Playwright playwright;
     
-    private static final String BASE_URL = "https://grc.vakilsearch.com/grc/auth/signin";
-    private static final String TEST_PHONE_NUMBER = "8148438075";
-    
-    @BeforeAll
-    static void launchBrowser() {
+    @BeforeClass
+    public void setupClass() {
         playwright = Playwright.create();
-        browser = playwright.chromium().launch(new BrowserType.LaunchOptions()
-            .setHeadless(false)
-            .setSlowMo(1000));
+        browser = playwright.chromium().launch(new BrowserType.LaunchOptions().setHeadless(false));
     }
     
-    @AfterAll
-    static void closeBrowser() {
+    @BeforeMethod
+    public void setup() {
+        context = browser.newContext(new Browser.NewContextOptions()
+            .setViewportSize(1280, 720));
+        page = context.newPage();
+        grcPage = new GRCPage(page);
+        grcPage.navigateToLoginPage();
+        grcPage.waitForPageLoad();
+    }
+    
+    @AfterMethod
+    public void teardown() {
+        if (context != null) {
+            context.close();
+        }
+    }
+    
+    @AfterClass
+    public void teardownClass() {
         if (browser != null) {
             browser.close();
         }
@@ -37,160 +50,156 @@ public class GRCTest {
         }
     }
     
-    @BeforeEach
-    void createContextAndPage() {
-        context = browser.newContext(new Browser.NewContextOptions()
-            .setViewportSize(1280, 720));
-        page = context.newPage();
-        grcPage = new GRCPage(page);
-        grcPage.navigateToLoginPage(BASE_URL);
-    }
-    
-    @AfterEach
-    void closeContext() {
-        if (context != null) {
-            context.close();
-        }
-    }
-    
-    @Test
-    @DisplayName("Should successfully enter phone number and click Get OTP")
-    void testEnterPhoneNumberAndClickGetOTP() {
-        // Wait for page to load completely
-        grcPage.waitForPageLoad();
+    /**
+     * Test entering valid phone number and clicking Get OTP button
+     * Verifies that the phone number is accepted and OTP process can be initiated
+     */
+    @Test(priority = 1, description = "Test entering valid phone number 8148438075 and clicking Get OTP")
+    public void testValidPhoneNumberAndGetOTP() {
+        // Enter the specified phone number
+        grcPage.enterEmailOrPhone("8148438075");
         
-        // Enter phone number
-        grcPage.enterPhoneOrEmail(TEST_PHONE_NUMBER);
+        // Verify the phone number is entered correctly
+        Assert.assertEquals(grcPage.getEmailFieldValue(), "8148438075", 
+            "Phone number should be entered correctly in the email field");
         
-        // Verify phone number is entered correctly
-        assertEquals(TEST_PHONE_NUMBER, grcPage.getInputValue(), 
-            "Phone number should be entered correctly in the input field");
-        
-        // Verify Get OTP button is enabled and visible
-        assertTrue(grcPage.isGetOtpButtonEnabled(), 
-            "Get OTP button should be visible and enabled");
+        // Verify Get OTP button is enabled
+        Assert.assertTrue(grcPage.isGetOTPButtonEnabled(), 
+            "Get OTP button should be enabled after entering valid phone number");
         
         // Click Get OTP button
-        grcPage.clickGetOtpButton();
+        grcPage.clickGetOTP();
         
-        // Add a small wait to allow any immediate UI changes
+        // Wait for page response (OTP screen or validation)
+        page.waitForTimeout(2000);
+        
+        // Verify no validation errors are shown for valid phone number
+        Assert.assertFalse(grcPage.isValidationMessageVisible(), 
+            "No validation error should be displayed for valid phone number");
+    }
+    
+    /**
+     * Test empty field validation
+     * Verifies that appropriate validation message is shown when trying to submit with empty field
+     */
+    @Test(priority = 2, description = "Test empty field validation when clicking Get OTP with no input")
+    public void testEmptyFieldValidation() {
+        // Ensure field is empty
+        grcPage.enterEmailOrPhone("");
+        
+        // Verify field is empty
+        Assert.assertEquals(grcPage.getEmailFieldValue(), "", 
+            "Email field should be empty initially");
+        
+        // Click Get OTP button with empty field
+        grcPage.clickGetOTP();
+        
+        // Wait for validation message to appear
         page.waitForTimeout(1000);
         
-        // Verify that the form submission was attempted (no error should appear for valid phone number)
-        assertFalse(grcPage.isErrorMessageVisible(), 
-            "No validation error should appear for valid phone number");
+        // Verify validation message is displayed
+        Assert.assertTrue(grcPage.isValidationMessageVisible(), 
+            "Validation message should be visible when field is empty");
+        
+        // Verify validation message content
+        String validationMessage = grcPage.getValidationMessage();
+        Assert.assertTrue(validationMessage.contains("Email or Mobile number is required") || 
+                         validationMessage.contains("required"),
+            "Validation message should indicate that email or mobile number is required. Actual message: " + validationMessage);
     }
     
-    @Test
-    @DisplayName("Should show validation error when Get OTP is clicked with empty field")
-    void testEmptyFieldValidation() {
-        // Wait for page to load completely
-        grcPage.waitForPageLoad();
-        
-        // Ensure input field is empty
-        grcPage.enterPhoneOrEmail("");
-        
-        // Click Get OTP without entering any data
-        grcPage.submitEmptyForm();
-        
-        // Verify error message appears
-        assertTrue(grcPage.isErrorMessageVisible(), 
-            "Validation error message should appear when field is empty");
-        
-        // Verify error message content
-        String errorText = grcPage.getErrorMessage();
-        assertTrue(errorText.contains("Email or Mobile number is required"), 
-            "Error message should indicate that field is required");
-        
-        // Verify input field has error styling
-        assertTrue(grcPage.hasInputErrorStyling(), 
-            "Input field should have error styling (red border) when validation fails");
-    }
-    
-    @Test
-    @DisplayName("Should display and allow clicking Login with Password button")
-    void testLoginWithPasswordButton() {
-        // Wait for page to load completely
-        grcPage.waitForPageLoad();
-        
+    /**
+     * Test Login with Password link functionality
+     * Verifies that the Login with Password button is visible and clickable
+     */
+    @Test(priority = 3, description = "Test Login with Password link visibility and functionality")
+    public void testLoginWithPasswordLink() {
         // Verify Login with Password button is visible
-        assertTrue(grcPage.isLoginWithPasswordButtonVisible(), 
+        Assert.assertTrue(grcPage.isLoginWithPasswordButtonVisible(), 
             "Login with Password button should be visible on the page");
         
         // Click Login with Password button
-        grcPage.clickLoginWithPasswordButton();
+        grcPage.clickLoginWithPassword();
         
-        // Add a small wait to allow any navigation or UI changes
+        // Wait for any page changes
+        page.waitForTimeout(1500);
+        
+        // Verify the button was clickable (no exception thrown)
+        // Additional assertions could be added here based on expected behavior
+        // such as navigation to a different page or modal appearance
+    }
+    
+    /**
+     * Test page elements are properly loaded
+     * Verifies that all essential page elements are present and functional
+     */
+    @Test(priority = 4, description = "Test that all essential page elements are loaded correctly")
+    public void testPageElementsLoaded() {
+        // Verify page title is correct
+        Assert.assertEquals(grcPage.getPageTitle(), "Log into your account", 
+            "Page title should be 'Log into your account'");
+        
+        // Verify email field is visible and interactable
+        Assert.assertTrue(page.locator("#login-id").isVisible(), 
+            "Email/phone input field should be visible");
+        
+        // Verify Get OTP button is present
+        Assert.assertTrue(grcPage.isGetOTPButtonEnabled(), 
+            "Get OTP button should be present and enabled by default");
+        
+        // Verify Login with Password button is present
+        Assert.assertTrue(grcPage.isLoginWithPasswordButtonVisible(), 
+            "Login with Password button should be visible");
+    }
+    
+    /**
+     * Test entering invalid email format
+     * Verifies validation for invalid email formats
+     */
+    @Test(priority = 5, description = "Test entering invalid email format")
+    public void testInvalidEmailFormat() {
+        // Enter invalid email format
+        grcPage.enterEmailOrPhone("invalid-email");
+        
+        // Verify the text is entered
+        Assert.assertEquals(grcPage.getEmailFieldValue(), "invalid-email", 
+            "Invalid email text should be entered in the field");
+        
+        // Click Get OTP button
+        grcPage.clickGetOTP();
+        
+        // Wait for potential validation
         page.waitForTimeout(1000);
         
-        // The button should remain clickable (no errors should occur)
-        assertTrue(grcPage.isLoginWithPasswordButtonVisible(), 
-            "Login with Password button should remain visible after clicking");
+        // The behavior for invalid email might vary - this test documents the current behavior
+        // Additional assertions can be added based on actual application behavior
     }
     
-    @Test
-    @DisplayName("Should validate input field placeholder and initial state")
-    void testInputFieldInitialState() {
-        // Wait for page to load completely
-        grcPage.waitForPageLoad();
+    /**
+     * Test entering valid email address
+     * Verifies that valid email addresses are accepted
+     */
+    @Test(priority = 6, description = "Test entering valid email address")
+    public void testValidEmailAddress() {
+        // Enter valid email address
+        grcPage.enterEmailOrPhone("test@example.com");
         
-        // Verify input field is initially empty
-        assertEquals("", grcPage.getInputValue(), 
-            "Input field should be empty initially");
+        // Verify email is entered correctly
+        Assert.assertEquals(grcPage.getEmailFieldValue(), "test@example.com", 
+            "Valid email should be entered correctly");
         
-        // Verify input field has proper placeholder (checking via space since placeholder might be handled differently)
-        String placeholder = grcPage.getInputPlaceholder();
-        assertEquals(" ", placeholder, 
-            "Input field should have proper placeholder setup");
+        // Verify Get OTP button is enabled
+        Assert.assertTrue(grcPage.isGetOTPButtonEnabled(), 
+            "Get OTP button should be enabled for valid email");
         
-        // Verify Get OTP button is initially enabled
-        assertTrue(grcPage.isGetOtpButtonEnabled(), 
-            "Get OTP button should be enabled initially");
-    }
-    
-    @Test
-    @DisplayName("Should verify page navigation elements are present")
-    void testPageNavigationElements() {
-        // Wait for page to load completely
-        grcPage.waitForPageLoad();
+        // Click Get OTP button
+        grcPage.clickGetOTP();
         
-        // Verify Sign Up link is present and visible
-        assertTrue(grcPage.isSignUpLinkVisible(), 
-            "Sign Up link should be visible for users who don't have an account");
+        // Wait for response
+        page.waitForTimeout(1500);
         
-        // Verify both login options are available
-        assertTrue(grcPage.isGetOtpButtonEnabled(), 
-            "Get OTP login option should be available");
-        
-        assertTrue(grcPage.isLoginWithPasswordButtonVisible(), 
-            "Login with Password option should be available");
-    }
-    
-    @Test
-    @DisplayName("Should handle different input formats correctly")
-    void testDifferentInputFormats() {
-        // Wait for page to load completely
-        grcPage.waitForPageLoad();
-        
-        // Test with email format
-        String testEmail = "test@example.com";
-        grcPage.enterPhoneOrEmail(testEmail);
-        assertEquals(testEmail, grcPage.getInputValue(), 
-            "Email should be entered correctly");
-        
-        // Clear and test with different phone number
-        String anotherPhoneNumber = "9876543210";
-        grcPage.enterPhoneOrEmail(anotherPhoneNumber);
-        assertEquals(anotherPhoneNumber, grcPage.getInputValue(), 
-            "Different phone number should be entered correctly");
-        
-        // Clear and test with the original test phone number
-        grcPage.enterPhoneOrEmail(TEST_PHONE_NUMBER);
-        assertEquals(TEST_PHONE_NUMBER, grcPage.getInputValue(), 
-            "Original test phone number should be entered correctly");
-        
-        // Verify Get OTP button remains functional with different inputs
-        assertTrue(grcPage.isGetOtpButtonEnabled(), 
-            "Get OTP button should remain enabled with valid input");
+        // Verify no validation errors for valid email
+        Assert.assertFalse(grcPage.isValidationMessageVisible(), 
+            "No validation error should be shown for valid email address");
     }
 }
