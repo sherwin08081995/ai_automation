@@ -11,7 +11,7 @@ public class GRCPage {
     private final Page page;
     
     // Locators
-    private final String emailPhoneInput = "#login-id";
+    private final String emailPhoneInput = "#login-idd";
     private final String getOtpButton = "button:has-text('Get OTP')";
     private final String loginWithPasswordLink = "button:has-text('Login with Password')";
     private final String signUpLink = "a[href='/grc/auth/signup']";
