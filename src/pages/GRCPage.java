@@ -21,7 +21,7 @@ public class GRCPage {
     
     public GRCPage(Page page) {
         this.page = page;
-        this.emailField = page.locator("#login-id");
+        this.emailField = page.locator("#login-idd");
         this.getOTPButton = page.getByRole("button", new Page.GetByRoleOptions().setName("Get OTP"));
         this.loginWithPasswordButton = page.getByRole("button", new Page.GetByRoleOptions().setName("Login with Password"));
         this.validationMessage = page.locator(".text-red-500.text-\\[1\\.2rem\\]");
