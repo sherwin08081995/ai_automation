@@ -1,19 +1,33 @@
 {
-  "baseUrl": "https://grc.vakilsearch.com/grc/auth/signin",
-  "validPhoneNumber": "8148438075",
-  "validEmail": "test@example.com",
-  "invalidPhoneNumber": "123",
-  "invalidEmail": "invalid-email",
-  "emptyField": "",
-  "expectedErrorMessages": {
-    "requiredField": "Email or Mobile number is required",
-    "invalidFormat": "Please enter a valid email or mobile number"
+  "mobileNumber": "8148438075",
+  "email": "test@example.com",
+  "testMobileNumbers": [
+    {
+      "value": "8148438075",
+      "description": "10 digit mobile number"
+    },
+    {
+      "value": "+918148438075",
+      "description": "Mobile number with country code"
+    },
+    {
+      "value": "91-8148438075",
+      "description": "Mobile number with country code and dash"
+    }
+  ],
+  "specialInputs": [
+    "test@domain.com",
+    "user.name@company.co.in",
+    "123-456-7890",
+    "(555) 123-4567"
+  ],
+  "errorMessages": {
+    "required": "Email or Mobile number is required",
+    "invalid": "Please enter a valid email or mobile number"
   },
   "pageElements": {
-    "title": "GRC | Vakilsearch",
-    "loginFormHeading": "Log into your account",
-    "getOtpButtonText": "Get OTP",
-    "loginWithPasswordText": "Login with Password",
-    "signUpText": "Sign Up"
+    "title": "Log into your account",
+    "buttonText": "Get OTP",
+    "placeholderText": "Email address or mobile number"
   }
 }
