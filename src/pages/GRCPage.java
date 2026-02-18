@@ -1,19 +1,3 @@
-// ============================================
-// 🤖 AI SELF-HEALING FIX
-// ============================================
-// Timestamp: 2026-02-17T07:36:00.519Z
-// File: src/pages/GRCPage.java
-// Field: emailPhoneInput
-//
-// SELECTOR FIXED:
-// Old: #login-idd
-// New: #login-id
-// Exception reported: #login-idd
-//
-// Confidence: 95%
-// Replacements: 1
-// ============================================
-
 package src.pages;
 
 import com.microsoft.playwright.*;
@@ -27,7 +11,7 @@ public class GRCPage {
     private final Page page;
     
     // Locators
-    private final String emailPhoneInput = "#login-id";
+    private final String emailPhoneInput = "#login-idd";
     private final String getOtpButton = "button:has-text('Get OTP')";
     private final String loginWithPasswordLink = "button:has-text('Login with Password')";
     private final String signUpLink = "a[href='/grc/auth/signup']";
