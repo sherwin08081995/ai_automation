@@ -1,0 +1,4 @@
+"DESCRIPTION","DURATION IN MS","NAME","PARENT SUITE","START TIME","STATUS","STOP TIME","SUB SUITE","SUITE","TEST CLASS","TEST METHOD"
+"  As a newly onboarded business user on the Zolvit GRC platform
+  I want to seamlessly register, complete onboarding, and explore service offerings
+  So that I can start managing my compliance needs effectively","370587","Validate GetStarted Widget for complete profile","","Mon Dec 08 18:56:04 IST 2025","failed","Mon Dec 08 19:02:15 IST 2025","","User Registration, Onboarding, and Compliance Workflow in Zolvit GRC Portal","Validate GetStarted Widget for complete profile",""

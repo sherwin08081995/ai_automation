@@ -1,0 +1,1 @@
+Variant detected: <b>LLPIN</b>. Skipped without entering any value.
