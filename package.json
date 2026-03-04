@@ -1,0 +1,18 @@
+{
+  "name": "grc-login-tests",
+  "version": "1.0.0",
+  "description": "Playwright tests for GRC Login page",
+  "main": "index.js",
+  "scripts": {
+    "test": "npx playwright test",
+    "test:headed": "npx playwright test --headed",
+    "test:debug": "npx playwright test --debug",
+    "report": "npx playwright show-report"
+  },
+  "keywords": ["playwright", "testing", "grc", "login"],
+  "author": "Test Engineer",
+  "license": "ISC",
+  "devDependencies": {
+    "@playwright/test": "^1.40.0"
+  }
+}
