@@ -1,1 +1,0 @@
-Completed validation for left menu items.

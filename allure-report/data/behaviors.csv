@@ -1,8 +1,0 @@
-"BROKEN","EPIC","FAILED","FEATURE","PASSED","SKIPPED","STORY","UNKNOWN"
-"0","","1","Home Page Functionality","0","0","Verify each Compliance tab navigates and displays correct record count","0"
-"0","","0","Login Page Functionality","1","0","Login with valid user credentials and OTP","0"
-"0","","0","Home Page Functionality","1","0","Verify values listed under the Due Date dropdown","0"
-"0","","0","Home Page Functionality","1","0","Validate left side menu","0"
-"0","","0","Home Page Functionality","1","0","Verify the Overall Compliances count","0"
-"0","","1","Home Page Functionality","0","0","Verify Due Date filtering and navigation consistency","0"
-"0","","0","Home Page Functionality","1","0","Verify default Due Date selection after page refresh","0"
