@@ -17,9 +17,15 @@ import java.util.List;
 public class SeleniumHelperMethods {
 
     /**
-     * Clicks the given web element.
+     * Clicks the given web element with validation.
      */
     public void click(WebElement element) {
+        if (element == null) {
+            throw new IllegalArgumentException("❌ Cannot click: Element is null.");
+        }
+        if (!element.isDisplayed() || !element.isEnabled()) {
+            throw new IllegalStateException("❌ Cannot click: Element is not visible or not enabled.");
+        }
         element.click();
     }
 
@@ -27,6 +33,9 @@ public class SeleniumHelperMethods {
      * Performs a JavaScript-based click on the specified element.
      */
     public void jsClick(WebDriver driver, WebElement element) {
+        if (element == null) {
+            throw new IllegalArgumentException("❌ Cannot JS click: Element is null.");
+        }
         ((JavascriptExecutor) driver).executeScript("arguments[0].click();", element);
     }
 
@@ -34,6 +43,12 @@ public class SeleniumHelperMethods {
      * Clears the existing text and types new text into an input field.
      */
     public void type(WebElement element, String text) {
+        if (element == null) {
+            throw new IllegalArgumentException("❌ Cannot type: Element is null.");
+        }
+        if (!element.isDisplayed() || !element.isEnabled()) {
+            throw new IllegalStateException("❌ Cannot type: Element is not visible or not enabled.");
+        }
         element.clear();
         element.sendKeys(text);
     }
@@ -42,6 +57,9 @@ public class SeleniumHelperMethods {
      * Retrieves and returns trimmed visible text from a web element.
      */
     public String getText(WebElement element) {
+        if (element == null) {
+            throw new IllegalArgumentException("❌ Cannot get text: Element is null.");
+        }
         return element.getText().trim();
     }
 
@@ -49,13 +67,24 @@ public class SeleniumHelperMethods {
      * Scrolls the specified element into the visible area of the browser window.
      */
     public void scrollToElement(WebDriver driver, WebElement element) {
-        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", element);
+        if (element == null) {
+            throw new IllegalArgumentException("❌ Cannot scroll: Element is null.");
+        }
+        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView({block: 'center'});", element);
     }
 
+    public void scrollIntoView(WebDriver driver, WebElement el) {
+        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView({block:'center',inline:'center'});", el);
+    }
+
+
     /**
-     * Moves the mouse pointer to hover over the given element.
+     * Hovers the mouse over the specified web element.
      */
     public void hover(WebDriver driver, WebElement element) {
+        if (element == null) {
+            throw new IllegalArgumentException("❌ Cannot hover: Element is null.");
+        }
         new Actions(driver).moveToElement(element).perform();
     }
 
@@ -64,7 +93,7 @@ public class SeleniumHelperMethods {
      */
     public boolean isElementDisplayed(WebElement element) {
         try {
-            return element.isDisplayed();
+            return element != null && element.isDisplayed();
         } catch (NoSuchElementException e) {
             return false;
         }
@@ -74,6 +103,9 @@ public class SeleniumHelperMethods {
      * Returns true if the element is enabled.
      */
     public boolean isElementEnabled(WebElement element) {
+        if (element == null) {
+            return false;
+        }
         return element.isEnabled();
     }
 
@@ -81,6 +113,9 @@ public class SeleniumHelperMethods {
      * Returns true if the element is selected.
      */
     public boolean isElementSelected(WebElement element) {
+        if (element == null) {
+            return false;
+        }
         return element.isSelected();
     }
 
@@ -88,6 +123,9 @@ public class SeleniumHelperMethods {
      * Returns a list of trimmed text values from a list of WebElements.
      */
     public List<String> getTextsFromElements(List<WebElement> elements) {
+        if (elements == null) {
+            throw new IllegalArgumentException("❌ Elements list is null.");
+        }
         return elements.stream().map(WebElement::getText).map(String::trim).toList();
     }
 
@@ -116,6 +154,9 @@ public class SeleniumHelperMethods {
      * Switches the WebDriver context to the specified frame element.
      */
     public void switchToFrame(WebDriver driver, WebElement frameElement) {
+        if (frameElement == null) {
+            throw new IllegalArgumentException("❌ Frame element is null.");
+        }
         driver.switchTo().frame(frameElement);
     }
 
@@ -130,6 +171,9 @@ public class SeleniumHelperMethods {
      * Performs a drag and drop action from the source element to the target element.
      */
     public void dragAndDrop(WebDriver driver, WebElement source, WebElement target) {
+        if (source == null || target == null) {
+            throw new IllegalArgumentException("❌ Source or target element is null.");
+        }
         new Actions(driver).dragAndDrop(source, target).perform();
     }
 
@@ -137,6 +181,7 @@ public class SeleniumHelperMethods {
      * Selects a dropdown option by visible text.
      */
     public void selectByVisibleText(WebElement dropdownElement, String visibleText) {
+        validateSelectElement(dropdownElement);
         new Select(dropdownElement).selectByVisibleText(visibleText);
     }
 
@@ -144,6 +189,7 @@ public class SeleniumHelperMethods {
      * Selects a dropdown option by value attribute.
      */
     public void selectByValue(WebElement dropdownElement, String value) {
+        validateSelectElement(dropdownElement);
         new Select(dropdownElement).selectByValue(value);
     }
 
@@ -151,6 +197,7 @@ public class SeleniumHelperMethods {
      * Selects a dropdown option by index.
      */
     public void selectByIndex(WebElement dropdownElement, int index) {
+        validateSelectElement(dropdownElement);
         new Select(dropdownElement).selectByIndex(index);
     }
 
@@ -158,6 +205,7 @@ public class SeleniumHelperMethods {
      * Returns the currently selected option's visible text.
      */
     public String getSelectedOptionText(WebElement dropdownElement) {
+        validateSelectElement(dropdownElement);
         return new Select(dropdownElement).getFirstSelectedOption().getText().trim();
     }
 
@@ -165,6 +213,7 @@ public class SeleniumHelperMethods {
      * Returns all available options' visible texts from the dropdown.
      */
     public List<String> getAllDropdownOptionsText(WebElement dropdownElement) {
+        validateSelectElement(dropdownElement);
         List<String> optionsText = new ArrayList<>();
         List<WebElement> options = new Select(dropdownElement).getOptions();
         for (WebElement option : options) {
@@ -177,6 +226,7 @@ public class SeleniumHelperMethods {
      * Checks if the dropdown allows multiple selection.
      */
     public boolean isMultipleSelection(WebElement dropdownElement) {
+        validateSelectElement(dropdownElement);
         return new Select(dropdownElement).isMultiple();
     }
 
@@ -184,8 +234,19 @@ public class SeleniumHelperMethods {
      * Returns the first selected option element from a <select> dropdown.
      */
     public WebElement getFirstSelectedOption(WebElement dropdownElement) {
+        validateSelectElement(dropdownElement);
         return new Select(dropdownElement).getFirstSelectedOption();
     }
 
-
+    /**
+     * Validates that the WebElement is a non-null <select> element.
+     */
+    private void validateSelectElement(WebElement element) {
+        if (element == null) {
+            throw new IllegalArgumentException("❌ Dropdown element is null.");
+        }
+        if (!"select".equalsIgnoreCase(element.getTagName())) {
+            throw new IllegalArgumentException("❌ Provided element is not a <select> dropdown.");
+        }
+    }
 }

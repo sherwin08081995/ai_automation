@@ -1,2 +1,0 @@
-Expected Overall Compliance Count: 5
-Actual Count from UI: 5

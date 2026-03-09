@@ -2,9 +2,7 @@ package base;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
-import utils.LoggerUtils;
-import utils.SeleniumHelperMethods;
-import utils.WaitUtils;
+import utils.*;
 import org.apache.logging.log4j.Logger;
 
 /**
@@ -21,6 +19,7 @@ public class BasePage {
     protected WaitUtils wait;
     protected SeleniumHelperMethods helpers;
     protected Logger logger;
+    protected ReusableCommonMethods commonMethods;
 
     public BasePage(WebDriver driver) {
         this.driver = driver;
@@ -28,6 +27,28 @@ public class BasePage {
         wait = new WaitUtils(driver);
         helpers = new SeleniumHelperMethods();
         logger = LoggerUtils.getLogger(getClass());
+        commonMethods = new ReusableCommonMethods(driver);
     }
+
+    /**
+     * Handles any validation-related failure (either Exception or AssertionError) by:
+     * - Logging the error with context
+     * - Capturing and attaching a screenshot to Allure
+     * - Throwing an AssertionError to fail the test
+     *
+     *
+     * @param context A brief description of where the failure occurred (e.g., "OTP entry", "Compliance page confirmation")
+     * @param t       The caught Throwable (Exception or AssertionError)
+     */
+    public void handleValidationException(String context, Throwable t) {
+        logger.error("❌ Exception during {}: {}", context, t.getMessage());
+        try {
+            ScreenshotUtils.attachScreenshotToAllure(driver, "Error_" + context.replaceAll("\\s+", "_"));
+        } catch (Exception screenshotEx) {
+            logger.warn("⚠️ Failed to capture screenshot for context '{}': {}", context, screenshotEx.getMessage());
+        }
+        throw new AssertionError("❌ Validation error during: " + context, t);
+    }
+
 }
 

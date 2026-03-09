@@ -16,7 +16,7 @@ public class AllureEnvironmentWriter {
     public static void createEnvironmentFile() {
         Properties props = new Properties();
         props.setProperty("Browser", "Chrome");
-        props.setProperty("Environment", "QE");
+        props.setProperty("Environment", "Prod");
         props.setProperty("BaseURL", ConfigReader.get("baseUrl"));
         props.setProperty("Tester", "Anto Sherwin");
 

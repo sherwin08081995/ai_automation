@@ -1,0 +1,1 @@
+Send button is visible and enabled.

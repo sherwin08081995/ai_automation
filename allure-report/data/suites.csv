@@ -1,8 +1,4 @@
 "DESCRIPTION","DURATION IN MS","NAME","PARENT SUITE","START TIME","STATUS","STOP TIME","SUB SUITE","SUITE","TEST CLASS","TEST METHOD"
-"","29190","Verify each Compliance tab navigates and displays correct record count","","Tue Jul 01 23:00:17 IST 2025","failed","Tue Jul 01 23:00:47 IST 2025","","Home Page Functionality","Verify each Compliance tab navigates and displays correct record count",""
-"","17788","Login with valid user credentials and OTP","","Tue Jul 01 23:08:18 IST 2025","passed","Tue Jul 01 23:08:36 IST 2025","","Login Page Functionality","Login with valid user credentials and OTP",""
-"","12645","Verify values listed under the Due Date dropdown","","Tue Jul 01 23:01:00 IST 2025","passed","Tue Jul 01 23:01:12 IST 2025","","Home Page Functionality","Verify values listed under the Due Date dropdown",""
-"","43502","Validate left side menu","","Tue Jul 01 22:59:20 IST 2025","passed","Tue Jul 01 23:00:04 IST 2025","","Home Page Functionality","Validate left side menu",""
-"","13585","Verify the Overall Compliances count","","Tue Jul 01 23:00:04 IST 2025","passed","Tue Jul 01 23:00:17 IST 2025","","Home Page Functionality","Verify the Overall Compliances count",""
-"","425608","Verify Due Date filtering and navigation consistency","","Tue Jul 01 23:01:12 IST 2025","failed","Tue Jul 01 23:08:18 IST 2025","","Home Page Functionality","Verify Due Date filtering and navigation consistency",""
-"","13017","Verify default Due Date selection after page refresh","","Tue Jul 01 23:00:47 IST 2025","passed","Tue Jul 01 23:01:00 IST 2025","","Home Page Functionality","Verify default Due Date selection after page refresh",""
+"  As a newly onboarded business user on the Zolvit GRC platform
+  I want to seamlessly register, complete onboarding, and explore service offerings
+  So that I can start managing my compliance needs effectively","370587","Validate GetStarted Widget for complete profile","","Mon Dec 08 18:56:04 IST 2025","failed","Mon Dec 08 19:02:15 IST 2025","","User Registration, Onboarding, and Compliance Workflow in Zolvit GRC Portal","Validate GetStarted Widget for complete profile",""

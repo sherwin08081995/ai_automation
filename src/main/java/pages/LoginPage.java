@@ -1,11 +1,3 @@
-`=// 🤖 AI Self-Healing Analysis (2026-01-31T17:41:19.427Z)
-// Test failure analyzed by Claude AI
-// This file was touched by the self-healing system
-
-// 🤖 AI Self-Healing Analysis (2026-01-31T13:07:30.194Z)
-// Test failure detected and analyzed by Claude AI
-// This file was touched by the self-healing system
-
 package pages;
 
 import base.BasePage;
@@ -46,7 +38,7 @@ public class LoginPage extends BasePage {
     @FindBy(xpath = "//input[@id='login-id']")
     private WebElement userName;
 
-    @FindBy(xpath = "//p[normalize-space()='Login with OT']")
+    @FindBy(xpath = "//p[normalize-space()='Login with OTP']")
     private WebElement otpBtn;
 
     @FindBy(xpath = "//p[normalize-space()='Get OTP']")
@@ -880,4 +872,3 @@ public class LoginPage extends BasePage {
     }
 
 }
-`

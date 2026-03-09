@@ -6,6 +6,9 @@ import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 
+import javax.imageio.ImageIO;
+import java.awt.*;
+import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.IOException;
@@ -85,4 +88,18 @@ public class ScreenshotUtils {
             System.err.println("❌ Error preparing screenshot folder: " + e.getMessage());
         }
     }
+
+    public static void captureDesktopScreenshot(String filename) {
+        try {
+            Robot robot = new Robot();
+            Rectangle screenRect = new Rectangle(Toolkit.getDefaultToolkit().getScreenSize());
+            BufferedImage screenFullImage = robot.createScreenCapture(screenRect);
+            ImageIO.write(screenFullImage, "png", new File(filename));
+            System.out.println("✅ Desktop screenshot saved: " + filename);
+        } catch (AWTException | IOException ex) {
+            ex.printStackTrace();
+            throw new RuntimeException("Failed to capture desktop screenshot", ex);
+        }
+    }
+
 }
