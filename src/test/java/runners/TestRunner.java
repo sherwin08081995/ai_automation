@@ -3,7 +3,7 @@ package runners;
 import io.cucumber.testng.CucumberOptions;
 import io.cucumber.testng.AbstractTestNGCucumberTests;
 
-@CucumberOptions(features = {"src/test/resources/login.feature"},
+@CucumberOptions(features = {"src/test/resources/customerprofile.feature"},
         glue = {"stepDefinitions", "hooks"},
         plugin = {"pretty", "io.qameta.allure.cucumber7jvm.AllureCucumber7Jvm",
                 "html:target/cucumber-reports/cucumber-html-report.html",
