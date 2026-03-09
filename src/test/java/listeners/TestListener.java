@@ -62,47 +62,47 @@ public class TestListener implements ITestListener {
         LOGGER.info(">>> Test Suite Started: {}", context.getName());
     }
 
-    @Override
-    public void onFinish(ITestContext context) {
-        int passed = context.getPassedTests().size();
-        int failed = context.getFailedTests().size();
-        int skipped = context.getSkippedTests().size();
-        int total = passed + failed + skipped;
+    // @Override
+    // public void onFinish(ITestContext context) {
+    //     int passed = context.getPassedTests().size();
+    //     int failed = context.getFailedTests().size();
+    //     int skipped = context.getSkippedTests().size();
+    //     int total = passed + failed + skipped;
 
-        String buildStatus = failed > 0 ? "FAILURE" : "SUCCESS";
+    //     String buildStatus = failed > 0 ? "FAILURE" : "SUCCESS";
 
-        String defaultBase = "http://192.168.4.74:8080/";
-        String jenkinsBaseUrl = System.getenv().getOrDefault("JENKINS_URL", defaultBase);
-        jenkinsBaseUrl = ensureTrailingSlash(jenkinsBaseUrl);
+    //     String defaultBase = "http://192.168.4.74:8080/";
+    //     String jenkinsBaseUrl = System.getenv().getOrDefault("JENKINS_URL", defaultBase);
+    //     jenkinsBaseUrl = ensureTrailingSlash(jenkinsBaseUrl);
 
-        String jobName = System.getenv().getOrDefault("JOB_NAME", "Zolvit360-Production");
-        String buildNumber = System.getenv().getOrDefault("BUILD_NUMBER", "local");
+    //     String jobName = System.getenv().getOrDefault("JOB_NAME", "Zolvit360-Production");
+    //     String buildNumber = System.getenv().getOrDefault("BUILD_NUMBER", "local");
 
-        String buildUrl = System.getenv("BUILD_URL");
-        if (buildUrl == null || buildUrl.isEmpty()) {
-            String numPart = buildNumber.equals("local") ? "" : (buildNumber + "/");
-            buildUrl = jenkinsBaseUrl + "job/" + jobName + "/" + numPart;
-        }
-        buildUrl = ensureTrailingSlash(buildUrl);
+    //     String buildUrl = System.getenv("BUILD_URL");
+    //     if (buildUrl == null || buildUrl.isEmpty()) {
+    //         String numPart = buildNumber.equals("local") ? "" : (buildNumber + "/");
+    //         buildUrl = jenkinsBaseUrl + "job/" + jobName + "/" + numPart;
+    //     }
+    //     buildUrl = ensureTrailingSlash(buildUrl);
 
-        String allureReportUrl = buildUrl + "allure/";
+    //     String allureReportUrl = buildUrl + "allure/";
 
-        long ms = context.getEndDate().getTime() - context.getStartDate().getTime();
-        String duration = String.format("%d min %d sec", (ms / 60000), (ms / 1000) % 60);
+    //     long ms = context.getEndDate().getTime() - context.getStartDate().getTime();
+    //     String duration = String.format("%d min %d sec", (ms / 60000), (ms / 1000) % 60);
 
-        try {
-            GoogleChatNotifier.sendNotification(
-                    buildNumber, jobName, buildStatus,
-                    allureReportUrl, buildUrl,
-                    total, passed, failed, skipped,
-                    duration
-            );
-            System.out.println("✅ Google Chat notification sent.");
-        } catch (Throwable t) {
-            System.err.println("❌ Failed to send Google Chat notification.");
-            t.printStackTrace();
-        }
-    }
+    //     try {
+    //         GoogleChatNotifier.sendNotification(
+    //                 buildNumber, jobName, buildStatus,
+    //                 allureReportUrl, buildUrl,
+    //                 total, passed, failed, skipped,
+    //                 duration
+    //         );
+    //         System.out.println("✅ Google Chat notification sent.");
+    //     } catch (Throwable t) {
+    //         System.err.println("❌ Failed to send Google Chat notification.");
+    //         t.printStackTrace();
+    //     }
+    // }
 
 
     /** Helper you already use elsewhere */
