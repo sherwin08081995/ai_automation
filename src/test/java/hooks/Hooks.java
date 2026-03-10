@@ -18,9 +18,12 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
 import java.time.Duration;
 import java.util.HashMap;
+import java.util.LinkedHashSet;
 import java.util.Map;
+import java.util.Set;
 import java.util.stream.Stream;
 
 /**
@@ -36,6 +39,7 @@ import java.util.stream.Stream;
  * ✅ Auto-login before non-login scenarios
  * ✅ ExtentReports & Allure reporting integration
  * ✅ Screenshot capture and embedding for failed scenarios
+ * ✅ URL capture for ZAP security scanning (urls-visited.txt)
  * <p>
  * Configuration-driven: Uses ConfigReader to pull values for:
  * - headless mode
@@ -62,6 +66,9 @@ public class Hooks {
 
     public static WebDriver driver;
     private static final Logger logger = LogManager.getLogger(Hooks.class);
+
+    // ── ZAP: accumulates every unique authenticated URL visited across all scenarios ──
+    private static final Set<String> visitedUrls = new LinkedHashSet<>();
 
     static {
         // Create Allure environment.properties once before all tests
@@ -129,7 +136,7 @@ public class Hooks {
         options.setExperimentalOption("prefs", prefs);
 
         if (Boolean.parseBoolean(headless)) {
-            // If you don’t add DevTools, prefer old --headless to avoid download issues:
+            // If you don't add DevTools, prefer old --headless to avoid download issues:
             // options.addArguments("--headless");
             options.addArguments("--headless=new");
             logger.info("🔧 Running in headless mode (system or config).");
@@ -168,7 +175,7 @@ public class Hooks {
             logger.info("✅ DevTools download behavior set to ALLOW → {}", downloadDir);
 
         } catch (Throwable t) {
-            // If the devtools module/version isn’t on classpath, we still proceed with prefs.
+            // If the devtools module/version isn't on classpath, we still proceed with prefs.
             logger.warn("⚠️ Could not set DevTools download behavior. Using Chrome prefs only. {}", t.toString());
         }
 
@@ -180,13 +187,6 @@ public class Hooks {
                 Long.parseLong(ConfigReader.get("implicitWait"))));
 
         logger.info("🚀 WebDriver setup complete for scenario: {}", scenario.getName());
-
-//        // ---- Auto-login for non-login scenarios
-//        if (!scenario.getName().toLowerCase().contains("login")) {
-//            performLogin();
-//        } else {
-//            logger.info("🔍 Skipping login for login-related scenario.");
-//        }
 
         // ---- Auto-login for non-login scenarios
         boolean skipAutoLogin =
@@ -217,6 +217,38 @@ public class Hooks {
                 }
             }
         } finally {
+            // ── ZAP: capture the URL the browser is on before closing ────────────
+            try {
+                if (driver != null) {
+                    String currentUrl = driver.getCurrentUrl();
+                    if (currentUrl != null
+                            && currentUrl.startsWith("https://grc.vakilsearch.com")
+                            && !currentUrl.contains("/grc/auth/signin")
+                            && !currentUrl.contains("/grc/login")
+                            && !currentUrl.contains("about:blank")) {
+                        visitedUrls.add(currentUrl);
+                        logger.info("🔍 ZAP target captured: {}", currentUrl);
+                    }
+                }
+            } catch (Exception e) {
+                logger.warn("⚠️ Could not capture URL for ZAP: {}", e.getMessage());
+            }
+
+            // ── ZAP: write all accumulated URLs to workspace file ─────────────
+            try {
+                Path urlsFile = Paths.get(System.getProperty("user.dir"), "urls-visited.txt");
+                Files.write(
+                    urlsFile,
+                    (String.join("\n", visitedUrls) + "\n").getBytes(),
+                    StandardOpenOption.CREATE,
+                    StandardOpenOption.TRUNCATE_EXISTING
+                );
+                logger.info("📝 urls-visited.txt updated ({} URL(s)): {}", visitedUrls.size(), visitedUrls);
+            } catch (IOException e) {
+                logger.warn("⚠️ Could not write urls-visited.txt: {}", e.getMessage());
+            }
+
+            // ── Close the browser ─────────────────────────────────────────────
             try {
                 if (driver != null) {
                     driver.quit();
@@ -412,8 +444,5 @@ public class Hooks {
     private static String safeGetUrl(WebDriver driver) {
         try { return driver.getCurrentUrl(); } catch (Exception e) { return "<unavailable>"; }
     }
-
-
-
 
 }
