@@ -13,7 +13,6 @@ import utils.*;
 import org.openqa.selenium.devtools.DevTools;
 import org.openqa.selenium.devtools.HasDevTools;
 import org.openqa.selenium.devtools.v139.browser.Browser;
-import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -24,6 +23,7 @@ import java.util.HashMap;
 import java.util.LinkedHashSet;
 import java.util.Map;
 import java.util.Set;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 /**
@@ -39,7 +39,8 @@ import java.util.stream.Stream;
  * ✅ Auto-login before non-login scenarios
  * ✅ ExtentReports & Allure reporting integration
  * ✅ Screenshot capture and embedding for failed scenarios
- * ✅ URL capture for ZAP security scanning (urls-visited.txt)
+ * ✅ URL capture for ZAP security scanning  (urls-visited.txt)
+ * ✅ Cookie capture for ZAP authenticated scanning (zap-cookies.txt)
  * <p>
  * Configuration-driven: Uses ConfigReader to pull values for:
  * - headless mode
@@ -60,8 +61,6 @@ import java.util.stream.Stream;
  * @author Sherwin
  * @since 17-06-2025
  */
-
-
 public class Hooks {
 
     public static WebDriver driver;
@@ -70,13 +69,19 @@ public class Hooks {
     // ── ZAP: accumulates every unique authenticated URL visited across all scenarios ──
     private static final Set<String> visitedUrls = new LinkedHashSet<>();
 
+    // ── ZAP: flag so we only write cookies once (after the first successful login) ──
+    private static volatile boolean cookiesWritten = false;
+
     static {
-        // Create Allure environment.properties once before all tests
         AllureEnvironmentWriter.createEnvironmentFile();
     }
 
+    // ─────────────────────────────────────────────────────────────────────────
+    // @Before  — setup driver + auto-login
+    // ─────────────────────────────────────────────────────────────────────────
     @Before
     public void setup(Scenario scenario) throws InterruptedException {
+
         // ---- one-time project bootstrapping
         if (System.getProperty("init.once") == null) {
             ScreenshotUtils.clearScreenshotFolder();
@@ -93,26 +98,14 @@ public class Hooks {
 
         WebDriverManager.chromedriver().setup();
 
-        // ---- downloads dir (native absolute path, Windows-safe)
+        // ---- downloads dir
         Path downloadDirPath = Paths.get(System.getProperty("user.dir"), "downloads");
         try { Files.createDirectories(downloadDirPath); } catch (IOException ignored) {}
         String downloadDir = downloadDirPath.toAbsolutePath().toString();
-
         System.setProperty("download.dir", downloadDir);
         logger.info("📂 Using download dir: {}", downloadDir);
 
-
-        // ---- clean downloads BEFORE any scenario runs
-        try (Stream<Path> paths = Files.list(downloadDirPath)) {
-            paths.filter(Files::isRegularFile).forEach(p -> {
-                try { Files.deleteIfExists(p); } catch (IOException ignored) {}
-            });
-            logger.info("🧹 Download folder cleaned: {}", downloadDir);
-        } catch (IOException e) {
-            logger.warn("⚠️ Failed to clean download folder: {}", e.getMessage());
-        }
-
-        // ---- clean downloads BEFORE any scenario runs
+        // ---- clean downloads before scenario
         try (Stream<Path> paths = Files.list(downloadDirPath)) {
             paths.filter(Files::isRegularFile).forEach(p -> {
                 try { Files.deleteIfExists(p); } catch (IOException ignored) {}
@@ -124,11 +117,10 @@ public class Hooks {
 
         // ---- Chrome options & prefs
         ChromeOptions options = new ChromeOptions();
-
         String headless = System.getProperty("headless", ConfigReader.get("headless"));
 
         Map<String, Object> prefs = new HashMap<>();
-        prefs.put("download.default_directory", downloadDir);             // absolute native path
+        prefs.put("download.default_directory", downloadDir);
         prefs.put("download.prompt_for_download", false);
         prefs.put("download.directory_upgrade", true);
         prefs.put("profile.default_content_setting_values.automatic_downloads", 1);
@@ -136,10 +128,8 @@ public class Hooks {
         options.setExperimentalOption("prefs", prefs);
 
         if (Boolean.parseBoolean(headless)) {
-            // If you don't add DevTools, prefer old --headless to avoid download issues:
-            // options.addArguments("--headless");
             options.addArguments("--headless=new");
-            logger.info("🔧 Running in headless mode (system or config).");
+            logger.info("🔧 Running in headless mode.");
         } else {
             logger.info("🖥️ Running in visible (headed) mode.");
         }
@@ -153,29 +143,23 @@ public class Hooks {
                 "--hide-scrollbars",
                 "--remote-allow-origins=*"
         );
+        logger.info("🔧 ChromeOptions set for 1920x1080 run");
 
-        logger.info("🔧 ChromeOptions set for 1920x1080 headless/visual run");
-
-        // ---- Create driver
         driver = new ChromeDriver(options);
 
-        // ---- Allow downloads via DevTools (works in headless=new; harmless in headed)
-        // Requires selenium-devtools-v139; adjust v### if your devtools artifact differs.
+        // ---- DevTools download behavior
         try {
             HasDevTools devToolsDriver = (HasDevTools) driver;
             DevTools devTools = devToolsDriver.getDevTools();
             devTools.createSession();
-
             devTools.send(Browser.setDownloadBehavior(
                     Browser.SetDownloadBehaviorBehavior.ALLOW,
-                    java.util.Optional.empty(),          // BrowserContextID (none)
-                    java.util.Optional.of(downloadDir),  // your downloads folder
-                    java.util.Optional.of(true)          // eventsEnabled
+                    java.util.Optional.empty(),
+                    java.util.Optional.of(downloadDir),
+                    java.util.Optional.of(true)
             ));
             logger.info("✅ DevTools download behavior set to ALLOW → {}", downloadDir);
-
         } catch (Throwable t) {
-            // If the devtools module/version isn't on classpath, we still proceed with prefs.
             logger.warn("⚠️ Could not set DevTools download behavior. Using Chrome prefs only. {}", t.toString());
         }
 
@@ -190,26 +174,31 @@ public class Hooks {
 
         // ---- Auto-login for non-login scenarios
         boolean skipAutoLogin =
-                scenario.getSourceTagNames().contains("@noAutoLogin") ||   // 👈 NEW
-                        scenario.getName().toLowerCase().contains("login");
+                scenario.getSourceTagNames().contains("@noAutoLogin") ||
+                scenario.getName().toLowerCase().contains("login");
 
         if (!skipAutoLogin) {
             performLogin();
+
+            // ── ZAP: capture session cookies once after first successful login ──
+            if (!cookiesWritten) {
+                writeZapCookies();
+            }
         } else {
             logger.info("🔍 Skipping pre-scenario login for scenario: {}", scenario.getName());
         }
-
     }
 
-
+    // ─────────────────────────────────────────────────────────────────────────
+    // @After  — screenshot on fail + ZAP URL capture + browser close
+    // ─────────────────────────────────────────────────────────────────────────
     @After
     public void tearDown(Scenario scenario) {
-        String scenarioName = scenario.getName().replace(" ", "_");
 
         try {
             if (scenario.isFailed() && driver instanceof TakesScreenshot) {
                 try {
-                    String screenshotName = "Failure_" + scenarioName;
+                    String screenshotName = "Failure_" + scenario.getName().replace(" ", "_");
                     ScreenshotUtils.takeScreenshot(driver, screenshotName);
                     ScreenshotUtils.attachScreenshotToAllure(driver, screenshotName);
                 } catch (WebDriverException e) {
@@ -217,7 +206,8 @@ public class Hooks {
                 }
             }
         } finally {
-            // ── ZAP: capture the URL the browser is on before closing ────────────
+
+            // ── ZAP: capture URL before closing browser ───────────────────────
             try {
                 if (driver != null) {
                     String currentUrl = driver.getCurrentUrl();
@@ -234,7 +224,7 @@ public class Hooks {
                 logger.warn("⚠️ Could not capture URL for ZAP: {}", e.getMessage());
             }
 
-            // ── ZAP: write all accumulated URLs to workspace file ─────────────
+            // ── ZAP: write accumulated URLs to workspace file ─────────────────
             try {
                 Path urlsFile = Paths.get(System.getProperty("user.dir"), "urls-visited.txt");
                 Files.write(
@@ -260,19 +250,52 @@ public class Hooks {
         }
     }
 
-    /**
-     * Performs automated login before executing test scenarios.
-     *
-     * Notes:
-     * - Called only for non-login scenarios to avoid redundancy.
-     * - Throws IllegalStateException if login verification fails.
-     * - Uses Log4j for detailed logs.
-     */
+    // ─────────────────────────────────────────────────────────────────────────
+    // ZAP Cookie Capture
+    // Reads all cookies from the live Selenium session and writes them as a
+    // single "name=value; name2=value2" string to zap-cookies.txt.
+    // Jenkins reads this file and injects it into every ZAP HTTP request via
+    // ZAP's replacer addon, so ZAP scans pages as an authenticated user.
+    // ─────────────────────────────────────────────────────────────────────────
+    private void writeZapCookies() {
+        try {
+            Set<Cookie> cookies = driver.manage().getCookies();
+
+            if (cookies == null || cookies.isEmpty()) {
+                logger.warn("⚠️ ZAP cookie capture: no cookies found in session.");
+                return;
+            }
+
+            // Build "name=value; name2=value2" header string
+            String cookieHeader = cookies.stream()
+                    .map(c -> c.getName() + "=" + c.getValue())
+                    .collect(Collectors.joining("; "));
+
+            Path cookiesFile = Paths.get(System.getProperty("user.dir"), "zap-cookies.txt");
+            Files.write(
+                cookiesFile,
+                cookieHeader.getBytes(),
+                StandardOpenOption.CREATE,
+                StandardOpenOption.TRUNCATE_EXISTING
+            );
+
+            cookiesWritten = true;
+            logger.info("🍪 ZAP cookies captured ({} cookie(s)) → zap-cookies.txt", cookies.size());
+            logger.debug("🍪 Cookie header (masked): {}",
+                cookieHeader.replaceAll("=[^;]+", "=***"));
+
+        } catch (Exception e) {
+            logger.warn("⚠️ Could not write zap-cookies.txt: {}", e.getMessage());
+        }
+    }
+
+    // ─────────────────────────────────────────────────────────────────────────
+    // performLogin
+    // ─────────────────────────────────────────────────────────────────────────
     public static void performLogin() throws InterruptedException {
         final String ctx = "Pre-Scenario Login";
         final long t0 = System.currentTimeMillis();
 
-        // --------- Read & validate config upfront ----------
         final String baseUrl = ConfigReader.get("baseUrl");
         final String mobNum  = ConfigReader.get("mobNum");
         final String otp     = ConfigReader.get("otp");
@@ -291,10 +314,9 @@ public class Hooks {
             throw new IllegalStateException("Config 'otp' is required");
         }
         if (email == null || email.trim().isEmpty()) {
-            logger.warn("{}: Config 'email' is empty. Chooser selection will be skipped if required.", ctx);
+            logger.warn("{}: Config 'email' is empty.", ctx);
         }
 
-        // --------- Navigate ----------
         try {
             driver.get(baseUrl);
             logger.info("🌐 {}: Navigated to {}", ctx, baseUrl);
@@ -303,36 +325,34 @@ public class Hooks {
             throw e;
         }
 
-        // Page objects
         LoginPage loginPage = new LoginPage(driver);
         HomePage homePage   = new HomePage(driver);
 
-        // --------- 1) Login steps ----------
+        // 1) Enter mobile / email
         try {
-            final long tEnterStart = System.currentTimeMillis();
             logger.info("✍️ {}: entering mobile/email: '{}'", ctx, maskForLogs(mobNum));
             loginPage.enterEmail(mobNum);
-            logger.info("✅ {}: entered mobile/email in {} ms", ctx, (System.currentTimeMillis() - tEnterStart));
+            logger.info("✅ {}: entered mobile/email", ctx);
         } catch (Exception e) {
             logger.error("💥 {}: enterEmail failed: {}", ctx, e.toString(), e);
             throw e;
         }
 
+        // 2) Click Get OTP
         try {
-            final long tOtpClickStart = System.currentTimeMillis();
             logger.info("🔘 {}: clicking Get OTP…", ctx);
             loginPage.clickGetOtpButton();
-            logger.info("✅ {}: Get OTP clicked in {} ms", ctx, (System.currentTimeMillis() - tOtpClickStart));
+            logger.info("✅ {}: Get OTP clicked", ctx);
         } catch (Exception e) {
             logger.error("💥 {}: clickGetOtpButton failed: {}", ctx, e.toString(), e);
             throw e;
         }
 
+        // 3) Enter OTP
         try {
-            final long tOtpEnterStart = System.currentTimeMillis();
             logger.info("🔐 {}: entering OTP ({} digits)…", ctx, otp.trim().length());
             loginPage.enterOtp(otp);
-            logger.info("✅ {}: OTP entered in {} ms", ctx, (System.currentTimeMillis() - tOtpEnterStart));
+            logger.info("✅ {}: OTP entered", ctx);
         } catch (RuntimeException re) {
             logger.error("💥 {}: enterOtp failed: {}", ctx, re.getMessage(), re);
             throw re;
@@ -341,108 +361,89 @@ public class Hooks {
             throw e;
         }
 
-        // --------- 2) Choose email only if chooser is open ----------
+        // 4) Email chooser
         try {
             if (loginPage.isChooserOpen()) {
                 if (email == null || email.trim().isEmpty()) {
-                    logger.error("⚠️ {}: chooser is open but Config 'email' is empty.", ctx);
                     throw new IllegalStateException("Chooser opened but 'email' was not provided");
                 }
-                final long tChooseStart = System.currentTimeMillis();
                 logger.info("📮 {}: chooser visible → selecting email '{}'", ctx, maskForLogs(email));
                 loginPage.selectEmailInChooser(email);
-                logger.info("✅ {}: email selected in {} ms", ctx, (System.currentTimeMillis() - tChooseStart));
+                logger.info("✅ {}: email selected", ctx);
             } else {
-                logger.info("📮 {}: chooser not open; likely already logged in.", ctx);
+                logger.info("📮 {}: chooser not open.", ctx);
             }
         } catch (Exception e) {
-            logger.error("💥 {}: email selection in chooser failed: {}", ctx, e.toString(), e);
+            logger.error("💥 {}: email chooser failed: {}", ctx, e.toString(), e);
             throw e;
         }
 
-        // --------- 3) Close popup only if present (non-blocking) ----------
+        // 5) Close popup if present
         try {
             if (loginPage.hasCloseIcon()) {
-                logger.info("🧩 {}: popup detected after login → attempting to close…", ctx);
-                long tClose = System.currentTimeMillis();
+                logger.info("🧩 {}: popup detected → closing…", ctx);
                 try {
                     loginPage.closePopupIfPresent();
-                    logger.info("✅ {}: popup closed in {} ms", ctx, (System.currentTimeMillis() - tClose));
+                    logger.info("✅ {}: popup closed", ctx);
                 } catch (Exception e) {
                     logger.warn("⚠️ {}: failed to close popup (continuing): {}", ctx, e.getMessage());
                 }
             } else {
-                logger.info("🧩 {}: no popup detected after login.", ctx);
+                logger.info("🧩 {}: no popup detected.", ctx);
             }
         } catch (Exception e) {
             logger.warn("⚠️ {}: popup detection error (continuing): {}", ctx, e.toString());
         }
 
-        // --------- 3a) Festive popup → Explore Service Hub (AFTER hasCloseIcon) ----------
+        // 6) Festive popup
         try {
             if (loginPage.isFestivePopupVisible()) {
                 logger.info("🎉 {}: festive popup detected → clicking 'Explore Service Hub'.", ctx);
-
-                long tHubStart = System.currentTimeMillis();
                 loginPage.clickExploreServiceHubFromPopup();
-
                 boolean atHub = loginPage.isOnServiceHubPage();
-                long tHubMs = System.currentTimeMillis() - tHubStart;
-
                 if (atHub) {
-                    logger.info("✅ {}: Service Hub opened in {} ms. URL={}", ctx, tHubMs, safeGetUrl(driver));
+                    logger.info("✅ {}: Service Hub opened. URL={}", ctx, safeGetUrl(driver));
                 } else {
-                    logger.error("❌ {}: Service Hub marker not visible after {} ms. URL={}", ctx, tHubMs, safeGetUrl(driver));
+                    logger.error("❌ {}: Service Hub not visible. URL={}", ctx, safeGetUrl(driver));
                     throw new IllegalStateException("Service Hub did not open as expected.");
                 }
-
-                // Return to previous page to continue setup flow
                 driver.navigate().back();
-                logger.info("↩️ {}: returned from Service Hub to previous page. URL={}", ctx, safeGetUrl(driver));
+                logger.info("↩️ {}: returned from Service Hub. URL={}", ctx, safeGetUrl(driver));
             } else {
-                logger.info("🎉 {}: festive popup not present; continuing.", ctx);
+                logger.info("🎉 {}: festive popup not present.", ctx);
             }
         } catch (IllegalStateException ise) {
-            // Make this fail fast (per your step logic)
             throw ise;
         } catch (Exception e) {
-            // Non-fatal to overall login unless you want to fail here
             logger.warn("⚠️ {}: festive popup handling error (continuing): {}", ctx, e.toString());
         }
 
-        // --------- 4) Final verification ----------
+        // 7) Final verification
         try {
             boolean success = homePage.isLoginSuccessful("Vakilsearch");
             if (!success) {
-                logger.error("❌ {}: login verification failed on HomePage.", ctx);
+                logger.error("❌ {}: login verification failed.", ctx);
                 throw new IllegalStateException("Login failed during setup");
             }
-            final long elapsed = System.currentTimeMillis() - t0;
-            logger.info("🔐 {}: login successful. Total time: {} ms", ctx, elapsed);
+            logger.info("🔐 {}: login successful. Total time: {} ms", ctx, System.currentTimeMillis() - t0);
         } catch (Exception e) {
             logger.error("💥 {}: final login verification failed: {}", ctx, e.toString(), e);
             throw e;
         }
     }
 
-    /** Mask emails/mobiles in logs: first 2 chars + **** + domain or last 2 digits. */
     private static String maskForLogs(String s) {
         if (s == null) return "<null>";
         String v = s.trim();
         int at = v.indexOf('@');
         if (at > 0) {
-            String prefix = v.substring(0, Math.min(2, at));
-            String domain = v.substring(at); // includes '@'
-            return prefix + "****" + domain;
+            return v.substring(0, Math.min(2, at)) + "****" + v.substring(at);
         }
         if (v.length() <= 2) return "**";
-        String tail = v.substring(v.length() - 2);
-        return "****" + tail;
+        return "****" + v.substring(v.length() - 2);
     }
 
-    /** Safe current URL for logs. */
     private static String safeGetUrl(WebDriver driver) {
         try { return driver.getCurrentUrl(); } catch (Exception e) { return "<unavailable>"; }
     }
-
 }
